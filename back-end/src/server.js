@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import { GraphQLServer } from 'graphql-yoga';
+import logger from 'morgan';
 
 // dotenv : github에 올릴수 없는 정보를 암호화 함
 // ex) api key, port번호 등
