@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { GraphQLServer } from 'graphql-yoga';
 import logger from 'morgan';
+import schema from './schema';
 
 // dotenv : github에 올릴수 없는 정보를 암호화 함
 // ex) api key, port번호 등
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 4000;
 // 2. 데이터 요청 혹은 데이터 변경이 들어왔을 때 실제 서버의 작동에 대한 정의
 // 가 필요함
 
+/*
 // typeDefs = 1번을 의미함
 // hello라는 데이터 요청(Query)가 들어왔을 경우 서버는 String형태의 데이터를 제공해야함
 const typeDefs = `
@@ -29,9 +31,13 @@ const resolvers = {
     hello: () => 'hi',
   },
 };
+*/
 
 // graphql서버 정의
-const server = new GraphQLServer({ typeDefs, resolvers });
+const server = new GraphQLServer({ schema });
+
+// logger추가
+server.express.use(logger('dev'));
 
 // 서버 시작
 server.start({ port: PORT }, () => console.log(`Server running on port ${PORT}`));
