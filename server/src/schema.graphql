@@ -9,6 +9,18 @@ type Place {
   updatedAt: String
 }
 
+type Trip {
+  id: Int!
+  status: String!
+  destinationAddress: String!
+  destinationLat: Float!
+  destinationLng: Float!
+  startDay: String!
+  endDay: String!
+  createdAt: String!
+  updatedAt: String
+}
+
 type User {
   id: Int!
   email: String!
@@ -16,7 +28,7 @@ type User {
   profilePhoto: String!
   bio: String
   password: String!
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 

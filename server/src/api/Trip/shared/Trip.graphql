@@ -1,0 +1,11 @@
+type Trip {
+  id: Int!
+  status: String!
+  destinationAddress: String!
+  destinationLat: Float!
+  destinationLng: Float!
+  startDay: String!
+  endDay: String!
+  createdAt: String!
+  updatedAt: String
+}
