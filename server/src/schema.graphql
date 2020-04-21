@@ -1,8 +1,14 @@
-type sayHelloResponse {
-  text: String!
-  error: Boolean!
+type User {
+  id: Int!
+  email: String!
+  verifiedAuth: Boolean!
+  userName: String!
+  profilePhoto: String!
+  password: String!
+  createAt: String!
+  updatedAt: String
 }
 
 type Query {
-  sayHello(name: String!): sayHelloResponse!
+  user: User
 }
