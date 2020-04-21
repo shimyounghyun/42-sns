@@ -1,7 +1,6 @@
 type User {
   id: Int!
   email: String!
-  verifiedAuth: Boolean!
   userName: String!
   profilePhoto: String!
   bio: String
