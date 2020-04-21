@@ -1,15 +1,17 @@
-export const typeDefs = ["type sayHelloResponse {\n  text: String!\n  error: Boolean!\n}\n\ntype Query {\n  sayHello(name: String!): sayHelloResponse!\n}\n"];
+export const typeDefs = ["type User {\n  id: Int!\n  email: String!\n  verifiedAuth: Boolean!\n  userName: String!\n  profilePhoto: String!\n  password: String!\n  createAt: String!\n  updatedAt: String\n}\n\ntype Query {\n  user: User\n}\n"];
 /* tslint:disable */
 
 export interface Query {
-  sayHello: sayHelloResponse;
+  user: User | null;
 }
 
-export interface SayHelloQueryArgs {
-  name: string;
-}
-
-export interface sayHelloResponse {
-  text: string;
-  error: boolean;
+export interface User {
+  id: number;
+  email: string;
+  verifiedAuth: boolean;
+  userName: string;
+  profilePhoto: string;
+  password: string;
+  createAt: string;
+  updatedAt: string | null;
 }
