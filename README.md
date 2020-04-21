@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 42 SNS
 
 ## 협업 도구
@@ -16,3 +17,112 @@
 - react
 
 with dakim yshim donglee
+=======
+# 42 SNS
+
+## 협업 도구
+
+[트렐로](https://trello.com/b/DFfWnGrR/42-sns)
+[슬랙](https://42sns.slack.com)
+
+## Server stack
+
+- node js (v12 stable)
+- graphql
+- prisma
+
+## Client stack
+
+- react
+
+## TODO
+
+### User
+
+- [ ] log-in/log-out
+- [ ] 42 authentication sign-in
+- [ ] see user profile
+- [ ] edit user profile
+
+### Post
+
+- [ ] see the feed
+- [ ] search feed
+- [ ] apply / unapply
+- [ ] upload post
+- [ ] edit post
+- [ ] finish post
+- [ ] delete post
+- [ ] subscribe post
+
+### Chatting
+
+- [ ] see chatting room
+- [ ] see chatting room list
+- [ ] send message
+- [ ] receive message
+
+## Data model
+
+### User
+
+- id
+- userName
+- profile image url
+- email
+- createAt
+- updateAt
+- Posts (relation)
+- Rooms (relation)
+- Applys (relation)
+
+### Post
+
+- id
+- location
+- start
+- end
+- caption
+- createAt
+- updateAt
+- isfinished
+- Rooms (relation)
+- User (relation)
+- Applys (relation)
+- Files (relation)
+
+### File
+
+- id
+- url
+- Post (relation)
+- createAt
+- updateAt
+
+### Chatting room
+
+- id
+- createAt
+- updateAt
+- Users (relation)
+- message (relation)
+
+### Chatting message
+
+- id
+- text
+- from (relation)
+- to (relation)
+- createAt
+- updateAt
+
+### Apply
+
+- id
+- user
+- post
+- createAt
+- updateAt
+
+with dakim yshim donglee
+>>>>>>> b9ff820dea82bd1a0ae2ba4f968c33b56a467fa1
