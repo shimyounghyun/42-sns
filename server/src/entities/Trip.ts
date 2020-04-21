@@ -6,13 +6,17 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { tripStatus } from "src/types/types";
 
 @Entity()
 class Trip extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "text" })
-  status: string;
+  @Column({
+    type: "text",
+    enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"],
+  })
+  status: tripStatus;
 
   @Column({ type: "text" })
   destinationAddress: string;
