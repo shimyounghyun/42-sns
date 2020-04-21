@@ -4,6 +4,7 @@ type User {
   verifiedAuth: Boolean!
   userName: String!
   profilePhoto: String!
+  bio: String
   password: String!
   createAt: String!
   updatedAt: String

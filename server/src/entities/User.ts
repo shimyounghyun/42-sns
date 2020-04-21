@@ -33,6 +33,9 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   password: string;
 
+  @Column({ type: "text" })
+  bio: string;
+
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
 
