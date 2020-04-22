@@ -1,11 +1,11 @@
 type User {
   id: Int!
   email: String!
-  verifiedAuth: Boolean!
   userName: String!
   profilePhoto: String!
+  bio: String
   password: String!
-  createAt: String!
+  createdAt: String!
   updatedAt: String
 }
 

@@ -21,9 +21,6 @@ class User extends BaseEntity {
   @IsEmail()
   email: string;
 
-  @Column({ type: "boolean", default: false })
-  verifiedAuth: boolean;
-
   @Column({ type: "text" })
   userName: string;
 
@@ -32,6 +29,9 @@ class User extends BaseEntity {
 
   @Column({ type: "text" })
   password: string;
+
+  @Column({ type: "text" })
+  bio: string;
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
