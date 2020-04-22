@@ -4,16 +4,19 @@
 
 [트렐로](https://trello.com/b/DFfWnGrR/42-sns)
 [슬랙](https://42sns.slack.com)
+[ERDCLOUD](https://www.erdcloud.com/d/WXRo9qtvcmcTnsbsQ)
 
 ## Server stack
 
 - node js (v12 stable)
 - graphql
-- prisma
+- typescript
+- typescript orm
 
 ## Client stack
 
 - react
+- typescript
 
 ## TODO
 
