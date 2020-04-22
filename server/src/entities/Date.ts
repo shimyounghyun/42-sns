@@ -5,7 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from "typeorm";
+import Trip from "./Trip";
 
 @Entity()
 class Date extends BaseEntity {
@@ -14,6 +16,9 @@ class Date extends BaseEntity {
 
   @Column({ type: "date" })
   time: string;
+
+  @ManyToMany((type) => Trip, (trip) => trip.dates)
+  trips: Trip[];
 
   @CreateDateColumn()
   createdAt: string;

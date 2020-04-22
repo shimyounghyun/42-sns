@@ -6,8 +6,7 @@ type Trip {
   destinationLng: Float!
   host: User!
   guest: User
-  startDay: String!
-  endDay: String!
+  dates: [Date]
   createdAt: String!
   updatedAt: String
 }

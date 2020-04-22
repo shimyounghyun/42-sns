@@ -4,10 +4,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import Date from "./Date";
 import User from "./User";
 
 @Entity()
@@ -36,11 +38,8 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.tripAsGuest)
   guest: User;
 
-  @Column({ type: "date" })
-  startDay: string;
-
-  @Column({ type: "date" })
-  endDay: string;
+  @ManyToMany((type) => Date, (date) => date.trips)
+  dates: Date[];
 
   @CreateDateColumn()
   createdAt: string;
