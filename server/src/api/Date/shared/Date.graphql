@@ -1,5 +1,6 @@
 type Date {
   id: Int!
+  time: String!
   createdAt: String!
   updatedAt: String
 }

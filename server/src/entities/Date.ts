@@ -4,12 +4,16 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  Column,
 } from "typeorm";
 
 @Entity()
 class Date extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: "date" })
+  time: string;
 
   @CreateDateColumn()
   createdAt: string;
