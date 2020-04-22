@@ -8,10 +8,12 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  OneToOne,
 } from "typeorm";
 import Date from "./Date";
 import Place from "./Place";
 import User from "./User";
+import Chat from "./Chat";
 
 @Entity()
 class Trip extends BaseEntity {
@@ -44,6 +46,9 @@ class Trip extends BaseEntity {
 
   @ManyToOne((type) => Place, (place) => place.trips)
   place: Place;
+
+  @OneToOne((type) => Chat, (chat) => chat.trip)
+  chat: Chat;
 
   @CreateDateColumn()
   createdAt: string;

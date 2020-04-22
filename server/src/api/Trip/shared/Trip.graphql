@@ -7,6 +7,7 @@ type Trip {
   host: User!
   guest: User
   dates: [Date]
+  chat: Chat
   place: Place
   createdAt: String!
   updatedAt: String

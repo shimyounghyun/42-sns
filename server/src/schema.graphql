@@ -2,6 +2,7 @@ type Chat {
   id: Int!
   messages: [Message]!
   participants: [User]!
+  chat: Chat
   createdAt: String!
   updatedAt: String
 }
@@ -43,6 +44,7 @@ type Trip {
   host: User!
   guest: User
   dates: [Date]
+  chat: Chat
   place: Place
   createdAt: String!
   updatedAt: String
