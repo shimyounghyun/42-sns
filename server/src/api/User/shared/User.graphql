@@ -9,6 +9,7 @@ type User {
   messages: [Message]
   tripAsHost: [Trip]
   tripAsGuest: [Trip]
+  intraId: String!
   createdAt: String!
   updatedAt: String
 }

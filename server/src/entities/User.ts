@@ -31,13 +31,16 @@ class User extends BaseEntity {
   userName: string;
 
   @Column({ type: "text" })
-  profilePhtot: string;
+  profilePhoto: string;
 
   @Column({ type: "text" })
   password: string;
 
   @Column({ type: "text" })
   bio: string;
+
+  @Column({ type: "text" })
+  intraId: string;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];
