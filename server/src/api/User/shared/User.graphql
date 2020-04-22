@@ -6,6 +6,7 @@ type User {
   bio: String
   password: String!
   chat: Chat
+  messages: [Message]
   createdAt: String!
   updatedAt: String
 }

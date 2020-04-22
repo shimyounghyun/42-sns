@@ -8,10 +8,12 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
+import Message from "./Message";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -37,6 +39,9 @@ class User extends BaseEntity {
 
   @ManyToOne((type) => Chat, (chat) => chat.participants)
   chat: Chat;
+
+  @OneToMany((type) => Message, (message) => message.user)
+  messages: Message[];
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
