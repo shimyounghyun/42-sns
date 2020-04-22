@@ -1,5 +1,6 @@
 type Date {
   id: Int!
+  places: [Place]
   createdAt: String!
   updatedAt: String
 }
