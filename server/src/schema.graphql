@@ -15,6 +15,12 @@ type Message {
   updatedAt: String
 }
 
+type Date {
+  id: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
 type Place {
   id: Int!
   name: String!
@@ -32,7 +38,7 @@ type Trip {
   destinationAddress: String!
   destinationLat: Float!
   destinationLng: Float!
-  host: User
+  host: User!
   guest: User
   startDay: String!
   endDay: String!
