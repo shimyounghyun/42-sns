@@ -12,7 +12,8 @@ import User from "./User";
 
 @Entity()
 class Message extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text" })
   test: string;
@@ -23,8 +24,11 @@ class Message extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.messages)
   user: User;
 
-  @CreateDateColumn() createdAt: string;
-  @UpdateDateColumn() updatedAt: string;
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 }
 
 export default Message;

@@ -19,7 +19,8 @@ const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text", unique: true })
   @IsEmail()
@@ -43,8 +44,11 @@ class User extends BaseEntity {
   @OneToMany((type) => Message, (message) => message.user)
   messages: Message[];
 
-  @CreateDateColumn() createdAt: string;
-  @UpdateDateColumn() updatedAt: string;
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);

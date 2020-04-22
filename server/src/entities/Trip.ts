@@ -1,3 +1,4 @@
+import { tripStatus } from "src/types/types";
 import {
   BaseEntity,
   Column,
@@ -6,11 +7,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { tripStatus } from "src/types/types";
 
 @Entity()
 class Trip extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     type: "text",
@@ -33,8 +34,11 @@ class Trip extends BaseEntity {
   @Column({ type: "date" })
   endDay: string;
 
-  @CreateDateColumn() createdAt: string;
-  @UpdateDateColumn() updatedAt: string;
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 }
 
 export default Trip;
