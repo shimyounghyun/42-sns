@@ -1,9 +1,6 @@
 type Trip {
   id: Int!
   status: String!
-  destinationAddress: String!
-  destinationLat: Float!
-  destinationLng: Float!
   host: User!
   guest: User
   dates: [Date]

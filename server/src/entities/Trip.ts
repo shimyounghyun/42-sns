@@ -17,8 +17,7 @@ import User from "./User";
 
 @Entity()
 class Trip extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({
     type: "text",
@@ -26,29 +25,20 @@ class Trip extends BaseEntity {
   })
   status: tripStatus;
 
-  @Column({ type: "text" })
-  destinationAddress: string;
-
-  @Column({ type: "double precision", default: 0 })
-  destinationLat: number;
-
-  @Column({ type: "double precision", default: 0 })
-  destinationLng: number;
-
   @ManyToOne((type) => User, (user) => user.tripAsHost)
   host: User;
 
   @ManyToOne((type) => User, (user) => user.tripAsGuest)
   guest: User;
 
+  @OneToOne((type) => Chat, (chat) => chat.trip)
+  chat: Chat;
+
   @ManyToMany((type) => Date, (date) => date.trips)
   dates: Date[];
 
   @ManyToOne((type) => Place, (place) => place.trips)
   place: Place;
-
-  @OneToOne((type) => Chat, (chat) => chat.trip)
-  chat: Chat;
 
   @CreateDateColumn()
   createdAt: string;
