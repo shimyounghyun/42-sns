@@ -9,11 +9,13 @@
 
 - node js (v12 stable)
 - graphql
-- prisma
+- typescript
+- typescript orm
 
 ## Client stack
 
 - react
+- typescript
 
 ## TODO
 
