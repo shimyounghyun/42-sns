@@ -17,7 +17,8 @@ import User from "./User";
 
 @Entity()
 class Trip extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     type: "text",
@@ -31,11 +32,11 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.tripAsGuest)
   guest: User;
 
-  @OneToOne((type) => Chat, (chat) => chat.trip)
-  chat: Chat;
-
   @ManyToMany((type) => Date, (date) => date.trips)
   dates: Date[];
+
+  @OneToOne((type) => Chat, (chat) => chat.trip)
+  chat: Chat;
 
   @ManyToOne((type) => Place, (place) => place.trips)
   place: Place;

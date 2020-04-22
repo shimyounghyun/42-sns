@@ -2,7 +2,7 @@ type Chat {
   id: Int!
   messages: [Message]!
   participants: [User]!
-  chat: Chat
+  trip: Trip
   createdAt: String!
   updatedAt: String
 }

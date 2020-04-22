@@ -34,13 +34,10 @@ class User extends BaseEntity {
   profilePhoto: string;
 
   @Column({ type: "text" })
-  password: string;
-
-  @Column({ type: "text" })
   bio: string;
 
   @Column({ type: "text" })
-  intraId: string;
+  password: string;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];
@@ -48,11 +45,14 @@ class User extends BaseEntity {
   @OneToMany((type) => Message, (message) => message.user)
   messages: Message[];
 
+  @OneToMany((type) => Trip, (trip) => trip.host)
+  tripAsHost: Trip[];
+
   @OneToMany((type) => Trip, (trip) => trip.guest)
   tripAsGuest: Trip[];
 
-  @OneToMany((type) => Trip, (trip) => trip.host)
-  tripAsHost: Trip[];
+  @Column({ type: "text" })
+  intraId: string;
 
   @CreateDateColumn()
   createdAt: string;
