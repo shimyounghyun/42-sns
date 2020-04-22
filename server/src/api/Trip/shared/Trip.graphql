@@ -4,6 +4,8 @@ type Trip {
   destinationAddress: String!
   destinationLat: Float!
   destinationLng: Float!
+  host: User!
+  guest: User
   startDay: String!
   endDay: String!
   createdAt: String!

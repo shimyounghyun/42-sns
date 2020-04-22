@@ -14,6 +14,7 @@ import {
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
+import Trip from "./Trip";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -43,6 +44,12 @@ class User extends BaseEntity {
 
   @OneToMany((type) => Message, (message) => message.user)
   messages: Message[];
+
+  @OneToMany((type) => Trip, (trip) => trip.guest)
+  tripAsGuest: Trip[];
+
+  @OneToMany((type) => Trip, (trip) => trip.host)
+  tripAsHost: Trip[];
 
   @CreateDateColumn()
   createdAt: string;

@@ -1,3 +1,20 @@
+type Chat {
+  id: Int!
+  messages: [Message]!
+  participants: [User]!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
 type Place {
   id: Int!
   name: String!
@@ -15,6 +32,8 @@ type Trip {
   destinationAddress: String!
   destinationLat: Float!
   destinationLng: Float!
+  host: User
+  guest: User
   startDay: String!
   endDay: String!
   createdAt: String!
@@ -28,6 +47,10 @@ type User {
   profilePhoto: String!
   bio: String
   password: String!
+  chats: [Chat]
+  messages: [Message]
+  tripAsHost: [Trip]
+  tripAsGuest: [Trip]
   createdAt: String!
   updatedAt: String
 }

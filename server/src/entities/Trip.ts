@@ -4,9 +4,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import User from "./User";
 
 @Entity()
 class Trip extends BaseEntity {
@@ -27,6 +29,12 @@ class Trip extends BaseEntity {
 
   @Column({ type: "double precision", default: 0 })
   destinationLng: number;
+
+  @ManyToOne((type) => User, (user) => user.tripAsHost)
+  host: User;
+
+  @ManyToOne((type) => User, (user) => user.tripAsGuest)
+  guest: User;
 
   @Column({ type: "date" })
   startDay: string;

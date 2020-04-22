@@ -7,6 +7,8 @@ type User {
   password: String!
   chats: [Chat]
   messages: [Message]
+  tripAsHost: [Trip]
+  tripAsGuest: [Trip]
   createdAt: String!
   updatedAt: String
 }
