@@ -4,13 +4,13 @@ import {
   Entity,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  OneToOne,
 } from "typeorm";
 import Message from "./Message";
-import User from "./User";
 import Trip from "./Trip";
+import User from "./User";
 
 @Entity()
 class Chat extends BaseEntity {

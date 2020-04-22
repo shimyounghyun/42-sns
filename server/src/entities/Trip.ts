@@ -6,14 +6,14 @@ import {
   Entity,
   ManyToMany,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  OneToOne,
 } from "typeorm";
+import Chat from "./Chat";
 import Date from "./Date";
 import Place from "./Place";
 import User from "./User";
-import Chat from "./Chat";
 
 @Entity()
 class Trip extends BaseEntity {
