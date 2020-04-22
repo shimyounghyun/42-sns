@@ -7,9 +7,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import Chat from "./Chat";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -32,6 +34,9 @@ class User extends BaseEntity {
 
   @Column({ type: "text" })
   bio: string;
+
+  @ManyToOne((type) => Chat, (chat) => chat.participants)
+  chat: Chat;
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
