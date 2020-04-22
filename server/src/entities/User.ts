@@ -7,7 +7,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -38,8 +38,8 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   bio: string;
 
-  @ManyToOne((type) => Chat, (chat) => chat.participants)
-  chat: Chat;
+  @ManyToMany((type) => Chat, (chat) => chat.participants)
+  chats: Chat[];
 
   @OneToMany((type) => Message, (message) => message.user)
   messages: Message[];

@@ -5,7 +5,7 @@ type User {
   profilePhoto: String!
   bio: String
   password: String!
-  chat: Chat
+  chats: [Chat]
   messages: [Message]
   createdAt: String!
   updatedAt: String

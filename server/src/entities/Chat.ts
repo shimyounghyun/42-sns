@@ -2,6 +2,7 @@ import {
   BaseEntity,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -17,7 +18,7 @@ class Chat extends BaseEntity {
   @OneToMany((type) => Message, (message) => message.chat)
   messages: Message[];
 
-  @OneToMany((type) => User, (user) => user.chat)
+  @ManyToMany((type) => User, (user) => user.chats)
   participants: User[];
 
   @CreateDateColumn()
