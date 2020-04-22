@@ -17,7 +17,6 @@ type Message {
 
 type Date {
   id: Int!
-  places: [Place]
   createdAt: String!
   updatedAt: String
 }
@@ -29,7 +28,6 @@ type Place {
   lng: Float!
   address: String!
   isFav: Boolean!
-  dates: [Date]
   createdAt: String!
   updatedAt: String
 }

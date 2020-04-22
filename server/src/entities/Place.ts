@@ -3,11 +3,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Date from "./Date";
 
 @Entity()
 class Place extends BaseEntity {
@@ -28,9 +26,6 @@ class Place extends BaseEntity {
 
   @Column({ type: "boolean", default: false })
   isFav: boolean;
-
-  @ManyToMany((type) => Date, (date) => date.places)
-  dates: Date[];
 
   @CreateDateColumn()
   createdAt: string;
