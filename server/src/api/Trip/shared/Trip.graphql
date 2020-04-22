@@ -1,11 +1,11 @@
 type Trip {
   id: Int!
   status: String!
-  destinationAddress: String!
-  destinationLat: Float!
-  destinationLng: Float!
-  startDay: String!
-  endDay: String!
+  host: User!
+  guest: User
+  dates: [Date]
+  chat: Chat
+  place: Place
   createdAt: String!
   updatedAt: String
 }

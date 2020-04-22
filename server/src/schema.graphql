@@ -1,10 +1,36 @@
+type Chat {
+  id: Int!
+  messages: [Message]!
+  participants: [User]!
+  trip: Trip
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Date {
+  id: Int!
+  time: String!
+  trips: [Trip]
+  createdAt: String!
+  updatedAt: String
+}
+
 type Place {
   id: Int!
   name: String!
   lat: Float!
   lng: Float!
   address: String!
-  isFav: Boolean!
+  trips: [Trip]
   createdAt: String!
   updatedAt: String
 }
@@ -12,11 +38,11 @@ type Place {
 type Trip {
   id: Int!
   status: String!
-  destinationAddress: String!
-  destinationLat: Float!
-  destinationLng: Float!
-  startDay: String!
-  endDay: String!
+  host: User!
+  guest: User
+  dates: [Date]
+  chat: Chat
+  place: Place
   createdAt: String!
   updatedAt: String
 }
@@ -28,6 +54,11 @@ type User {
   profilePhoto: String!
   bio: String
   password: String!
+  chats: [Chat]
+  messages: [Message]
+  tripAsHost: [Trip]
+  tripAsGuest: [Trip]
+  intraId: String!
   createdAt: String!
   updatedAt: String
 }

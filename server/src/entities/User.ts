@@ -7,15 +7,21 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import Chat from "./Chat";
+import Message from "./Message";
+import Trip from "./Trip";
 
 const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: "text", unique: true })
   @IsEmail()
@@ -25,16 +31,34 @@ class User extends BaseEntity {
   userName: string;
 
   @Column({ type: "text" })
-  profilePhtot: string;
-
-  @Column({ type: "text" })
-  password: string;
+  profilePhoto: string;
 
   @Column({ type: "text" })
   bio: string;
 
-  @CreateDateColumn() createdAt: string;
-  @UpdateDateColumn() updatedAt: string;
+  @Column({ type: "text" })
+  password: string;
+
+  @ManyToMany((type) => Chat, (chat) => chat.participants)
+  chats: Chat[];
+
+  @OneToMany((type) => Message, (message) => message.user)
+  messages: Message[];
+
+  @OneToMany((type) => Trip, (trip) => trip.host)
+  tripAsHost: Trip[];
+
+  @OneToMany((type) => Trip, (trip) => trip.guest)
+  tripAsGuest: Trip[];
+
+  @Column({ type: "text" })
+  intraId: string;
+
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);

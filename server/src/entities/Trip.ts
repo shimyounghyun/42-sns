@@ -1,16 +1,24 @@
+import { tripStatus } from "src/types/types";
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { tripStatus } from "src/types/types";
+import Chat from "./Chat";
+import Date from "./Date";
+import Place from "./Place";
+import User from "./User";
 
 @Entity()
 class Trip extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({
     type: "text",
@@ -18,23 +26,26 @@ class Trip extends BaseEntity {
   })
   status: tripStatus;
 
-  @Column({ type: "text" })
-  destinationAddress: string;
+  @ManyToOne((type) => User, (user) => user.tripAsHost)
+  host: User;
 
-  @Column({ type: "double precision", default: 0 })
-  destinationLat: number;
+  @ManyToOne((type) => User, (user) => user.tripAsGuest)
+  guest: User;
 
-  @Column({ type: "double precision", default: 0 })
-  destinationLng: number;
+  @ManyToMany((type) => Date, (date) => date.trips)
+  dates: Date[];
 
-  @Column({ type: "date" })
-  startDay: string;
+  @OneToOne((type) => Chat, (chat) => chat.trip)
+  chat: Chat;
 
-  @Column({ type: "date" })
-  endDay: string;
+  @ManyToOne((type) => Place, (place) => place.trips)
+  place: Place;
 
-  @CreateDateColumn() createdAt: string;
-  @UpdateDateColumn() updatedAt: string;
+  @CreateDateColumn()
+  createdAt: string;
+
+  @UpdateDateColumn()
+  updatedAt: string;
 }
 
 export default Trip;
