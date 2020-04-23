@@ -47,10 +47,23 @@ type Trip {
   updatedAt: String
 }
 
+type IntraConnectResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
+}
+
 type User {
   id: Int!
   email: String!
   userName: String!
+  firstName: String!
+  lastName: String!
+  fullName: String
   profilePhoto: String!
   bio: String
   password: String!
