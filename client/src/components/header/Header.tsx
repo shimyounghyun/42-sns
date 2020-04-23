@@ -20,8 +20,8 @@ function Header(props: MainHeaderProps) {
           <Right>
               <RoundButton color="darkGray" onClick={onLoginClick}>
                 Login
-              </RoundButton>
-            </Right>
+              </RoundButton>              
+          </Right>          
       </Inner>
     </Block>
   );
