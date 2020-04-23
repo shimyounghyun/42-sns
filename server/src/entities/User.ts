@@ -39,10 +39,10 @@ class User extends BaseEntity {
   @Column({ type: "text" })
   profilePhoto: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   bio: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   password: string;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
