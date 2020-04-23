@@ -1,0 +1,9 @@
+type SignInIntraResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Query {
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
