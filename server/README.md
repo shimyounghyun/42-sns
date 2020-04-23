@@ -4,9 +4,9 @@
 
 ### Public Resolvers
 
-- [ ] Sign in with intra
-- [ ] Sign up with intra
-- [ ] Sign in with email
+- [x] Sign in with intra
+- [x] Sign up with intra
+- [x] Sign in with email
 
 ### Private Resolvers
 
