@@ -1,8 +1,13 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  trip: Trip\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Date {\n  id: Int!\n  time: String!\n  trips: [Trip]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  trips: [Trip]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Trip {\n  id: Int!\n  status: String!\n  host: User!\n  guest: User\n  dates: [Date]\n  chat: Chat\n  place: Place\n  createdAt: String!\n  updatedAt: String\n}\n\ntype IntraConnectResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse\n}\n\ntype User {\n  id: Int!\n  email: String!\n  userName: String!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  profilePhoto: String!\n  bio: String\n  password: String!\n  chats: [Chat]\n  messages: [Message]\n  tripAsHost: [Trip]\n  tripAsGuest: [Trip]\n  intraId: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Query {\n  user: User\n}\n"];
+export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  trip: Trip\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Date {\n  id: Int!\n  time: String!\n  trips: [Trip]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  trips: [Trip]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Trip {\n  id: Int!\n  status: String!\n  host: User!\n  guest: User\n  dates: [Date]\n  chat: Chat\n  place: Place\n  createdAt: String!\n  updatedAt: String\n}\n\ntype IntraConnectResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse\n  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse\n}\n\ntype User {\n  id: Int!\n  email: String!\n  userName: String!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  profilePhoto: String!\n  bio: String\n  password: String!\n  chats: [Chat]\n  messages: [Message]\n  tripAsHost: [Trip]\n  tripAsGuest: [Trip]\n  intraId: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Query {\n  user: User\n  SignInIntra(intraId: String!): SignInIntraResponse\n}\n\ntype SignInIntraResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype SignUpIntraResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
   user: User | null;
+  SignInIntra: SignInIntraResponse | null;
+}
+
+export interface SignInIntraQueryArgs {
+  intraId: string;
 }
 
 export interface User {
@@ -73,8 +78,15 @@ export interface Place {
   updatedAt: string | null;
 }
 
+export interface SignInIntraResponse {
+  result: boolean;
+  error: string | null;
+  token: string | null;
+}
+
 export interface Mutation {
   IntraConnect: IntraConnectResponse | null;
+  SignUpIntra: SignUpIntraResponse | null;
 }
 
 export interface IntraConnectMutationArgs {
@@ -86,7 +98,23 @@ export interface IntraConnectMutationArgs {
   intraId: string;
 }
 
+export interface SignUpIntraMutationArgs {
+  email: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  profilePhoto: string;
+  intraId: string;
+  password: string;
+}
+
 export interface IntraConnectResponse {
+  result: boolean;
+  error: string | null;
+  token: string | null;
+}
+
+export interface SignUpIntraResponse {
   result: boolean;
   error: string | null;
   token: string | null;
