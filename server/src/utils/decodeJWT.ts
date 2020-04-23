@@ -13,6 +13,7 @@ const decodeJWT = async (token: string): Promise<User | undefined> => {
     // 해독한 정보에서 id를 가져옴
     const { id } = decode;
 
+    // id로부터 유저 정보를 받아옴
     const user = await User.findOne({ id });
     return user;
   } catch (error) {
