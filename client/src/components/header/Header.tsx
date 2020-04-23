@@ -1,13 +1,16 @@
 import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import RoundButton from '../common/RoundButton';
+import useHeader from './hooks/useHeader';
 
 export type MainHeaderProps = {};
 // const handleLink = () => {
 //   document.location.href="/";  
 // }
-function Header(props: MainHeaderProps) {
 
+function Header(props: MainHeaderProps) {
+  const {onLoginClick} = useHeader();
+  
   return (
     <Block>
       <Inner>
@@ -15,10 +18,10 @@ function Header(props: MainHeaderProps) {
            <HeaderLogo/>
           </a>
           <Right>
-              <RoundButton color="darkGray" /*onClick={onLoginClick}*/>
+              <RoundButton color="darkGray" onClick={onLoginClick}>
                 Login
-              </RoundButton>
-            </Right>
+              </RoundButton>              
+          </Right>          
       </Inner>
     </Block>
   );
