@@ -1,0 +1,9 @@
+type EmailSignInResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Query {
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+}
