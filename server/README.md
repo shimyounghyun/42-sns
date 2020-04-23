@@ -10,7 +10,7 @@
 
 ### Private Resolvers
 
-- [ ] Generate JWT
+- [x] Generate JWT
 - [ ] Verify JWT
 - [ ] Get my profile
 - [ ] Update my profile
