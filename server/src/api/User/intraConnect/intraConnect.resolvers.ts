@@ -4,6 +4,7 @@ import {
 } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -19,7 +20,11 @@ const resolvers: Resolvers = {
 
         if (existingUser) {
           // 가입한경우 로그인 처리
-          return { result: true, error: null, token: "Log In" };
+          return {
+            result: true,
+            error: null,
+            token: createJWT(existingUser.id),
+          };
         }
       } catch (error) {
         return { result: false, error: error.message, token: null };
@@ -27,9 +32,9 @@ const resolvers: Resolvers = {
 
       // intraId 가입 내역이 없는경우 회원가입 진행
       try {
-        await User.create(args).save();
+        const newUser = await User.create(args).save();
 
-        return { result: true, error: null, token: "Sign In" };
+        return { result: true, error: null, token: createJWT(newUser.id) };
       } catch (error) {
         return { result: false, error: error.message, token: null };
       }

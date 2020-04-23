@@ -1,6 +1,7 @@
 import { SignInIntraQueryArgs, SignInIntraResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Query: {
@@ -13,9 +14,13 @@ const resolvers: Resolvers = {
         const existingUser = await User.findOne(args);
 
         if (existingUser) {
-          return { result: true, error: null, token: "Log In" };
+          return {
+            result: true,
+            error: null,
+            token: createJWT(existingUser.id),
+          };
         } else {
-          return { result: false, error: null, token: null };
+          return { result: false, error: "Can't find user", token: null };
         }
       } catch (error) {
         return { result: false, error: error.message, token: null };

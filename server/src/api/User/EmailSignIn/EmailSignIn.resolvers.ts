@@ -1,6 +1,7 @@
 import { EmailSignInQueryArgs, EmailSignInResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Query: {
@@ -16,7 +17,7 @@ const resolvers: Resolvers = {
 
         if (!user) {
           // 회원가입 되어있지 않은경우
-          return { result: false, error: null, token: null };
+          return { result: false, error: "Can't find user", token: null };
         }
 
         // 비밀번호 비교
@@ -24,7 +25,7 @@ const resolvers: Resolvers = {
 
         if (result) {
           // 비밀번호가 맞는경우
-          return { result: true, error: null, token: "Log In" };
+          return { result: true, error: null, token: createJWT(user.id) };
         } else {
           // 비밀번호가 아닌경우
           return { result: false, error: "Wrong password", token: null };

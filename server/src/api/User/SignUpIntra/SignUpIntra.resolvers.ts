@@ -1,6 +1,7 @@
 import { SignUpIntraMutationArgs, SignUpIntraResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -10,9 +11,9 @@ const resolvers: Resolvers = {
     ): Promise<SignUpIntraResponse> => {
       try {
         // 회원가입 진행
-        await User.create(args).save();
+        const user = await User.create(args).save();
 
-        return { result: true, error: null, token: "Sign In" };
+        return { result: true, error: null, token: createJWT(user.id) };
       } catch (error) {
         return { result: false, error: error.message, token: null };
       }
