@@ -9,6 +9,7 @@ const resolvers: Resolvers = {
       args: SignInIntraQueryArgs
     ): Promise<SignInIntraResponse> => {
       try {
+        // intraId이용하여 회원가입 여부 확인
         const existingUser = await User.findOne(args);
 
         if (existingUser) {

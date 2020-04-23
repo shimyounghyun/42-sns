@@ -9,13 +9,10 @@ const resolvers: Resolvers = {
       args: SignUpIntraMutationArgs
     ): Promise<SignUpIntraResponse> => {
       try {
-        const newUser = await User.create(args).save();
+        // 회원가입 진행
+        await User.create(args).save();
 
-        if (newUser) {
-          return { result: true, error: null, token: "Sign In" };
-        } else {
-          return { result: false, error: null, token: null };
-        }
+        return { result: true, error: null, token: "Sign In" };
       } catch (error) {
         return { result: false, error: error.message, token: null };
       }
