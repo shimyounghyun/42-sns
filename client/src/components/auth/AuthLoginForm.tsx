@@ -44,7 +44,7 @@ const LoginInput = styled.input.attrs({
 
 const LoginPassword = styled.input.attrs({
     placeholder:'비밀번호',
-    type:'passowrd'
+    type:'password'
 })`
     radius: 4px;
     height: 1.5rem;
@@ -80,16 +80,50 @@ const LoginButton = styled.button`
   }
 `;
 
+const Divider = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  text-align:center;
+  span {
+    position:relative;
+    font-size:14px;
+    font-weight:600;
+    color:rgb(118, 118, 118);
+    padding-bottom: var(--spacing-rule-text-vertical, 16px);
+    padding-top: var(--spacing-rule-text-vertical, 16px);
+    padding-left: var(--spacing-rule-text-horizontal, 16px);
+    padding-right: var(--spacing-rule-text-horizontal, 16px);
+  }
+  span::before{
+    content:"";
+    border-bottom-style:solid;
+    border-bottom-color:#e4e4e4;
+    border-bottom-width: var(--border-rule-border-width, 1px);
+    position: absolute;
+    top:50%;
+    right:100%;
+    width:5000px;
+  }
+  span::after{
+    content:"";
+    border-bottom-style:solid;
+    border-bottom-color:#e4e4e4;
+    border-bottom-width: var(--border-rule-border-width, 1px);
+    position: absolute;
+    top:50%;
+    left:100%;
+    width:5000px;
+  }
+`;
+
 const AuthLoginForm = () => {
     return(
         <LoginFormBlock>
+            <Divider><span>또는</span></Divider>
             <LoginInput/>
             <LoginPassword/>
-            <LoginButton>로그인</LoginButton>
-            <div className="foot">
-                <span>아직 회원이 아니신가요?</span>
-                <div className="link">회원가입</div>
-            </div>            
+            <LoginButton>로그인</LoginButton>         
         </LoginFormBlock>
     );
 }

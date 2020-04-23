@@ -40,7 +40,12 @@ const AuthModalContainer: React.FC<AuthModalContainerProps> = ({
 
   
     return (
-      <AuthModal visible={visible} onClose={onClose}>
+      <AuthModal 
+        visible={visible} 
+        onClose={onClose} 
+        onToggleMode={onToggleMode}
+        mode={mode}
+      >
       </AuthModal>
     );
   };

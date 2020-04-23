@@ -5,10 +5,11 @@ import zIndexes from '../../lib/styles/zIndexes';
 import transitions from '../../lib/styles/transitions';
 import {MdClose} from 'react-icons/md';
 import AuthLoginForm from './AuthLoginForm';
+import {AuthMode} from '../../modules/core';
 
 const {useState, useEffect} = React;
 
-const AuthModalBlock = styled.div<{ visible: boolean }>`
+const AuthModalBlock = styled.div<{ visible: boolean, mode: AuthMode }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -20,7 +21,11 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
   z-index: ${zIndexes.AuthModal};
   .wrapper {
     width: 606px;
-    height: 480px;
+    ${props =>
+        props.mode === 'LOGIN'
+          ? css`height: 480px;`
+          : css`height: 250px;`
+    }    
     ${props =>
       props.visible
         ? css`
@@ -31,26 +36,6 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
           `}
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.09);
     display: flex;
-    .gray-block {
-      width: 216px;
-      background: ${palette.gray1};
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-      .welcome {
-        font-size: 1.75rem;
-        margin-top: 1.5rem;
-        color: ${palette.gray7};
-        text-align: center;
-        font-weight: 600;
-      }
     }
     .white-block {
       flex: 1;
@@ -76,6 +61,20 @@ const AuthModalBlock = styled.div<{ visible: boolean }>`
     }
   }
 `;
+
+const Footer = styled.div`
+  margin-top:1.5rem;
+  padding: 1.5rem 0 0 0;
+  border-top:1px solid #e4e4e4;
+  .link {
+      display: inline-block;
+      font-weight: bold;
+      color: #00babc;
+      cursor: pointer;
+  &hover {
+      text-decoration: underline;
+  }
+`;
 const FortyTwoImg = styled.img.attrs({
   src:'./logo_42_white.svg'
 })`
@@ -98,52 +97,19 @@ const FortyTwoButton = styled.button`
   justify-content: center;
 `;
 
-const Divider = styled.div`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  text-align:center;
-  span {
-    position:relative;
-    font-size:14px;
-    font-weight:600;
-    color:rgb(118, 118, 118);
-    padding-bottom: var(--spacing-rule-text-vertical, 16px);
-    padding-top: var(--spacing-rule-text-vertical, 16px);
-    padding-left: var(--spacing-rule-text-horizontal, 16px);
-    padding-right: var(--spacing-rule-text-horizontal, 16px);
-  }
-  span::before{
-    content:"";
-    border-bottom-style:solid;
-    border-bottom-color:#e4e4e4;
-    border-bottom-width: var(--border-rule-border-width, 1px);
-    position: absolute;
-    top:50%;
-    right:100%;
-    width:5000px;
-  }
-  span::after{
-    content:"";
-    border-bottom-style:solid;
-    border-bottom-color:#e4e4e4;
-    border-bottom-width: var(--border-rule-border-width, 1px);
-    position: absolute;
-    top:50%;
-    left:100%;
-    width:5000px;
-  }
-`;
-
 interface AuthModalProps {
   visible: boolean;
   onClose: () => void;
+  onToggleMode: () => void;
+  mode : AuthMode;
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({
   visible,
   children,
   onClose,
+  onToggleMode,
+  mode
 }) => {
   const [closed, setClosed] = useState(true);
   useEffect(() => {
@@ -164,14 +130,11 @@ const AuthModal: React.FC<AuthModalProps> = ({
 
   if (!visible && closed) return null;
 
+  const modText = mode === 'LOGIN' ? '로그인' : '회원가입';
+
   return (
-    <AuthModalBlock visible={visible}>
+    <AuthModalBlock visible={visible} mode={mode}>
       <div className="wrapper">
-        {/* <div className="gray-block">
-          <div>
-            <div className="welcome">환영합니다!</div>
-          </div>
-        </div> */}        
         <div className="white-block">
           <div className="exit-wrapper">
             <MdClose onClick={onClose} tabIndex={1} />
@@ -180,10 +143,27 @@ const AuthModal: React.FC<AuthModalProps> = ({
             {children}
             <FortyTwoButton>
               <FortyTwoImg/>
-              인트라 계정으로 로그인
+              인트라 계정으로 {modText}
             </FortyTwoButton>
-            <Divider><span>또는</span></Divider>
-            <AuthLoginForm/>
+            {mode === 'LOGIN' 
+              ? <AuthLoginForm/> 
+              : null
+            }
+            <Footer>
+                <span>
+                    {mode === 'LOGIN' 
+                        ? '아직 회원이 아니신가요?'
+                        : '계정이 이미 있으신가요?'}                 
+                </span>
+                <div 
+                    className="link"
+                    onClick={onToggleMode}
+                >
+                    {mode === 'LOGIN' 
+                        ? '회원가입'
+                        : '로그인'}
+                </div>
+              </Footer> 
           </div>
         </div>
       </div>
