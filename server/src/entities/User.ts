@@ -31,12 +31,18 @@ class User extends BaseEntity {
   userName: string;
 
   @Column({ type: "text" })
+  firstName: string;
+
+  @Column({ type: "text" })
+  lastName: string;
+
+  @Column({ type: "text" })
   profilePhoto: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   bio: string;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   password: string;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
@@ -59,6 +65,10 @@ class User extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: string;
+
+  get fullName(): string {
+    return `${this.firstName} ${this.lastName}`;
+  }
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
