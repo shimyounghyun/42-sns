@@ -55,8 +55,15 @@ type EmailSignInResponse {
 
 type Query {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
   user: User
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
 }
 
 type IntraConnectResponse {
