@@ -74,7 +74,8 @@ type IntraConnectResponse {
 type Mutation {
   IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
-  UpdateMyProfile(bio: String, password: String, profilePhoto: String): UpdateMyProfileResponse
+  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
+  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
 }
 
 type User {
@@ -109,6 +110,11 @@ type SignUpIntraResponse {
 }
 
 type UpdateMyProfileResponse {
+  result: Boolean!
+  error: String
+}
+
+type UpdatePasswordResponse {
   result: Boolean!
   error: String
 }
