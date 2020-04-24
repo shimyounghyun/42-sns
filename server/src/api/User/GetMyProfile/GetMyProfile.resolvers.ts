@@ -8,7 +8,7 @@ const resolvers: Resolvers = {
       async (_, __, { req }): Promise<GetMyProfileResponse> => {
         const { user } = req;
         return {
-          ok: true,
+          result: true,
           error: null,
           user,
         };
