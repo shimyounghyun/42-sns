@@ -1,0 +1,17 @@
+type SignUpIntraResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  SignUpIntra(
+    email: String!
+    userName: String!
+    firstName: String!
+    lastName: String!
+    profilePhoto: String!
+    intraId: String!
+    password: String!
+  ): SignUpIntraResponse
+}

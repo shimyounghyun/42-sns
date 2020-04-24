@@ -47,10 +47,36 @@ type Trip {
   updatedAt: String
 }
 
+type EmailSignInResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Query {
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  user: User
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type IntraConnectResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
+  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
+}
+
 type User {
   id: Int!
   email: String!
   userName: String!
+  firstName: String!
+  lastName: String!
+  fullName: String
   profilePhoto: String!
   bio: String
   password: String!
@@ -63,6 +89,14 @@ type User {
   updatedAt: String
 }
 
-type Query {
-  user: User
+type SignInIntraResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type SignUpIntraResponse {
+  result: Boolean!
+  error: String
+  token: String
 }

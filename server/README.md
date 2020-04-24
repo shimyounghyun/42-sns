@@ -4,13 +4,14 @@
 
 ### Public Resolvers
 
-- [ ] Start 42 passport verification
-- [ ] Complete 42 passport verification
-- [ ] Sign up with 42 passport with email
-- [ ] Sign in with email
+- [x] Sign in with intra
+- [x] Sign up with intra
+- [x] Sign in with email
 
 ### Private Resolvers
 
+- [x] Generate JWT
+- [ ] Verify JWT
 - [ ] Get my profile
 - [ ] Update my profile
 - [ ] Add trip
