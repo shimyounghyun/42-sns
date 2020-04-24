@@ -16,3 +16,7 @@ type User {
   createdAt: String!
   updatedAt: String
 }
+
+type Query {
+  user: User
+}
