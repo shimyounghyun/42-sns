@@ -47,7 +47,7 @@ class User extends BaseEntity {
   password: string;
 
   @OneToMany((type) => Place, (place) => place.user)
-  places: Place[];
+  places: Place[] | any;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];
