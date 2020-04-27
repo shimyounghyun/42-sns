@@ -14,8 +14,8 @@ import {
 } from "typeorm";
 import Chat from "./Chat";
 import Message from "./Message";
-import Trip from "./Trip";
 import Place from "./Place";
+import Trip from "./Trip";
 
 const BCRYPT_ROUNDS = 10;
 

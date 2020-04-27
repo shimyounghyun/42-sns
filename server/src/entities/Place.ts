@@ -3,10 +3,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToOne,
 } from "typeorm";
 import Trip from "./Trip";
 import User from "./User";
