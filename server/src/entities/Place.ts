@@ -37,6 +37,9 @@ class Place extends BaseEntity {
   @Column({ nullable: true })
   userId: number;
 
+  @Column({ type: "boolean", default: false })
+  isFav: boolean;
+
   @CreateDateColumn()
   createdAt: string;
 
