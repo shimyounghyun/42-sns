@@ -1,0 +1,8 @@
+type UpdateMyProfileResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
+}

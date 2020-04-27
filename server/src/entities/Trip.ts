@@ -41,6 +41,12 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => Place, (place) => place.trips)
   place: Place;
 
+  @Column({ nullable: true })
+  placeLat: string;
+
+  @Column({ nullable: true })
+  placeLng: string;
+
   @CreateDateColumn()
   createdAt: string;
 

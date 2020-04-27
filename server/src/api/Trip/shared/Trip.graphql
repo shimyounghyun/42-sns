@@ -6,6 +6,8 @@ type Trip {
   dates: [Date]
   chat: Chat
   place: Place
+  placeLat: String
+  placeLng: String
   createdAt: String!
   updatedAt: String
 }

@@ -15,7 +15,9 @@ class App {
     this.app = new GraphQLServer({
       schema,
       context: (req) => {
-        req: req.request;
+        return {
+          req: req.request,
+        };
       },
     });
     this.middleWares();

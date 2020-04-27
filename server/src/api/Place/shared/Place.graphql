@@ -5,6 +5,9 @@ type Place {
   lng: Float!
   address: String!
   trips: [Trip]
+  user: User!
+  userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
 }

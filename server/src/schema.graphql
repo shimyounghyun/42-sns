@@ -24,6 +24,44 @@ type Date {
   updatedAt: String
 }
 
+type AddPlaceResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse
+  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
+  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
+  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
+  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
+type DeletePlaceResponse {
+  result: Boolean!
+  error: String
+}
+
+type EditPlaceResponse {
+  result: Boolean!
+  error: String
+}
+
+type GetMyPlacesResponse {
+  result: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
 type Place {
   id: Int!
   name: String!
@@ -31,8 +69,16 @@ type Place {
   lng: Float!
   address: String!
   trips: [Trip]
+  user: User!
+  userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
+}
+
+type AddTripResponse {
+  result: Boolean!
+  error: String
 }
 
 type Trip {
@@ -53,21 +99,16 @@ type EmailSignInResponse {
   token: String
 }
 
-type Query {
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+type GetMyProfileResponse {
+  result: Boolean!
+  error: String
   user: User
-  SignInIntra(intraId: String!): SignInIntraResponse
 }
 
 type IntraConnectResponse {
   result: Boolean!
   error: String
   token: String
-}
-
-type Mutation {
-  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
-  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
 }
 
 type User {
@@ -80,6 +121,7 @@ type User {
   profilePhoto: String!
   bio: String
   password: String!
+  places: [Place]
   chats: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
@@ -99,4 +141,14 @@ type SignUpIntraResponse {
   result: Boolean!
   error: String
   token: String
+}
+
+type UpdateMyProfileResponse {
+  result: Boolean!
+  error: String
+}
+
+type UpdatePasswordResponse {
+  result: Boolean!
+  error: String
 }
