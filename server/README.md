@@ -15,9 +15,10 @@
 - [x] Get my profile
 - [x] Update my profile
 - [x] Update my password
-- [x] Add Place
-- [x] Edit Place
-- [x] Delete Place
+- [x] Add place
+- [x] Edit place
+- [x] Delete place
+- [ ] Get my place
 - [ ] Add trip
 - [ ] Edit trip
 - [ ] Delete trip
