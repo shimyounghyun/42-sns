@@ -15,6 +15,7 @@ import {
 import Chat from "./Chat";
 import Message from "./Message";
 import Trip from "./Trip";
+import Place from "./Place";
 
 const BCRYPT_ROUNDS = 10;
 
@@ -44,6 +45,9 @@ class User extends BaseEntity {
 
   @Column({ type: "text", nullable: true })
   password: string;
+
+  @OneToMany((type) => Place, (place) => place.user)
+  places: Place[];
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];
