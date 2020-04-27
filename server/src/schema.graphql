@@ -49,6 +49,19 @@ type EditPlaceResponse {
   error: String
 }
 
+type GetMyPlacesResponse {
+  result: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
 type Place {
   id: Int!
   name: String!
@@ -83,12 +96,6 @@ type EmailSignInResponse {
   result: Boolean!
   error: String
   token: String
-}
-
-type Query {
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  GetMyProfile: GetMyProfileResponse
-  SignInIntra(intraId: String!): SignInIntraResponse
 }
 
 type GetMyProfileResponse {
