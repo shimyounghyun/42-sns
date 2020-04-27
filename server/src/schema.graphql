@@ -30,9 +30,9 @@ type AddPlaceResponse {
 }
 
 type Mutation {
-  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!): AddPlaceResponse!
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
-  EditPlace(placeId: Int!, name: String): EditPlaceResponse!
+  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -71,6 +71,7 @@ type Place {
   trips: [Trip]
   user: User!
   userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
 }
