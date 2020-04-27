@@ -18,7 +18,7 @@
 - [x] Add place
 - [x] Edit place
 - [x] Delete place
-- [ ] Get my place
+- [x] Get my place
 - [ ] Add trip
 - [ ] Edit trip
 - [ ] Delete trip
