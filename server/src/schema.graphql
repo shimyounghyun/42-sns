@@ -18,8 +18,11 @@ type Message {
 
 type Date {
   id: Int!
-  time: String!
+  startAt: String!
+  endAt: String!
   trips: [Trip]
+  user: User!
+  userId: Int!
   createdAt: String!
   updatedAt: String
 }
@@ -57,9 +60,16 @@ type GetMyPlacesResponse {
 
 type Query {
   GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetNearbyTripsResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
 }
 
 type Place {
@@ -89,6 +99,8 @@ type Trip {
   dates: [Date]
   chat: Chat
   place: Place
+  placeLat: String
+  placeLng: String
   createdAt: String!
   updatedAt: String
 }
@@ -122,6 +134,7 @@ type User {
   bio: String
   password: String!
   places: [Place]
+  dates: [Date]
   chats: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
