@@ -51,7 +51,7 @@ class User extends BaseEntity {
   places: Place[] | any;
 
   @OneToMany((type) => Date, (date) => date.user)
-  dates: Date;
+  dates: Date[] | any;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];

@@ -16,11 +16,11 @@ class Date extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "date" })
-  startAt: Date;
+  @Column({ type: "timestamp" })
+  startAt: string;
 
-  @Column({ type: "date" })
-  endAt: Date;
+  @Column({ type: "timestamp" })
+  endAt: string;
 
   @ManyToOne((type) => User, (user) => user.dates)
   user: User;
