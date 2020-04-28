@@ -1,7 +1,10 @@
 type Date {
   id: Int!
-  time: String!
+  startAt: String!
+  endAt: String!
   trips: [Trip]
+  user: User!
+  userId: Int!
   createdAt: String!
   updatedAt: String
 }

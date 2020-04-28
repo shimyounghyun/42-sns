@@ -9,6 +9,7 @@ type User {
   bio: String
   password: String!
   places: [Place]
+  dates: [Date]
   chats: [Chat]
   messages: [Message]
   tripAsHost: [Trip]

@@ -13,6 +13,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
+import Date from "./Date";
 import Message from "./Message";
 import Place from "./Place";
 import Trip from "./Trip";
@@ -48,6 +49,9 @@ class User extends BaseEntity {
 
   @OneToMany((type) => Place, (place) => place.user)
   places: Place[] | any;
+
+  @OneToMany((type) => Date, (date) => date.user)
+  dates: Date;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];
