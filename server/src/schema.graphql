@@ -16,6 +16,22 @@ type Message {
   updatedAt: String
 }
 
+type AddDateResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddDate(startAt: String!, endAt: String!): AddDateResponse
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse
+  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
+  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
+  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
+  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
 type Date {
   id: Int!
   startAt: String!
@@ -30,16 +46,6 @@ type Date {
 type AddPlaceResponse {
   result: Boolean!
   error: String
-}
-
-type Mutation {
-  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
-  DeletePlace(placeId: Int!): DeletePlaceResponse
-  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
-  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
-  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
-  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
-  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
 }
 
 type DeletePlaceResponse {
