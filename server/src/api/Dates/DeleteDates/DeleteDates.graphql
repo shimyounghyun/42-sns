@@ -1,0 +1,8 @@
+type DeleteDatesResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteDates(datesId: Int!): DeleteDatesResponse
+}
