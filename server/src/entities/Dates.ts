@@ -12,7 +12,7 @@ import Trip from "./Trip";
 import User from "./User";
 
 @Entity()
-class Date extends BaseEntity {
+class Dates extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -38,4 +38,4 @@ class Date extends BaseEntity {
   updatedAt: string;
 }
 
-export default Date;
+export default Dates;

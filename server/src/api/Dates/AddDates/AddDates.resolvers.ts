@@ -1,6 +1,6 @@
 import { AddDateMutationArgs, AddDateResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
-import Date from "../../../entities/Date";
+import Date from "../../../entities/Dates";
 import User from "../../../entities/User";
 import privateResolver from "../../../utils/privateMiddleware";
 

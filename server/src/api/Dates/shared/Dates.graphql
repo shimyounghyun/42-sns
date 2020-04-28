@@ -1,4 +1,4 @@
-type Date {
+type Dates {
   id: Int!
   startAt: String!
   endAt: String!

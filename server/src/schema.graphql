@@ -32,7 +32,7 @@ type Mutation {
   UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
 }
 
-type Date {
+type Dates {
   id: Int!
   startAt: String!
   endAt: String!
@@ -102,7 +102,7 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  dates: [Date]
+  dates: [Dates]
   chat: Chat
   place: Place
   placeLat: String
@@ -140,7 +140,7 @@ type User {
   bio: String
   password: String!
   places: [Place]
-  dates: [Date]
+  dates: [Dates]
   chats: [Chat]
   messages: [Message]
   tripAsHost: [Trip]

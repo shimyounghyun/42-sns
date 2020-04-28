@@ -13,7 +13,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
-import Date from "./Date";
+import Date from "./Dates";
 import Message from "./Message";
 import Place from "./Place";
 import Trip from "./Trip";
