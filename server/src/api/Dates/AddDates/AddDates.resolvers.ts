@@ -15,7 +15,7 @@ const resolvers: Resolvers = {
         const user: User = req.user;
         const { startAt, endAt } = args;
 
-        if (endAt > startAt) {
+        if (endAt >= startAt) {
           try {
             await Dates.create({ startAt, endAt, user }).save();
             return {
