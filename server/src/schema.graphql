@@ -23,6 +23,7 @@ type AddDatesResponse {
 
 type Mutation {
   AddDates(startAt: String!, endAt: String!): AddDatesResponse
+  DeleteDates(datesId: Int!): DeleteDatesResponse
   EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
@@ -31,6 +32,11 @@ type Mutation {
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
   UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
+type DeleteDatesResponse {
+  result: Boolean!
+  error: String
 }
 
 type EditDatesResponse {
