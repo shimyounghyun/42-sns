@@ -16,13 +16,13 @@ type Message {
   updatedAt: String
 }
 
-type AddDateResponse {
+type AddDatesResponse {
   result: Boolean!
   error: String
 }
 
 type Mutation {
-  AddDate(startAt: String!, endAt: String!): AddDateResponse
+  AddDates(startAt: String!, endAt: String!): AddDatesResponse
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
