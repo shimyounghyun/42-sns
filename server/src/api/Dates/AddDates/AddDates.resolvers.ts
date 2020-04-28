@@ -1,29 +1,39 @@
-import { AddDateMutationArgs, AddDateResponse } from "src/types/graph";
+import { AddDatesMutationArgs, AddDatesResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
-import Date from "../../../entities/Dates";
+import Dates from "../../../entities/Dates";
 import User from "../../../entities/User";
 import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
-    AddDate: privateResolver(
+    AddDates: privateResolver(
       async (
         _,
-        args: AddDateMutationArgs,
+        args: AddDatesMutationArgs,
         { req }
-      ): Promise<AddDateResponse> => {
+      ): Promise<AddDatesResponse> => {
         const user: User = req.user;
+        const { startAt, endAt } = args;
+        const startDay = new Date(startAt);
+        const endDay = new Date(endAt);
 
-        try {
-          await Date.create({ ...args, user }).save();
-          return {
-            result: true,
-            error: null,
-          };
-        } catch (error) {
+        if (endDay > startDay) {
+          try {
+            await Dates.create({ startAt, endAt, user }).save();
+            return {
+              result: true,
+              error: null,
+            };
+          } catch (error) {
+            return {
+              result: false,
+              error: error.message,
+            };
+          }
+        } else {
           return {
             result: false,
-            error: error.message,
+            error: "Start day is prior than end day",
           };
         }
       }

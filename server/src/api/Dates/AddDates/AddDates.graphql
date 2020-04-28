@@ -1,8 +1,8 @@
-type AddDateResponse {
+type AddDatesResponse {
   result: Boolean!
   error: String
 }
 
 type Mutation {
-  AddDate(startAt: String!, endAt: String!): AddDateResponse
+  AddDates(startAt: String!, endAt: String!): AddDatesResponse
 }
