@@ -14,10 +14,8 @@ const resolvers: Resolvers = {
       ): Promise<AddDatesResponse> => {
         const user: User = req.user;
         const { startAt, endAt } = args;
-        const startDay = new Date(startAt);
-        const endDay = new Date(endAt);
 
-        if (endDay > startDay) {
+        if (endAt > startAt) {
           try {
             await Dates.create({ startAt, endAt, user }).save();
             return {
