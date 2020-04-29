@@ -8,7 +8,7 @@ import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
-    EditPlace: privateResolver(
+    EditDates: privateResolver(
       async (
         _,
         args: EditDatesMutationArgs,
@@ -34,6 +34,10 @@ const resolvers: Resolvers = {
                   error: "check startAt and endAt",
                 };
               }
+              return {
+                result: true,
+                error: null,
+              };
             } else {
               return {
                 result: false,
