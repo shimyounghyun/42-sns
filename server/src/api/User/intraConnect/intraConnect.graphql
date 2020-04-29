@@ -1,16 +1,29 @@
+enum ConnectType {
+  LOGIN,
+  REGIST,
+  ERROR
+}
+
+type UserBasicInfo {
+  id : Int!
+  email: String!
+  userName: String!
+  firstName: String!
+  lastName: String!
+  profilePhoto: String!
+  intraId: String!
+}
+
 type IntraConnectResponse {
   result: Boolean!
   error: String
   token: String
+  type : ConnectType
+  data : UserBasicInfo
 }
 
 type Mutation {
   IntraConnect(
-    email: String!
-    userName: String!
-    firstName: String!
-    lastName: String!
-    profilePhoto: String!
-    intraId: String!
+    code : String
   ): IntraConnectResponse
 }

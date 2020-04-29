@@ -55,19 +55,36 @@ type EmailSignInResponse {
 
 type Query {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  user: User
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+enum ConnectType {
+  LOGIN
+  REGIST
+  ERROR
+}
+
+type UserBasicInfo {
+  id: Int!
+  email: String!
+  userName: String!
+  firstName: String!
+  lastName: String!
+  profilePhoto: String!
+  intraId: String!
 }
 
 type IntraConnectResponse {
   result: Boolean!
   error: String
   token: String
+  type: ConnectType
+  data: UserBasicInfo
 }
 
 type Mutation {
-  IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
-  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
+  IntraConnect(code: String): IntraConnectResponse
+  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse
 }
 
 type User {

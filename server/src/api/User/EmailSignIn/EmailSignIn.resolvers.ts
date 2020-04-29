@@ -10,7 +10,7 @@ const resolvers: Resolvers = {
       args: EmailSignInQueryArgs
     ): Promise<EmailSignInResponse> => {
       const { email, password } = args;
-
+      console.log(email, password);
       try {
         // 회원가입 여부 확인
         const user = await User.findOne({ email });
