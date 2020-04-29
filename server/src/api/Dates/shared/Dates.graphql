@@ -1,0 +1,10 @@
+type Dates {
+  id: Int!
+  startAt: String!
+  endAt: String!
+  trips: [Trip]
+  user: User!
+  userId: Int!
+  createdAt: String!
+  updatedAt: String
+}

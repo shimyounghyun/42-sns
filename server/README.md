@@ -19,6 +19,7 @@
 - [x] Edit place
 - [x] Delete place
 - [x] Get my place
+- [x] Get nearby trips(user lat, lng)
 - [ ] Add trip
 - [ ] Edit trip
 - [ ] Delete trip

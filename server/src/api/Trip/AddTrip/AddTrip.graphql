@@ -1,0 +1,4 @@
+type AddTripResponse {
+  result: Boolean!
+  error: String
+}

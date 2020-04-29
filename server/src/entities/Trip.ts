@@ -11,7 +11,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
-import Date from "./Date";
+import Date from "./Dates";
 import Place from "./Place";
 import User from "./User";
 

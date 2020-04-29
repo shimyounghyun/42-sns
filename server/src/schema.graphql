@@ -16,20 +16,14 @@ type Message {
   updatedAt: String
 }
 
-type Date {
-  id: Int!
-  time: String!
-  trips: [Trip]
-  createdAt: String!
-  updatedAt: String
-}
-
-type AddPlaceResponse {
+type AddDatesResponse {
   result: Boolean!
   error: String
 }
 
 type Mutation {
+  AddDates(startAt: String!, endAt: String!): AddDatesResponse
+  EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
@@ -37,6 +31,27 @@ type Mutation {
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
   UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
+type EditDatesResponse {
+  result: Boolean!
+  error: String
+}
+
+type Dates {
+  id: Int!
+  startAt: String!
+  endAt: String!
+  trips: [Trip]
+  user: User!
+  userId: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddPlaceResponse {
+  result: Boolean!
+  error: String
 }
 
 type DeletePlaceResponse {
@@ -57,9 +72,16 @@ type GetMyPlacesResponse {
 
 type Query {
   GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetNearbyTripsResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
 }
 
 type Place {
@@ -86,9 +108,11 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  dates: [Date]
+  dates: [Dates]
   chat: Chat
   place: Place
+  placeLat: String
+  placeLng: String
   createdAt: String!
   updatedAt: String
 }
@@ -122,6 +146,7 @@ type User {
   bio: String
   password: String!
   places: [Place]
+  dates: [Dates]
   chats: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
