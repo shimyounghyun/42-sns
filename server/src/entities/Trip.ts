@@ -34,6 +34,12 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => Date, (date) => date.trips)
   date: Date;
 
+  @Column({ nullable: true })
+  dateStartAt: string;
+
+  @Column({ nullable: true })
+  dateEndAt: string;
+
   @OneToOne((type) => Chat, (chat) => chat.trip)
   chat: Chat;
 
