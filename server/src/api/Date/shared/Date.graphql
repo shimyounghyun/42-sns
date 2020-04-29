@@ -1,7 +1,0 @@
-type Date {
-  id: Int!
-  time: String!
-  trips: [Trip]
-  createdAt: String!
-  updatedAt: String
-}

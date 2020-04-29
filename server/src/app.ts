@@ -15,18 +15,10 @@ class App {
     this.app = new GraphQLServer({
       schema,
       context: (req) => {
-				// console.log(req.connection)
-				// console.log(req.request)
-
-				// context undefined 에러 발생 방지
-				// context에 디폴트 값으로 null을 부여
-				// connection에는 디폴트 값으로 비어있는 값 부여
-				const { connection: { context = null } = {} } = req
-				return {
-					req: req.request,
-					context
-				}
-			},
+        return {
+          req: req.request,
+        };
+      },
     });
     this.middleWares();
   }
@@ -37,48 +29,6 @@ class App {
     this.app.express.use(logger("dev"));
     this.app.express.use(helmet());
     this.app.express.use(this.jwt);
-    // this.app.express.get('/auth', async (req, res) => {
-    //   //const code = req.query.code || null;
-    //   //console.log("코드값?",code);
-    //   const code = 'd9dd5ba18a539733f2ee70eaf1633aa37f08efa7f08b16b323308e7914141015';
-
-    //   // if (code){
-    //     const grant_type = 'authorization_code';
-    //     const client_id = '5502eb0a16b9d4e2c52efa25d4a97437462c649ea3e3f5e0ad8ef5e0c24a700e';
-    //     const client_secret = '02673be641d22404932124304f110cb6f2d6179df3c9dfda18962876318d317a';
-    //     const redirect_uri = 'http://127.0.0.1:4000/auth';
-    //     const access_token = await axios.post(
-    //       'https://api.intra.42.fr/oauth/token',
-    //       {
-    //         grant_type,
-    //         client_id,
-    //         client_secret,
-    //         redirect_uri,
-    //         code
-    //       }
-    //     )
-    //     .then(r =>r.data.access_token)
-    //     .catch(e =>{console.log(e); return null;});
-
-    //     if (access_token){
-    //       const info = await axios.get(
-    //         'https://api.intra.42.fr/v2/me',
-    //         {
-    //           headers: {
-    //             Authorization : `Bearer ${access_token}`
-    //           }
-    //         }
-    //       )
-    //       .then(r => r.data)
-    //       .catch(e =>{console.log(e); return null;});
-
-    //       console.log(info);
-    //     }
-    //   // }else {
-
-    //   // }
-    //     return ;
-    // });
   };
 
   // 헤더에 있는 json web token을 해독해 유저정보를 얻어옴

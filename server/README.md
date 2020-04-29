@@ -11,9 +11,15 @@
 ### Private Resolvers
 
 - [x] Generate JWT
-- [ ] Verify JWT
-- [ ] Get my profile
-- [ ] Update my profile
+- [x] Verify JWT
+- [x] Get my profile
+- [x] Update my profile
+- [x] Update my password
+- [x] Add place
+- [x] Edit place
+- [x] Delete place
+- [x] Get my place
+- [x] Get nearby trips(user lat, lng)
 - [ ] Add trip
 - [ ] Edit trip
 - [ ] Delete trip

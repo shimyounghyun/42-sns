@@ -14,7 +14,9 @@ import {
   PrimaryColumn,
 } from "typeorm";
 import Chat from "./Chat";
+import Date from "./Dates";
 import Message from "./Message";
+import Place from "./Place";
 import Trip from "./Trip";
 
 const BCRYPT_ROUNDS = 10;
@@ -46,6 +48,12 @@ class User extends BaseEntity {
 
   @Column({ type: "text", nullable: true })
   password: string;
+
+  @OneToMany((type) => Place, (place) => place.user)
+  places: Place[] | any;
+
+  @OneToMany((type) => Date, (date) => date.user)
+  dates: Date[] | any;
 
   @ManyToMany((type) => Chat, (chat) => chat.participants)
   chats: Chat[];

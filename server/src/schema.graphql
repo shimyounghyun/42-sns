@@ -16,12 +16,72 @@ type Message {
   updatedAt: String
 }
 
-type Date {
+type AddDatesResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddDates(startAt: String!, endAt: String!): AddDatesResponse
+  EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse
+  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  IntraConnect(code: String): IntraConnectResponse
+  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse
+  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
+  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
+type EditDatesResponse {
+  result: Boolean!
+  error: String
+}
+
+type Dates {
   id: Int!
-  time: String!
+  startAt: String!
+  endAt: String!
   trips: [Trip]
+  user: User!
+  userId: Int!
   createdAt: String!
   updatedAt: String
+}
+
+type AddPlaceResponse {
+  result: Boolean!
+  error: String
+}
+
+type DeletePlaceResponse {
+  result: Boolean!
+  error: String
+}
+
+type EditPlaceResponse {
+  result: Boolean!
+  error: String
+}
+
+type GetMyPlacesResponse {
+  result: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetNearbyTripsResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
 }
 
 type Place {
@@ -31,8 +91,16 @@ type Place {
   lng: Float!
   address: String!
   trips: [Trip]
+  user: User!
+  userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
+}
+
+type AddTripResponse {
+  result: Boolean!
+  error: String
 }
 
 type Trip {
@@ -40,9 +108,11 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  dates: [Date]
+  dates: [Dates]
   chat: Chat
   place: Place
+  placeLat: String
+  placeLng: String
   createdAt: String!
   updatedAt: String
 }
@@ -53,9 +123,10 @@ type EmailSignInResponse {
   token: String
 }
 
-type Query {
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  SignInIntra(intraId: String!): SignInIntraResponse
+type GetMyProfileResponse {
+  result: Boolean!
+  error: String
+  user: User
 }
 
 enum ConnectType {
@@ -82,11 +153,6 @@ type IntraConnectResponse {
   data: UserBasicInfo
 }
 
-type Mutation {
-  IntraConnect(code: String): IntraConnectResponse
-  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse
-}
-
 type User {
   id: Int!
   email: String!
@@ -97,6 +163,8 @@ type User {
   profilePhoto: String!
   bio: String
   password: String!
+  places: [Place]
+  dates: [Dates]
   chats: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
@@ -116,4 +184,14 @@ type SignUpIntraResponse {
   result: Boolean!
   error: String
   token: String
+}
+
+type UpdateMyProfileResponse {
+  result: Boolean!
+  error: String
+}
+
+type UpdatePasswordResponse {
+  result: Boolean!
+  error: String
 }

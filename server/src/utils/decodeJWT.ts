@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-import {} from "jsonwebtoken";
 import jwt from "jsonwebtoken";
 import User from "../entities/User";
 

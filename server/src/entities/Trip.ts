@@ -11,7 +11,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
-import Date from "./Date";
+import Date from "./Dates";
 import Place from "./Place";
 import User from "./User";
 
@@ -40,6 +40,12 @@ class Trip extends BaseEntity {
 
   @ManyToOne((type) => Place, (place) => place.trips)
   place: Place;
+
+  @Column({ nullable: true })
+  placeLat: string;
+
+  @Column({ nullable: true })
+  placeLng: string;
 
   @CreateDateColumn()
   createdAt: string;
