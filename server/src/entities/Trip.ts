@@ -19,6 +19,15 @@ class Trip extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ type: "text" })
+  title: string;
+
+  @Column({ type: "text", nullable: true })
+  caption: string;
+
+  @Column({ type: "text", nullable: true })
+  files: string[];
+
   @Column({
     type: "text",
     enum: [

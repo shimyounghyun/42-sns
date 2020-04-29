@@ -139,6 +139,9 @@ type AddTripResponse {
 
 type Trip {
   id: Int!
+  title: String!
+  caption: String
+  files: [String]
   status: String!
   host: User!
   guest: User
