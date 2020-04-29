@@ -17,7 +17,7 @@ const resolvers: Resolvers = {
           const dates = await Dates.findOne({ id: args.datesId });
           if (dates) {
             if (dates.userId === user.id) {
-              dates.remove();
+              await dates.remove();
               return {
                 result: true,
                 error: null,
