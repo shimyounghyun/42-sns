@@ -44,13 +44,14 @@ type EditDatesResponse {
   error: String
 }
 
-type GetMyDatesResponse {
+type GetDatesNearTripsResponse {
   result: Boolean!
   error: String
-  dates: [Dates]
+  trips: [Trip]
 }
 
 type Query {
+  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
   GetMyDates: GetMyDatesResponse
   GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
   GetMyPlaces: GetMyPlacesResponse!
@@ -59,6 +60,12 @@ type Query {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetMyDatesResponse {
+  result: Boolean!
+  error: String
+  dates: [Dates]
 }
 
 type GetNearbyDatesResponse {
