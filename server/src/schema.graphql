@@ -52,11 +52,18 @@ type GetMyDatesResponse {
 
 type Query {
   GetMyDates: GetMyDatesResponse
+  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
   GetMyPlaces: GetMyPlacesResponse!
   GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetNearbyDatesResponse {
+  result: Boolean!
+  error: String
+  dates: [Dates]
 }
 
 type Dates {
