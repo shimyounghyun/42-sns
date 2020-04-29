@@ -24,7 +24,7 @@ type AddDatesResponse {
 type Mutation {
   AddDates(startAt: String!, endAt: String!): AddDatesResponse
   DeleteDates(datesId: Int!): DeleteDatesResponse
-  EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse
+  EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse!
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
@@ -53,7 +53,7 @@ type GetMyDatesResponse {
 type Query {
   GetMyDates: GetMyDatesResponse
   GetMyPlaces: GetMyPlacesResponse!
-  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
+  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
@@ -91,10 +91,10 @@ type GetMyPlacesResponse {
   places: [Place]
 }
 
-type GetNearbyTripsResponse {
+type GetNearbyPlacesResponse {
   result: Boolean!
   error: String
-  trips: [Trip]
+  places: [Place]
 }
 
 type Place {
