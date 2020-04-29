@@ -1,9 +1,0 @@
-type GetNearbyTripsResponse {
-  result: Boolean!
-  error: String
-  trips: [Trip]
-}
-
-type Query {
-  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
-}

@@ -1,0 +1,9 @@
+type GetNearbyPlacesResponse {
+  result: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
+}
