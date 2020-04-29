@@ -2,3 +2,13 @@ type AddTripResponse {
   result: Boolean!
   error: String
 }
+
+type Mutation {
+  AddTrip(
+    title: String
+    caption: String
+    file: [String]
+    dateId: Int!
+    placeId: Int!
+  ): AddTripResponse!
+}
