@@ -1,0 +1,9 @@
+type GetMyDatesResponse {
+  result: Boolean!
+  error: String
+  dates: [Dates]
+}
+
+type Query {
+  GetMyDates: GetMyDatesResponse
+}
