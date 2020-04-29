@@ -4,7 +4,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -32,8 +31,8 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.tripAsGuest)
   guest: User;
 
-  @ManyToMany((type) => Date, (date) => date.trips)
-  dates: Date[];
+  @ManyToOne((type) => Date, (date) => date.trips)
+  date: Date;
 
   @OneToOne((type) => Chat, (chat) => chat.trip)
   chat: Chat;

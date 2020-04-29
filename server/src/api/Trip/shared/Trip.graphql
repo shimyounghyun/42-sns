@@ -3,7 +3,7 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  dates: [Dates]
+  date: Dates
   chat: Chat
   place: Place
   placeLat: String

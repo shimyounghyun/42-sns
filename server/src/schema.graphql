@@ -44,6 +44,21 @@ type EditDatesResponse {
   error: String
 }
 
+type GetMyDatesResponse {
+  result: Boolean!
+  error: String
+  dates: [Dates]
+}
+
+type Query {
+  GetMyDates: GetMyDatesResponse
+  GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
 type Dates {
   id: Int!
   startAt: String!
@@ -76,14 +91,6 @@ type GetMyPlacesResponse {
   places: [Place]
 }
 
-type Query {
-  GetMyPlaces: GetMyPlacesResponse!
-  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  GetMyProfile: GetMyProfileResponse
-  SignInIntra(intraId: String!): SignInIntraResponse
-}
-
 type GetNearbyTripsResponse {
   result: Boolean!
   error: String
@@ -114,7 +121,7 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  dates: [Dates]
+  date: Dates
   chat: Chat
   place: Place
   placeLat: String

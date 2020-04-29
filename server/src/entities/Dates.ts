@@ -3,8 +3,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -16,10 +16,10 @@ class Dates extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "date" })
   startAt: string;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "date" })
   endAt: string;
 
   @ManyToOne((type) => User, (user) => user.dates)
@@ -28,7 +28,7 @@ class Dates extends BaseEntity {
   @Column({ nullable: true })
   userId: number;
 
-  @ManyToMany((type) => Trip, (trip) => trip.dates)
+  @OneToMany((type) => Trip, (trip) => trip.date)
   trips: Trip[];
 
   @CreateDateColumn()
