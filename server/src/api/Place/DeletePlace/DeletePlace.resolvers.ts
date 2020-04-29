@@ -17,7 +17,7 @@ const resolvers: Resolvers = {
           const place = await Place.findOne({ id: args.placeId });
           if (place) {
             if (place.userId === user.id) {
-              place.remove();
+              await place.remove();
               return {
                 result: true,
                 error: null,
