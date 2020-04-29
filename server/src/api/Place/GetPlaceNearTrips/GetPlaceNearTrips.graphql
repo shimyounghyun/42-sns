@@ -1,0 +1,8 @@
+type GetPlaceNearTripsResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
+}
+type Query {
+  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
+}
