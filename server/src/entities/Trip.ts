@@ -21,7 +21,15 @@ class Trip extends BaseEntity {
 
   @Column({
     type: "text",
-    enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"],
+    enum: [
+      "WATING",
+      "ACCEPTED",
+      "FINISHED",
+      "CANCELED",
+      "REQUESTING",
+      "ONROUTE",
+    ],
+    default: "WATING",
   })
   status: tripStatus;
 
