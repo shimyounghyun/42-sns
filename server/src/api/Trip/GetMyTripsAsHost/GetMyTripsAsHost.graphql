@@ -1,0 +1,9 @@
+type GetMyTripsAsHostResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
+}
+
+type Query {
+  GetMyTripsAsHost: GetMyTripsAsHostResponse!
+}
