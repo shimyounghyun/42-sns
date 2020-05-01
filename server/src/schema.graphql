@@ -147,9 +147,6 @@ type GetMyTripsAsHostResponse {
 
 type Trip {
   id: Int!
-  title: String!
-  caption: String
-  files: [String]
   status: String!
   host: User!
   guest: User
@@ -158,8 +155,8 @@ type Trip {
   dateEndAt: String
   chat: Chat
   place: Place
-  placeLat: String
-  placeLng: String
+  placeLat: Float
+  placeLng: Float
   createdAt: String!
   updatedAt: String
 }
