@@ -1,0 +1,8 @@
+type DeleteTripResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  DeleteTrip(tripId: Int!): DeleteTripResponse
+}
