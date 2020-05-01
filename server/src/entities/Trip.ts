@@ -10,8 +10,6 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
-import Date from "./Dates";
-import Place from "./Place";
 import User from "./User";
 
 @Entity()
@@ -21,7 +19,15 @@ class Trip extends BaseEntity {
 
   @Column({
     type: "text",
-    enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"],
+    enum: [
+      "WATING",
+      "ACCEPTED",
+      "FINISHED",
+      "CANCELED",
+      "REQUESTING",
+      "ONROUTE",
+    ],
+    default: "WATING",
   })
   status: tripStatus;
 
@@ -31,26 +37,29 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.tripAsGuest)
   guest: User;
 
-  @ManyToOne((type) => Date, (date) => date.trips)
-  date: Date;
+  @Column({ type: "text", nullable: true })
+  title: string;
 
-  @Column({ nullable: true })
-  dateStartAt: string;
+  @Column({ type: "text", nullable: true })
+  caption: string;
 
-  @Column({ nullable: true })
-  dateEndAt: string;
+  @Column({ type: "text", nullable: true })
+  file: string[];
+
+  @Column({ type: "double precision", default: 0 })
+  lat: number;
+
+  @Column({ type: "double precision", default: 0 })
+  lng: number;
+
+  @Column({ type: "text" })
+  startAt: string;
+
+  @Column({ type: "text" })
+  endAt: string;
 
   @OneToOne((type) => Chat, (chat) => chat.trip)
   chat: Chat;
-
-  @ManyToOne((type) => Place, (place) => place.trips)
-  place: Place;
-
-  @Column({ nullable: true })
-  placeLat: number;
-
-  @Column({ nullable: true })
-  placeLng: number;
 
   @CreateDateColumn()
   createdAt: string;

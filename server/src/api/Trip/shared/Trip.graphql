@@ -3,13 +3,14 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  date: Dates
-  dateStartAt: String
-  dateEndAt: String
+  title: String
+  caption: String
+  file: [String]
+  lat: Float!
+  lng: Float!
+  startAt: String!
+  endAt: String!
   chat: Chat
-  place: Place
-  placeLat: Float
-  placeLng: Float
   createdAt: String!
   updatedAt: String
 }
