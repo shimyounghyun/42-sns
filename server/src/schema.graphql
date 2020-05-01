@@ -80,7 +80,6 @@ type Dates {
   id: Int!
   startAt: String!
   endAt: String!
-  trips: [Trip]
   user: User!
   userId: Int!
   createdAt: String!
@@ -126,7 +125,6 @@ type Place {
   lat: Float!
   lng: Float!
   address: String!
-  trips: [Trip]
   user: User!
   userId: Int!
   isFav: Boolean!
@@ -150,13 +148,13 @@ type Trip {
   status: String!
   host: User!
   guest: User
-  date: Dates
-  dateStartAt: String
-  dateEndAt: String
+  name: String!
+  lat: Float!
+  lng: Float!
+  address: String!
+  startAt: String!
+  endAt: String!
   chat: Chat
-  place: Place
-  placeLat: Float
-  placeLng: Float
   createdAt: String!
   updatedAt: String
 }
