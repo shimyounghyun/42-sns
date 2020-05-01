@@ -26,8 +26,8 @@ const resolvers: Resolvers = {
               const { startAt, endAt } = dates;
               try {
                 const trips: Trip[] = await getRepository(Trip).find({
-                  dateStartAt: Between(startAt, endAt),
-                  dateEndAt: Between(startAt, endAt),
+                  startAt: Between(startAt, endAt),
+                  endAt: Between(startAt, endAt),
                 });
                 return {
                   result: true,
