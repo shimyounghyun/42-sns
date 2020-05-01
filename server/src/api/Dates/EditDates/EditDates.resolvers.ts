@@ -2,7 +2,6 @@ import { EditDatesMutationArgs, EditDatesResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import Dates from "../../../entities/Dates";
 import User from "../../../entities/User";
-import checkDates from "../../../utils/checkDates";
 import cleanNullArgs from "../../../utils/cleanNullArgs";
 import privateResolver from "../../../utils/privateMiddleware";
 
@@ -19,21 +18,8 @@ const resolvers: Resolvers = {
           const dates = await Dates.findOne({ id: args.id });
           if (dates) {
             if (dates.userId === user.id) {
-              if (
-                checkDates(args.startAt, args.endAt, dates.startAt, dates.endAt)
-              ) {
-                const notNull = cleanNullArgs(args);
-                await Dates.update({ id: args.id }, { ...notNull });
-                return {
-                  result: true,
-                  error: null,
-                };
-              } else {
-                return {
-                  result: false,
-                  error: "check startAt and endAt",
-                };
-              }
+              const notNull = cleanNullArgs(args);
+              await Dates.update({ id: args.id }, { ...notNull });
               return {
                 result: true,
                 error: null,

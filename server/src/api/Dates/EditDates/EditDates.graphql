@@ -4,5 +4,5 @@ type EditDatesResponse {
 }
 
 type Mutation {
-  EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse!
+  EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!
 }
