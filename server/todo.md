@@ -28,7 +28,7 @@
 - [x] Get nearby dates(startAt, endAt)
 - [x] Get dates near trips(startAt, endAt)
 - [x] Add trip
-- [ ] Edit trip
+- [x] Edit trip
 - [x] Delete trip
 - [ ] Get nearby trips(lat, lng, startAt, endAt)
 - [ ] Report location
