@@ -12,3 +12,4 @@ const privateResolver = (resovlerFunction) => async (
 };
 
 export default privateResolver;
+
