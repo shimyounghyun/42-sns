@@ -2,7 +2,9 @@ type Trip {
   id: Int!
   status: String!
   host: User!
+  hostId: Int!
   guest: User
+  guestId: Int
   title: String
   caption: String
   file: [String]

@@ -34,8 +34,14 @@ class Trip extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.tripAsHost)
   host: User;
 
+  @Column({ nullable: true })
+  hostId: number;
+
   @ManyToOne((type) => User, (user) => user.tripAsGuest)
   guest: User;
+
+  @Column({ nullable: true })
+  guestId: number;
 
   @Column({ type: "text", nullable: true })
   title: string;
