@@ -1,9 +1,11 @@
 type Dates {
   id: Int!
+  name: String!
   startAt: String!
   endAt: String!
   user: User!
   userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
 }

@@ -22,9 +22,9 @@ type AddDatesResponse {
 }
 
 type Mutation {
-  AddDates(startAt: String!, endAt: String!): AddDatesResponse
+  AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse
   DeleteDates(datesId: Int!): DeleteDatesResponse
-  EditDates(id: Int!, startAt: String, endAt: String): EditDatesResponse!
+  EditDates(id: Int!, name: String): EditDatesResponse!
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
@@ -79,10 +79,12 @@ type GetNearbyDatesResponse {
 
 type Dates {
   id: Int!
+  name: String!
   startAt: String!
   endAt: String!
   user: User!
   userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
 }

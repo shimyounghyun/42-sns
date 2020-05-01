@@ -14,11 +14,17 @@ class Dates extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ type: "text" })
+  name: string;
+
   @Column({ type: "date" })
   startAt: string;
 
   @Column({ type: "date" })
   endAt: string;
+
+  @Column({ type: "boolean", default: false })
+  isFav: boolean;
 
   @ManyToOne((type) => User, (user) => user.dates)
   user: User;
