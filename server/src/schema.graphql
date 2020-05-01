@@ -29,6 +29,7 @@ type Mutation {
   DeletePlace(placeId: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!
+  DeleteTrip(tripId: Int!): DeleteTripResponse
   IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -137,6 +138,11 @@ type AddTripResponse {
   error: String
 }
 
+type DeleteTripResponse {
+  result: Boolean!
+  error: String
+}
+
 type GetMyTripsAsHostResponse {
   result: Boolean!
   error: String
@@ -147,7 +153,9 @@ type Trip {
   id: Int!
   status: String!
   host: User!
+  hostId: Int!
   guest: User
+  guestId: Int
   title: String
   caption: String
   file: [String]
