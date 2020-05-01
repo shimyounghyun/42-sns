@@ -61,6 +61,7 @@ type Query {
   GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
   GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
   GetMyTripsAsHost: GetMyTripsAsHostResponse!
+  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
@@ -152,6 +153,12 @@ type EditTripResponse {
 }
 
 type GetMyTripsAsHostResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
+}
+
+type GetNearbyTripsResponse {
   result: Boolean!
   error: String
   trips: [Trip]
