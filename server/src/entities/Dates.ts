@@ -4,11 +4,9 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Trip from "./Trip";
 import User from "./User";
 
 @Entity()
@@ -27,9 +25,6 @@ class Dates extends BaseEntity {
 
   @Column({ nullable: true })
   userId: number;
-
-  @OneToMany((type) => Trip, (trip) => trip.date)
-  trips: Trip[];
 
   @CreateDateColumn()
   createdAt: string;
