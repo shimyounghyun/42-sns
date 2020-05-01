@@ -24,11 +24,10 @@ const resolvers: Resolvers = {
 
           if (place) {
             if (place.userId === user.id) {
-              const { lat, lng } = place;
               try {
                 const trips: Trip[] = await getRepository(Trip).find({
-                  placeLat: Between(lat - 0.05, lat + 0.05),
-                  placeLng: Between(lng - 0.05, lng + 0.05),
+                  lat: Between(place.lat - 0.05, place.lat + 0.05),
+                  lng: Between(place.lng - 0.05, place.lng + 0.05),
                 });
                 return {
                   result: true,
