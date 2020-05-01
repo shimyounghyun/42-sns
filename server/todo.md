@@ -30,7 +30,7 @@
 - [x] Add trip
 - [x] Edit trip
 - [x] Delete trip
-- [ ] Get nearby trips(lat, lng, startAt, endAt)
+- [x] Get nearby trips(lat, lng, startAt, endAt)
 - [ ] Report location
 - [ ] Request trip
 - [ ] Get trip requests
