@@ -26,14 +26,14 @@ class Place extends BaseEntity {
   @Column({ type: "text" })
   address: string;
 
+  @Column({ type: "boolean", default: false })
+  isFav: boolean;
+
   @ManyToOne((type) => User, (user) => user.places)
   user: User;
 
   @Column({ nullable: true })
   userId: number;
-
-  @Column({ type: "boolean", default: false })
-  isFav: boolean;
 
   @CreateDateColumn()
   createdAt: string;
