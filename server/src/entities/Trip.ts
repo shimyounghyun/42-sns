@@ -19,26 +19,9 @@ class Trip extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "text" })
-  title: string;
-
-  @Column({ type: "text", nullable: true })
-  caption: string;
-
-  @Column({ type: "text", nullable: true })
-  files: string[];
-
   @Column({
     type: "text",
-    enum: [
-      "WATING",
-      "ACCEPTED",
-      "FINISHED",
-      "CANCELED",
-      "REQUESTING",
-      "ONROUTE",
-    ],
-    default: "WATING",
+    enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"],
   })
   status: tripStatus;
 
@@ -64,10 +47,10 @@ class Trip extends BaseEntity {
   place: Place;
 
   @Column({ nullable: true })
-  placeLat: string;
+  placeLat: number;
 
   @Column({ nullable: true })
-  placeLng: string;
+  placeLng: number;
 
   @CreateDateColumn()
   createdAt: string;
