@@ -1,0 +1,13 @@
+type EditTripResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  EditTrip(
+    id: Int!
+    title: String
+    caption: String
+    file: [String]
+  ): EditTripResponse!
+}

@@ -24,12 +24,13 @@ type AddDatesResponse {
 type Mutation {
   AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse
   DeleteDates(datesId: Int!): DeleteDatesResponse
-  EditDates(id: Int!, name: String): EditDatesResponse!
+  EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse
   EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!
   DeleteTrip(tripId: Int!): DeleteTripResponse
+  EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!
   IntraConnect(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -141,6 +142,11 @@ type AddTripResponse {
 }
 
 type DeleteTripResponse {
+  result: Boolean!
+  error: String
+}
+
+type EditTripResponse {
   result: Boolean!
   error: String
 }
