@@ -16,43 +16,27 @@ const resolvers: Resolvers = {
         { req }
       ): Promise<AddTripResponse> => {
         const user: User = req.user;
-        const { placeId, dateId, title, caption, file } = args;
-
+        const { title, caption, file, placeId, datesId } = args;
         try {
-          const date = await Dates.findOne({ id: dateId });
           const place = await Place.findOne({ id: placeId });
-          if (date && place) {
-            if (date.userId === user.id && place.userId === user.id) {
-              try {
-                const notNull = cleanNullArgs({ caption, file, title });
-                await Trip.create({
-                  ...notNull,
-                  host: user,
-                  date,
-                  place,
-                }).save();
-                return {
-                  result: true,
-                  error: null,
-                };
-              } catch (error) {
-                return {
-                  result: false,
-                  error: error.message,
-                };
-              }
-            } else {
-              return {
-                result: false,
-                error: "Not Authorized",
-              };
-            }
-          } else {
-            return {
-              result: false,
-              error: "Dates and/or Place not found",
-            };
-          }
+          const dates = await Dates.findOne({ id: datesId });
+          const notNull = cleanNullArgs({
+            title,
+            caption,
+            file,
+            startAt: dates?.startAt,
+            endAt: dates?.endAt,
+            lat: place?.lat,
+            lng: place?.lng,
+          });
+          await Trip.create({
+            ...notNull,
+            host: user,
+          }).save();
+          return {
+            result: true,
+            error: null,
+          };
         } catch (error) {
           return {
             result: false,
