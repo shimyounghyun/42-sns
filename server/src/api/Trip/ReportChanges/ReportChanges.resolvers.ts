@@ -32,8 +32,13 @@ const resolvers: Resolvers = {
                 (!args.startAt && !args.endAt)
               ) {
                 const notNull = cleanNullArgs(args);
-                await Trip.update({ id: args.id }, { ...notNull });
-                pubSub.publish("tripUpdate", { TripsSubscription: trip });
+                const updatedTrip = await Trip.update(
+                  { id: args.id },
+                  { ...notNull }
+                );
+                pubSub.publish("tripUpdate", {
+                  TripsSubscription: updatedTrip,
+                });
                 return {
                   result: true,
                   error: null,
