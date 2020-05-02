@@ -1,11 +1,11 @@
 enum ConnectType {
-  LOGIN,
-  REGIST,
+  LOGIN
+  REGIST
   ERROR
 }
 
 type UserBasicInfo {
-  id : Int!
+  id: Int!
   email: String!
   userName: String!
   firstName: String!
@@ -18,12 +18,10 @@ type IntraConnectResponse {
   result: Boolean!
   error: String
   token: String
-  type : ConnectType
-  data : UserBasicInfo
+  type: ConnectType
+  data: UserBasicInfo
 }
 
 type Mutation {
-  IntraConnect(
-    code : String
-  ): IntraConnectResponse
+  IntraConnect(code: String): IntraConnectResponse
 }
