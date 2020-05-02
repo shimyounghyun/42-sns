@@ -10,7 +10,10 @@ const resolvers = {
         },
         (payload, _, { context }) => {
           const user: User = context.currentUser;
-          if (payload.guestId === user.id) return true;
+          const {
+            TripsSubscription: { guestId },
+          } = payload;
+          if (guestId === user.id) return true;
           return false;
         }
       ),
