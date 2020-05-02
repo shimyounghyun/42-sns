@@ -9,7 +9,8 @@ import {
   Entity,
   ManyToMany,
   OneToMany,
-  PrimaryGeneratedColumn,
+  // PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
@@ -22,7 +23,8 @@ const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  // @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
   @Column({ type: "text", unique: true })
