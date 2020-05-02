@@ -4,6 +4,7 @@
 */
 import {ActionType} from 'typesafe-actions';
 import * as actions from './actions';
+import {CurrentUser} from '../../lib/graphql/user';
 
 export type AuthMode = 'REGISTER' | 'LOGIN';
 export type CoreAction = ActionType<typeof actions>;
@@ -14,5 +15,5 @@ export type CoreState = {
         visible: boolean;
         mode: AuthMode;
     };
-    user: null;
+    user: CurrentUser | null;
 };

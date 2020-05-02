@@ -6,6 +6,7 @@ import transitions from '../../lib/styles/transitions';
 import {MdClose} from 'react-icons/md';
 import AuthLoginForm from './AuthLoginForm';
 import {AuthMode} from '../../modules/core';
+import {logo_42_white} from '../../static/svg';
 
 const {useState, useEffect} = React;
 
@@ -76,7 +77,7 @@ const Footer = styled.div`
   }
 `;
 const FortyTwoImg = styled.img.attrs({
-  src:'./logo_42_white.svg'
+  src:logo_42_white
 })`
   width:20px;
   height:20px;
@@ -141,7 +142,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
           </div>
           <div className="block-content">
             {children}
-            <FortyTwoButton>
+            <FortyTwoButton onClick={go42Auth}>
               <FortyTwoImg/>
               인트라 계정으로 {modText}
             </FortyTwoButton>
@@ -171,4 +172,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
   );
 };
 
+const go42Auth = () =>{
+  document.location.href="https://api.intra.42.fr/oauth/authorize?client_id=5502eb0a16b9d4e2c52efa25d4a97437462c649ea3e3f5e0ad8ef5e0c24a700e&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Fauth&response_type=code";
+}
 export default AuthModal;

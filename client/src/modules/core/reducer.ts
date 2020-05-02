@@ -10,8 +10,10 @@ import {
     SET_LAYER,
     SHOW_AUTH_MODAL,
     CLOSE_AUTH_MODAL,
-    CHANGE_AUTH_MODAL_MODE
+    CHANGE_AUTH_MODAL_MODE,
+    SET_USER
 } from './actions';
+import {updateKey} from '../../lib/utils';
 
 const initialState: CoreState = {
     layer: false,
@@ -44,6 +46,7 @@ const core = createReducer<CoreState, CoreAction>(initialState, {
         draft.auth.visible = false;
         draft.layer = false;
     }),
+    [SET_USER]: (state, {payload: user}) => updateKey(state, 'user', user)
 });
 
 export default core;

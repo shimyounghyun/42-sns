@@ -44,7 +44,6 @@ class App {
     if (token) {
       // 토큰을 해석해 유저 정보를 받아옴
       const user = await decodeJWT(token);
-
       if (user) {
         // 유저 정보를 받아온 경우
         // req에다가 유저정보를 넣음
