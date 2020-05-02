@@ -18,7 +18,6 @@ const appOptions: Options = {
     // 토큰을 확인함
     onConnect: async (connectionParmas) => {
       const token = connectionParmas.JWT;
-      console.log(token);
       if (token) {
         const user = await decodeJWT(token);
         if (user) {
