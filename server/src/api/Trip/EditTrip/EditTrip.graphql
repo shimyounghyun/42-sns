@@ -1,14 +1,13 @@
-type AddTripResponse {
+type EditTripResponse {
   result: Boolean!
   error: String
 }
 
 type Mutation {
-  AddTrip(
+  EditTrip(
+    id: Int!
     title: String
     caption: String
     file: [String]
-    placeId: Int!
-    datesId: Int!
-  ): AddTripResponse!
+  ): EditTripResponse!
 }

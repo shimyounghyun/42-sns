@@ -4,11 +4,9 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Trip from "./Trip";
 import User from "./User";
 
 @Entity()
@@ -28,17 +26,14 @@ class Place extends BaseEntity {
   @Column({ type: "text" })
   address: string;
 
-  @OneToMany((type) => Trip, (trip) => trip.place)
-  trips: Trip[];
+  @Column({ type: "boolean", default: false })
+  isFav: boolean;
 
   @ManyToOne((type) => User, (user) => user.places)
   user: User;
 
   @Column({ nullable: true })
   userId: number;
-
-  @Column({ type: "boolean", default: false })
-  isFav: boolean;
 
   @CreateDateColumn()
   createdAt: string;

@@ -1,0 +1,9 @@
+type GetDatesNearTripsResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
+}
+
+type Query {
+  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
+}

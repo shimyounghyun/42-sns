@@ -1,23 +1,26 @@
-import { DeletePlaceMutationArgs, DeletePlaceResponse } from "src/types/graph";
+import {
+  DeleteTripMutationArgs,
+  DeleteTripResponse,
+  User,
+} from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
-import Place from "../../../entities/Place";
-import User from "../../../entities/User";
+import Trip from "../../../entities/Trip";
 import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
-    DeletePlace: privateResolver(
+    DeleteTrip: privateResolver(
       async (
         _,
-        args: DeletePlaceMutationArgs,
+        args: DeleteTripMutationArgs,
         { req }
-      ): Promise<DeletePlaceResponse> => {
+      ): Promise<DeleteTripResponse> => {
         const user: User = req.user;
         try {
-          const place = await Place.findOne({ id: args.placeId });
-          if (place) {
-            if (place.userId === user.id) {
-              await place.remove();
+          const trip = await Trip.findOne({ id: args.tripId });
+          if (trip) {
+            if (trip.hostId === user.id) {
+              await trip.remove();
               return {
                 result: true,
                 error: null,
@@ -31,7 +34,7 @@ const resolvers: Resolvers = {
           } else {
             return {
               result: false,
-              error: "Place Not Found",
+              error: "Trip Not Found",
             };
           }
         } catch (error) {

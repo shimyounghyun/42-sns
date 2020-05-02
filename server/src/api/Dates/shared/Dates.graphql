@@ -1,10 +1,11 @@
 type Dates {
   id: Int!
+  name: String!
   startAt: String!
   endAt: String!
-  trips: [Trip]
   user: User!
   userId: Int!
+  isFav: Boolean!
   createdAt: String!
   updatedAt: String
 }

@@ -3,12 +3,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import Trip from "./Trip";
 import User from "./User";
 
 @Entity()
@@ -16,20 +14,23 @@ class Dates extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "text" })
+  name: string;
+
+  @Column({ type: "date" })
   startAt: string;
 
-  @Column({ type: "date", nullable: true })
+  @Column({ type: "date" })
   endAt: string;
+
+  @Column({ type: "boolean", default: false })
+  isFav: boolean;
 
   @ManyToOne((type) => User, (user) => user.dates)
   user: User;
 
   @Column({ nullable: true })
   userId: number;
-
-  @ManyToMany((type) => Trip, (trip) => trip.dates)
-  trips: Trip[];
 
   @CreateDateColumn()
   createdAt: string;

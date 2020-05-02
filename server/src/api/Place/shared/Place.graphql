@@ -4,7 +4,6 @@ type Place {
   lat: Float!
   lng: Float!
   address: String!
-  trips: [Trip]
   user: User!
   userId: Int!
   isFav: Boolean!

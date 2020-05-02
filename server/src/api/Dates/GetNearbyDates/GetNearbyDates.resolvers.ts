@@ -1,66 +1,65 @@
 import {
-  GetNearbyTripsQueryArgs,
-  GetNearbyTripsResponse,
+  GetNearbyDatesQueryArgs,
+  GetNearbyDatesResponse,
+  User,
 } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import { Between, getRepository } from "typeorm";
-import Place from "../../../entities/Place";
-import Trip from "../../../entities/Trip";
-import User from "../../../entities/User";
+import Dates from "../../../entities/Dates";
 import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Query: {
-    GetNearbyTrips: privateResolver(
+    GetNearbyDates: privateResolver(
       async (
         _,
-        args: GetNearbyTripsQueryArgs,
+        args: GetNearbyDatesQueryArgs,
         { req }
-      ): Promise<GetNearbyTripsResponse> => {
+      ): Promise<GetNearbyDatesResponse> => {
         const user: User = req.user;
 
         try {
-          const place = await Place.findOne({ id: args.placeId });
+          const date = await Dates.findOne({ id: args.dateId });
 
-          if (place) {
-            if (place.userId === user.id) {
-              const { lat, lng } = place;
+          if (date) {
+            if (date.userId === user.id) {
+              const { startAt, endAt } = date;
               try {
-                const trips: Trip[] = await getRepository(Trip).find({
-                  placeLat: Between(lat - 0.05, lat + 0.05),
-                  placeLng: Between(lng - 0.05, lng + 0.05),
+                const dates: Dates[] = await getRepository(Dates).find({
+                  startAt: Between(startAt, endAt),
+                  endAt: Between(startAt, endAt),
                 });
                 return {
                   result: true,
                   error: null,
-                  trips,
+                  dates,
                 };
               } catch (error) {
                 return {
                   result: false,
                   error: error.message,
-                  trips: null,
+                  dates: null,
                 };
               }
             } else {
               return {
                 result: false,
                 error: "Not Authorized",
-                trips: null,
+                dates: null,
               };
             }
           } else {
             return {
               result: false,
-              error: "Place not found",
-              trips: null,
+              error: "Dates not found",
+              dates: null,
             };
           }
         } catch (error) {
           return {
             result: false,
             error: error.message,
-            trips: null,
+            dates: null,
           };
         }
       }

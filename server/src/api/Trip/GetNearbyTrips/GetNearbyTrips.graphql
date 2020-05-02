@@ -5,5 +5,5 @@ type GetNearbyTripsResponse {
 }
 
 type Query {
-  GetNearbyTrips(placeId: Int!): GetNearbyTripsResponse!
+  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
 }

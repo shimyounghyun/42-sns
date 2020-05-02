@@ -19,10 +19,18 @@
 - [x] Edit place
 - [x] Delete place
 - [x] Get my place
-- [x] Get nearby trips(user lat, lng)
-- [ ] Add trip
-- [ ] Edit trip
-- [ ] Delete trip
+- [x] Get nearby place(lat, lng)
+- [x] Get place near trips(lat, lng)
+- [x] Add dates
+- [x] Edit dates
+- [x] Delete dates
+- [x] Get my dates
+- [x] Get nearby dates(startAt, endAt)
+- [x] Get dates near trips(startAt, endAt)
+- [x] Add trip
+- [x] Edit trip
+- [x] Delete trip
+- [x] Get nearby trips(lat, lng, startAt, endAt)
 - [ ] Report location
 - [ ] Request trip
 - [ ] Get trip requests

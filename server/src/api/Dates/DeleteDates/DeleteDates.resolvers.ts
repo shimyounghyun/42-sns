@@ -1,23 +1,23 @@
-import { DeletePlaceMutationArgs, DeletePlaceResponse } from "src/types/graph";
+import { DeleteDatesMutationArgs, DeleteDatesResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
-import Place from "../../../entities/Place";
+import Dates from "../../../entities/Dates";
 import User from "../../../entities/User";
 import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
-    DeletePlace: privateResolver(
+    DeleteDates: privateResolver(
       async (
         _,
-        args: DeletePlaceMutationArgs,
+        args: DeleteDatesMutationArgs,
         { req }
-      ): Promise<DeletePlaceResponse> => {
+      ): Promise<DeleteDatesResponse> => {
         const user: User = req.user;
         try {
-          const place = await Place.findOne({ id: args.placeId });
-          if (place) {
-            if (place.userId === user.id) {
-              await place.remove();
+          const dates = await Dates.findOne({ id: args.datesId });
+          if (dates) {
+            if (dates.userId === user.id) {
+              await dates.remove();
               return {
                 result: true,
                 error: null,
@@ -25,13 +25,13 @@ const resolvers: Resolvers = {
             } else {
               return {
                 result: false,
-                error: "Not Authorized",
+                error: "Not Authorided",
               };
             }
           } else {
             return {
               result: false,
-              error: "Place Not Found",
+              error: "Dates Not Found",
             };
           }
         } catch (error) {

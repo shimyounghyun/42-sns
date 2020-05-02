@@ -4,5 +4,10 @@ type AddDatesResponse {
 }
 
 type Mutation {
-  AddDates(startAt: String!, endAt: String!): AddDatesResponse
+  AddDates(
+    name: String!
+    startAt: String!
+    endAt: String!
+    isFav: Boolean!
+  ): AddDatesResponse
 }

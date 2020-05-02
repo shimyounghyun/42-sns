@@ -1,0 +1,9 @@
+type GetNearbyDatesResponse {
+  result: Boolean!
+  error: String
+  dates: [Dates]
+}
+
+type Query {
+  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
+}
