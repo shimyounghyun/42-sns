@@ -1,6 +1,12 @@
 import {useCallback} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {showAuthModal} from '../../../modules/core';
+import {
+  showAuthModal,
+  setLayer
+} from '../../../modules/core';
+import {
+  setVisible
+} from '../../../modules/search';
 import {useQuery, useMutation} from '@apollo/react-hooks';
 import {IS_LOGGED_IN, LOGUSER_IN, LOGUSER_OUT} from '../../../lib/graphql/user';
 import { RootState } from '../../../modules';
@@ -10,7 +16,13 @@ export default function useHeader() {
     const user = useSelector((state:RootState) => state.core.user);
     const [logout] = useMutation(LOGUSER_OUT);
     const {data} = useQuery(IS_LOGGED_IN);
-    const isLoggedIn = data ? data.auth.isLoggedIn : false;    
+    const isLoggedIn = data ? data.auth.isLoggedIn : false;
+
+    const onSearchClick =useCallback(()=>{
+      dispatch(setLayer(true));
+      dispatch(setVisible(true));
+    },[dispatch]);
+
     const onLoginClick = useCallback(() => {
       dispatch(showAuthModal('LOGIN'));    
     }, [dispatch]);
@@ -22,5 +34,5 @@ export default function useHeader() {
       window.location.href='/';
     },[]);
   
-    return { user, onLoginClick,  onLogout ,isLoggedIn};
+    return { user, onLoginClick,  onLogout ,isLoggedIn, onSearchClick};
   }

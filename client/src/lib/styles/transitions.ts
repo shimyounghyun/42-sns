@@ -55,19 +55,19 @@ const popIn = keyframes`
 
 const slideUp = keyframes`
   0% {
-    transform: translateY(100%);
+    transform: translateY(0%);
   }
   100% {
-    transform: translateY(0%);
+    transform: translateY(-100%);
   };
 `;
 
 const slideDown = keyframes`
   0% {
-    transform: translateY(0%);
+    transform: translateY(-100%);
   }
   100% {
-    transform: translateY(100%);
+    transform: translateY(0%);
   };
 `;
 

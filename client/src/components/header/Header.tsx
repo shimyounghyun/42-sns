@@ -35,7 +35,9 @@ function Header(props: MainHeaderProps) {
           </Link>
           {isLoggedIn == true && user
             ? <Right>
-                <HeaderUserIcon user={user} onClick={toggleUserMenu}/>
+                <div ref={ref}>
+                  <HeaderUserIcon user={user} onClick={toggleUserMenu}/>
+                </div>
                 <HeaderUserMenu
                   onClose={onOutsideClick}
                   onLogout={onLogout}
