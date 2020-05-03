@@ -8,12 +8,15 @@ import {
     LocationType,
     DateType,    
     SearchState,
-    setFocus
+    setFocus,
+    FocusType
   } from '../../modules/search';
 import {setLayer} from '../../modules/core';
 import {connect, useDispatch} from 'react-redux';
 import { useLocation} from 'react-router-dom';
 import {RootState} from '../../modules';
+import {usePlaceAutocomplete} from '../../lib/api/googleMap';
+
 const { useCallback } = React;
 
 interface OwnProps {}
@@ -38,22 +41,37 @@ const SearchContainer: React.FC<SearchContainerProps> = ({
     setFocus    
 }) => {
     const dispatch = useDispatch();
-
-    const changeDate = ({startDate, endDate}:DateType) => {
+    const {setKeyword, autocompleteResult, status} = usePlaceAutocomplete();
+    const onChangeDate = ({startDate, endDate}:DateType) => {
         dispatch(setDate({startDate, endDate}));
     }
 
     const onOutsideClick = useCallback(
         (e: React.MouseEvent) => {
-            dispatch(setLayer(false));
-            dispatch(setVisible(false));
-        },[]
-    );
+        dispatch(setLayer(false));
+        dispatch(setVisible(false));
+    },[]);
+
+    const onFocus = useCallback((el:FocusType)=>{
+        dispatch(setFocus(el));
+    },[]);
+
+    const onSearch = useCallback((keyword:string)=>{
+        if (!keyword)
+            return;
+        setKeyword(keyword);
+    },[]);
 
     return(
         <Search
             visible={visible}
             onOutsideClick={onOutsideClick}
+            onFocus={onFocus}
+            focus={focus}
+            onChangeDate={onChangeDate}
+            initial=''
+            onSearch={onSearch}
+            searchResult={autocompleteResult}
         />
     );
 }

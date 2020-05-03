@@ -17,13 +17,13 @@ export default function useHeader() {
     const [logout] = useMutation(LOGUSER_OUT);
     const {data} = useQuery(IS_LOGGED_IN);
     const isLoggedIn = data ? data.auth.isLoggedIn : false;
-
-    const onSearchClick =useCallback(()=>{
+//onSearchClick
+    const onLoginClick =useCallback(()=>{
       dispatch(setLayer(true));
       dispatch(setVisible(true));
     },[dispatch]);
 
-    const onLoginClick = useCallback(() => {
+    const onSearchClick = useCallback(() => {
       dispatch(showAuthModal('LOGIN'));    
     }, [dispatch]);
 

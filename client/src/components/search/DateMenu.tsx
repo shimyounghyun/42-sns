@@ -1,12 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import DayPickerRangeConrollerWrapper from '../datepicker/DayPickerRangeConrollerWrapper';
+import { FocusType, FOCUS, DateType } from '../../modules/search';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../modules';
 const MenuWrapper = styled.div`
-display: inline-flex;
-width:100%;
-padding: 16px 22px;
-border-color: rgb(34, 34, 34);
-.content{
+    display: inline-flex;
+    width:100%;
+    padding: 16px 22px;
+    border-color: rgb(34, 34, 34);
+`;
+
+const Menu = styled.div`
     position: relative;
     flex: 1 0;
     cursor:pointer;
@@ -31,20 +36,56 @@ border-color: rgb(34, 34, 34);
         font-weight: 600;
         color: #222222;
         text-overflow: ellipsis;
-        cursor: text;
+        cursor: pointer;
     }
-}
+`;
+const DatePickerWrapper = styled.div`
+    display: flex;
+    position: absolute;
+    height: 300px;
+    top: 100px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
 `;
 
-interface DateMenuProps {}
+interface DateMenuProps {
+    onFocus: (el:FocusType)=> void;
+    focus:FocusType;
+    onChangeDate : ({startDate, endDate}:any) => void;
+}
 
-const DateMenu:React.FC<DateMenuProps> = () => {
+const DateMenu:React.FC<DateMenuProps> = ({
+    onFocus,
+    focus,
+    onChangeDate
+}) => {
+    const onClick = () => onFocus(FOCUS.DATE);
+    const {startDate, endDate} = useSelector((state:RootState) => state.search.date);
     return (
-        <MenuWrapper>
-            <div className="content">
+        <MenuWrapper onClick={onClick}>
+            <Menu>
                 <div className="item-descript">날짜</div>
-                <div className="item-input">7월 30일 - 8월 9일</div>
-            </div>
+                <div className="item-input">
+                    {startDate ? startDate : ''}
+                    {endDate ? ' - '+endDate : ''}
+                    {!startDate && !endDate && '기간을 선택해주세요.'}
+                </div>
+            </Menu>
+            {
+                focus == FOCUS.DATE 
+                ? <DatePickerWrapper>
+                    <DayPickerRangeConrollerWrapper
+                        numberOfMonths={3}
+                        noBorder
+                        onChangeDate={onChangeDate}
+                    />
+                </DatePickerWrapper>
+                : null
+            }
         </MenuWrapper>
     );
 }

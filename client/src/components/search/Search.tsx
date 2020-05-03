@@ -6,6 +6,7 @@ import LocationMenu from './LocationMenu';
 import DateMenu from './DateMenu';
 import palette from '../../lib/styles/palette';
 import OutsideClickHandler from 'react-outside-click-handler';
+import {FocusType, FOCUS} from '../../modules/search';
 
 const Wrapper = styled.div<{visible: boolean}>`
     position:fixed;
@@ -29,7 +30,7 @@ const Wrapper = styled.div<{visible: boolean}>`
         display:flex;
         background-color: rgb(255,255,255);
         box-shadow: rgba(0, 0, 0, 0.28) 0px 8px 28px !important;
-        // min-height:500px;
+        min-height:500px;
         .content-block {
             width:100%;
             padding-left:80px;
@@ -103,11 +104,23 @@ const SearchButton = styled.button`
 interface SearchProps {
     visible : boolean;
     onOutsideClick: (e: React.MouseEvent) => void;
+    onFocus: (el:FocusType)=> void;
+    focus:FocusType;
+    onChangeDate: ({startDate, endDate}:any) => void;
+    onSearch: (keyword:string) => void;
+    initial: string;
+    searchResult?:any[];
 }
 
 const Search: React.FC<SearchProps> = ({
     visible,
-    onOutsideClick
+    onOutsideClick,
+    onFocus,
+    focus,
+    onChangeDate,
+    onSearch,
+    initial,
+    searchResult
 }) => {
     const [closed, setClosed] = useState(true);
     useEffect(() => {
@@ -135,9 +148,19 @@ const Search: React.FC<SearchProps> = ({
                     <div className="content-block">
                         <div className="menu-block">
                             <SearchMenuBlock>
-                                <LocationMenu/>
+                                <LocationMenu
+                                    onFocus={onFocus}
+                                    onSearch={onSearch}
+                                    focus={focus}
+                                    initial={initial}
+                                    searchResult={searchResult}
+                                />
                                 <Divider/>            
-                                <DateMenu/>                        
+                                <DateMenu 
+                                    onFocus={onFocus}
+                                    focus={focus}
+                                    onChangeDate={onChangeDate}
+                                />                     
                             </SearchMenuBlock>
                             <div className="search-block">
                                 <SearchButton>검색</SearchButton>

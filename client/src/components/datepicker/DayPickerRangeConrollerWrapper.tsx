@@ -3,6 +3,7 @@ import {Omit} from 'react-redux';
 import 'react-dates/initialize';
 import './datepicker.css';
 import moment from 'moment';
+
 import {
     DayPickerRangeController,
     DayPickerRangeControllerShape,
@@ -32,6 +33,7 @@ interface DatePickerRangeWrapperProps
             initialEndDate?: moment.Moment;
             daysViolatingMinNightsCanBeClicked?: boolean;
             hideKeyboardShortcutsPanel?: boolean;
+            onChangeDate:({startDate, endDate}:any) => void;
 }
 
 interface DatePickerRangeWrapperState {
@@ -40,7 +42,7 @@ interface DatePickerRangeWrapperState {
     endDate:moment.Moment | null;
 }
 
-class DateRangePickerWrapper extends React.Component<DatePickerRangeWrapperProps, DatePickerRangeWrapperState>{
+class DayPickerRangeControllerWrapper extends React.Component<DatePickerRangeWrapperProps, DatePickerRangeWrapperState>{
 
     constructor(props:DatePickerRangeWrapperProps) {
       super(props);
@@ -67,6 +69,11 @@ class DateRangePickerWrapper extends React.Component<DatePickerRangeWrapperProps
         startDate,
         endDate: doesNotMeetMinNights ? null : endDate
       });
+      if(this.props.onChangeDate)
+        this.props.onChangeDate({
+          startDate : startDate && startDate.format('M월 D일'),
+          endDate : endDate && endDate.format('M월 D일'),
+        });
     }
   
     onFocusChange(focusedInput : FocusedInputShape | null) {
@@ -86,13 +93,15 @@ class DateRangePickerWrapper extends React.Component<DatePickerRangeWrapperProps
             startDate,
             endDate,
           } = this.state;
-        const startDateString = startDate && startDate.format('YYYY-MM-DD');
-        const endDateString = endDate && endDate.format('YYYY-MM-DD');
+        const startDateString = startDate && startDate.format('M월 D일');
+        const endDateString = endDate && endDate.format('M월 D일');
         const renderCalendarInfo = renderCalendarInfoProp;
-
+        
+        const propsObj = {...this.props};
+        delete propsObj['onChangeDate'];
       return (
           <DayPickerRangeController
-            {...this.props}
+            {...propsObj}
             onDatesChange={this.onDatesChange}
             onFocusChange={this.onFocusChange}
             focusedInput={focusedInput}
@@ -106,4 +115,4 @@ class DateRangePickerWrapper extends React.Component<DatePickerRangeWrapperProps
   }
 
 
-export default DateRangePickerWrapper;
+export default DayPickerRangeControllerWrapper;
