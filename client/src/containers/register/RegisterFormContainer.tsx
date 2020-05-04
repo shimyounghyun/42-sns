@@ -70,8 +70,10 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
       variables: form
     });
 
-    if (result.data && result.data.result && result.data.token)
+    if (result.data && result.data.result && result.data.token){
       signIn({variables:{token : result.data.token}});
+      window.location.href="/";
+    }
   }
   return (
     <>
