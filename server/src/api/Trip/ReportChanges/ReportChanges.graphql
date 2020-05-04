@@ -1,0 +1,14 @@
+type ReportChangesResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  ReportChanges(
+    id: Int!
+    lat: Float
+    lng: Float
+    startAt: String
+    endAt: String
+  ): ReportChangesResponse!
+}

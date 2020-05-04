@@ -10,8 +10,8 @@ import {
   ManyToMany,
   OneToMany,
   // PrimaryGeneratedColumn,
-  UpdateDateColumn,
   PrimaryColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import Chat from "./Chat";
 import Date from "./Dates";
