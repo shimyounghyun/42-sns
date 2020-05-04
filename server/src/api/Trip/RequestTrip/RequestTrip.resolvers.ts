@@ -27,7 +27,7 @@ const resolvers: Resolvers = {
                 // 이경우 null이 들어옴
                 // 그래서 Trip.findOne();으로 다시 찾아서 리턴함
                 const updatedTrip = await Trip.findOne({ id: args.tripId });
-                pubSub.publish("tripRequest", {
+                pubSub.publish("hostSubscription", {
                   RequestSubscription: updatedTrip,
                 });
                 return {

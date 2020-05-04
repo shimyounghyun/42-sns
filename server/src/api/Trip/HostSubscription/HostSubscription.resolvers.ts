@@ -3,10 +3,10 @@ import User from "../../../entities/User";
 
 const resolvers = {
   Subscription: {
-    RequestSubscription: {
+    HostSubscription: {
       subscribe: withFilter(
         (_, __, { pubSub }) => {
-          return pubSub.asyncIterator("tripRequest");
+          return pubSub.asyncIterator("hostSubscription");
         },
         (payload, _, { context }) => {
           const user: User = context.currentUser;
