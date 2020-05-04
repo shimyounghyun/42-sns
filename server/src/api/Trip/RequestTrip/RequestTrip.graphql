@@ -1,0 +1,8 @@
+type RequestTripResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  RequestTrip(tripId: Int!): RequestTripResponse!
+}
