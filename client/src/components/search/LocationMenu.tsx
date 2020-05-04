@@ -1,6 +1,6 @@
 import React, {useMemo,useEffect, useCallback} from 'react';
 import styled from 'styled-components';
-import { FocusType, FOCUS } from '../../modules/search';
+import { FocusType, FOCUS} from '../../modules/search';
 import {debounce} from 'throttle-debounce';
 import useInput from '../../lib/hooks/useInput';
 import { RouteComponentProps } from 'react-router';
@@ -104,6 +104,7 @@ interface LocationMenuProps{
     focus:FocusType;
     onSearch: (keyword: string) => void;
     initial: string;
+    onSelect: (placeId:string, name:string) => void;
     searchResult?:any[];
 }
 
@@ -112,7 +113,8 @@ const LocationMenu:React.FC<LocationMenuProps> = ({
     focus,
     onSearch,
     initial,
-    searchResult
+    searchResult,
+    onSelect
 }) => {
     const [keyword, setKeyword] = useInput(initial);
     const onClick = () => onFocus(FOCUS.LOCATION);
@@ -126,7 +128,6 @@ const LocationMenu:React.FC<LocationMenuProps> = ({
     useEffect(()=>{
         debouncedSearch(keyword);
     },[keyword]);
-    console.log(searchResult);
     return (
         <MenuWrapper onClick={onClick}>
             <div className="content">
@@ -141,7 +142,10 @@ const LocationMenu:React.FC<LocationMenuProps> = ({
             {searchResult && focus == FOCUS.LOCATION
             ? (<AutocompleteList>
                 {searchResult.map((data)=>
-                    <AutocompleteItem key={data.id}>
+                    <AutocompleteItem 
+                        key={data.place_id}
+                        onClick={()=>onSelect(data.place_id, data.description)}
+                    >
                         <div className="location-img"></div>
                         <div className="location-name">{data.description}</div>
                     </AutocompleteItem>

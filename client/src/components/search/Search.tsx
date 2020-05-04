@@ -110,6 +110,7 @@ interface SearchProps {
     onSearch: (keyword:string) => void;
     initial: string;
     searchResult?:any[];
+    onSelect: (placeId:string, name:string) => void;
 }
 
 const Search: React.FC<SearchProps> = ({
@@ -120,7 +121,8 @@ const Search: React.FC<SearchProps> = ({
     onChangeDate,
     onSearch,
     initial,
-    searchResult
+    searchResult,
+    onSelect
 }) => {
     const [closed, setClosed] = useState(true);
     useEffect(() => {
@@ -154,6 +156,7 @@ const Search: React.FC<SearchProps> = ({
                                     focus={focus}
                                     initial={initial}
                                     searchResult={searchResult}
+                                    onSelect={onSelect}
                                 />
                                 <Divider/>            
                                 <DateMenu 

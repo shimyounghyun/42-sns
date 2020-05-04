@@ -65,13 +65,15 @@ const DateMenu:React.FC<DateMenuProps> = ({
 }) => {
     const onClick = () => onFocus(FOCUS.DATE);
     const {startDate, endDate} = useSelector((state:RootState) => state.search.date);
+    const startDateString = startDate && startDate.format('M월 D일');
+    const endDateString = endDate && endDate.format('M월 D일');
     return (
         <MenuWrapper onClick={onClick}>
             <Menu>
                 <div className="item-descript">날짜</div>
                 <div className="item-input">
-                    {startDate ? startDate : ''}
-                    {endDate ? ' - '+endDate : ''}
+                    {startDate ? startDateString : ''}
+                    {endDate ? ' - '+endDateString : ''}
                     {!startDate && !endDate && '기간을 선택해주세요.'}
                 </div>
             </Menu>
@@ -82,6 +84,8 @@ const DateMenu:React.FC<DateMenuProps> = ({
                         numberOfMonths={3}
                         noBorder
                         onChangeDate={onChangeDate}
+                        startDate={startDate}
+                        endDate={endDate}
                     />
                 </DatePickerWrapper>
                 : null

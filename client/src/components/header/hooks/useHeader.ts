@@ -14,16 +14,17 @@ import { RootState } from '../../../modules';
 export default function useHeader() {
     const dispatch = useDispatch();
     const user = useSelector((state:RootState) => state.core.user);
+    const search = useSelector((state:RootState) => state.search);
     const [logout] = useMutation(LOGUSER_OUT);
     const {data} = useQuery(IS_LOGGED_IN);
     const isLoggedIn = data ? data.auth.isLoggedIn : false;
-//onSearchClick
-    const onLoginClick =useCallback(()=>{
+
+    const onSearchClick =useCallback(()=>{
       dispatch(setLayer(true));
       dispatch(setVisible(true));
     },[dispatch]);
 
-    const onSearchClick = useCallback(() => {
+    const onLoginClick = useCallback(() => {
       dispatch(showAuthModal('LOGIN'));    
     }, [dispatch]);
 
@@ -34,5 +35,5 @@ export default function useHeader() {
       window.location.href='/';
     },[]);
   
-    return { user, onLoginClick,  onLogout ,isLoggedIn, onSearchClick};
+    return { user, onLoginClick,  onLogout ,isLoggedIn, onSearchClick, search};
   }

@@ -1,6 +1,7 @@
 import {deprecated} from 'typesafe-actions'; 
 import {updateKey, createReducer} from '../lib/utils';
 import produce from 'immer';
+import moment from 'moment';
 
 const {createStandardAction} = deprecated;
 
@@ -25,8 +26,8 @@ export type LocationType = {
 }
 
 export type DateType = {
-    startDate: string | null;
-    endDate:string | null;
+    startDate: moment.Moment | null;
+    endDate:moment.Moment | null
 }
 
 const initialState:SearchState = {

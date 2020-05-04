@@ -24,8 +24,8 @@ interface onDatesChangeArgs {
 
 interface DatePickerRangeWrapperProps 
     extends Omit<DayPickerRangeControllerShape,
-        'startDate' | 'endDate' | 'focusedInput' | 
-        'onFocusChange' | 'onDatesChange' | 'hideKeyboardShortcutsPanel'>{
+         'focusedInput' | 'onFocusChange' |
+          'onDatesChange' | 'hideKeyboardShortcutsPanel'>{
             autoFocus?: boolean;
             autoFocusEndDate?: boolean;
             stateDateWrapper?: Function;
@@ -71,8 +71,8 @@ class DayPickerRangeControllerWrapper extends React.Component<DatePickerRangeWra
       });
       if(this.props.onChangeDate)
         this.props.onChangeDate({
-          startDate : startDate && startDate.format('M월 D일'),
-          endDate : endDate && endDate.format('M월 D일'),
+          startDate : startDate,
+          endDate : endDate,
         });
     }
   
@@ -105,8 +105,6 @@ class DayPickerRangeControllerWrapper extends React.Component<DatePickerRangeWra
             onDatesChange={this.onDatesChange}
             onFocusChange={this.onFocusChange}
             focusedInput={focusedInput}
-            startDate={startDate}
-            endDate={endDate}
             renderCalendarInfo={renderCalendarInfo}
             hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
           />
