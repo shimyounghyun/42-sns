@@ -26,7 +26,7 @@ const resolvers: Resolvers = {
                 await Trip.update({ id: args.tripId }, { status: "WATING" });
               }
               const updatedTrip = await Trip.findOne({ id: args.tripId });
-              pubSub.publish("tripUpdate", {
+              pubSub.publish("guestSubscription", {
                 TripsSubscription: updatedTrip,
               });
               return {

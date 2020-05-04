@@ -36,7 +36,7 @@ const resolvers: Resolvers = {
                   { id: args.id },
                   { ...notNull }
                 );
-                pubSub.publish("tripUpdate", {
+                pubSub.publish("guestSubscription", {
                   TripsSubscription: updatedTrip,
                 });
                 return {
