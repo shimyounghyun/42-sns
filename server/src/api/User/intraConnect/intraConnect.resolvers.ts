@@ -7,6 +7,10 @@ import {
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const resolvers: Resolvers = {
   Mutation: {
     IntraConnect: async (
@@ -14,18 +18,12 @@ const resolvers: Resolvers = {
       args: IntraConnectMutationArgs
     ): Promise<IntraConnectResponse> => {
       const { code } = args;
-      const grantType = "authorization_code";
-      const clientId =
-        "5502eb0a16b9d4e2c52efa25d4a97437462c649ea3e3f5e0ad8ef5e0c24a700e";
-      const clientSecret =
-        "02673be641d22404932124304f110cb6f2d6179df3c9dfda18962876318d317a";
-      const redirectUri = "http://127.0.0.1:3000/auth";
       const accessToken = await axios
         .post("https://api.intra.42.fr/oauth/token", {
-          grant_type: grantType,
-          client_id: clientId,
-          client_secret: clientSecret,
-          redirect_uri: redirectUri,
+          grant_type: process.env.GRANTTYPE,
+          client_id: process.env.CLIENTID,
+          client_secret: process.env.CLIENTSECRET,
+          redirect_uri: process.env.REDIRECTURI,
           code,
         })
         .then((r) => r.data.access_token)
