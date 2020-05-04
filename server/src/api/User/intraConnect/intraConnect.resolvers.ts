@@ -1,4 +1,5 @@
 import axios from "axios";
+import dotenv from "dotenv";
 import {
   IntraConnectMutationArgs,
   IntraConnectResponse,
@@ -7,7 +8,6 @@ import {
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
-import dotenv from "dotenv";
 
 dotenv.config();
 
