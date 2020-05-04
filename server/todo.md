@@ -31,7 +31,7 @@
 - [x] Edit trip
 - [x] Delete trip
 - [x] Get nearby trips(lat, lng, startAt, endAt)
-- [ ] Report location
+- [x] Report Trip
 - [ ] Request trip
 - [ ] Get trip requests
 - [ ] Subscribe to trip requests
