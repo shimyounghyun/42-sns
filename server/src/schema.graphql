@@ -171,6 +171,11 @@ type ReportChangesResponse {
   error: String
 }
 
+type Subscription {
+  RequestSubscription: Trip
+  TripsSubscription: Trip
+}
+
 type RequestTripResponse {
   result: Boolean!
   error: String
@@ -193,10 +198,6 @@ type Trip {
   chat: Chat
   createdAt: String!
   updatedAt: String
-}
-
-type Subscription {
-  TripsSubscription: Trip
 }
 
 type EmailSignInResponse {
