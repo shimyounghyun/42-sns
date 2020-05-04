@@ -8,6 +8,7 @@ import HeaderUserIcon from './HeaderUserIcon';
 import HeaderUserMenu from './HeaderUserMenu';
 import useToggle from '../../lib/hooks/useToggle';
 import { Link } from 'react-router-dom';
+import {MdToday, MdLocalAirport} from 'react-icons/md';
 
 export type MainHeaderProps = {};
 // const handleLink = () => {
@@ -35,7 +36,8 @@ function Header(props: MainHeaderProps) {
           <Link to="/">
             <HeaderLogo/>
           </Link>
-          <div style={{display:'flex'}}>
+          <div style={{display:'flex', alignItems:"center"}}>
+            <MdLocalAirport size={20} style={{marginRight:"0.5rem"}} color="rgb(113, 113, 113)"/>
             <Button 
               color={'lightGray'} 
               size={'large'} 
@@ -44,6 +46,7 @@ function Header(props: MainHeaderProps) {
             >{search?.location?.name ? search?.location?.name : '여행지'}
             </Button>
             <Divider/>
+            <MdToday size={20} style={{marginRight:"0.5rem"}} color="rgb(113, 113, 113)"/>
             <Button 
               color={'lightGray'} 
               size={'large'} 
@@ -51,11 +54,14 @@ function Header(props: MainHeaderProps) {
               onClick={onSearchClick}
             >{search?.date?.startDate ? search.date.startDate.format("M월 D일") : '' }
               {search?.date?.endDate ? ' - ' + search.date.endDate.format("M월 D일") : '' }
-              {!search?.date?.startDate && !search?.date?.endDate && '날짜'}
+              {!search?.date?.startDate && !search?.date?.endDate && '여행 일자'}
             </Button>
           </div>
           {isLoggedIn == true && user
             ? <Right>
+                <RoundButton color="lightGray" style={{margin:"1rem"}}>
+                    여행지 만들기
+                </RoundButton>
                 <div ref={ref}>
                   <HeaderUserIcon user={user} onClick={toggleUserMenu}/>
                 </div>

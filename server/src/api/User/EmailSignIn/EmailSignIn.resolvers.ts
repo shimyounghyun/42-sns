@@ -4,7 +4,7 @@ import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
-  Query: {
+  Mutation: {
     EmailSignIn: async (
       _,
       args: EmailSignInQueryArgs

@@ -1,13 +1,32 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import palette, {buttonColorMap} from '../../lib/styles/palette';
+import {useMutation} from '@apollo/react-hooks';
+import useInput from '../../lib/hooks/useInput';
+import {BasicResponse, EMAIL_SIGN_IN, LOGUSER_IN} from '../../lib/graphql/user';
+const {useCallback, useState} = React;
 
-const LoginFormBlock = styled.form`
+const LoginFormBlock = styled.div`
     width: 100%;
     line-height: 1.43;
     font-size: 1rem;
     display: flex;
     flex-direction:column;
+    .login-input {
+        radius: 4px;
+        height: 1.5rem;
+        border: 1px solid ${palette.gray3};
+        font-size: 1rem;
+        font-weight: normal;
+        padding: 1rem;
+        margin-bottom:1rem;
+        &::placeholder {
+            color: ${palette.gray6};
+        }
+        &:disabled {
+            background: ${palette.gray1};
+        }
+    }
     .foot {
         margin-top:1.5rem;
         padding: 1.5rem 0 0 0;
@@ -117,13 +136,38 @@ const Divider = styled.div`
   }
 `;
 
+const Message = styled.div`
+    font-size: 1rem;
+    font-weight:600;
+    color: #d93900;
+    padding-top:1rem;
+    padding-bottom:1rem;
+`;
+
 const AuthLoginForm = () => {
+    const [message, setMessage] = useState('');
+    const [email, setEmail] = useInput('');
+    const [password, setPassword] = useInput('');
+    const [login] = useMutation(EMAIL_SIGN_IN);
+    const [auth] = useMutation(LOGUSER_IN);
+
+    const onLogin = async () => {
+        const {data} = await login({variables:{email, password}});
+        if (!data.EmailSignIn.result){
+            setMessage(data.EmailSignIn.error);
+            return;
+        }
+        await auth({variables:{token:data.EmailSignIn.token}});
+        window.location.href="/";
+    }
+
     return(
         <LoginFormBlock>
             <Divider><span>또는</span></Divider>
-            <LoginInput/>
-            <LoginPassword/>
-            <LoginButton>로그인</LoginButton>         
+            <LoginInput onChange={setEmail}/>
+            <LoginPassword onChange={setPassword}/>
+                {message ? <Message>{message}</Message> : null}
+            <LoginButton onClick={onLogin}>로그인</LoginButton>
         </LoginFormBlock>
     );
 }
