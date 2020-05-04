@@ -32,6 +32,7 @@ type Mutation {
   DeleteTrip(tripId: Int!): DeleteTripResponse
   EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!
   ReportChanges(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): ReportChangesResponse!
+  RequestTrip(tripId: Int!): RequestTripResponse!
   IntraConnect(code: String): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -166,6 +167,11 @@ type GetNearbyTripsResponse {
 }
 
 type ReportChangesResponse {
+  result: Boolean!
+  error: String
+}
+
+type RequestTripResponse {
   result: Boolean!
   error: String
 }
