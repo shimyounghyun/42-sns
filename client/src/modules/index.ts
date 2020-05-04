@@ -4,13 +4,15 @@
 */
 import {combineReducers} from 'redux';
 import  core,{CoreState} from './core';
-
+import search,{SearchState} from './search';
 export type RootState = {
-    core: CoreState
+    core: CoreState;
+    search: SearchState;
 }
 
 const rootReducer = combineReducers({
-    core
+    core,
+    search
 });
 
 export default rootReducer;

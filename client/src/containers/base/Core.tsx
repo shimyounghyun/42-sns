@@ -4,6 +4,7 @@ import AuthModalContainer from '../auth/AuthModalContainer';
 import {RootState} from '../../modules';
 import OpaqueLayer from '../../components/common/OpaqueLayer';
 import useUserLoader from './hooks/useUserLoader';
+import SearchContainer from '../search/SearchContainer';
 
 interface OwnProps {};
 interface StateProps {
@@ -19,6 +20,7 @@ const Core: React.FC<CoreProps> = ({layer}) => {
         <>
             <OpaqueLayer visible={layer}/>
             <AuthModalContainer/>
+            <SearchContainer/>
         </>
     );
 }
