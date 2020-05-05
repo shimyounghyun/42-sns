@@ -1,5 +1,6 @@
 import {
   BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
@@ -23,8 +24,14 @@ class Chat extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.chatsAsGuest)
   guest: User;
 
+  @Column({ nullable: true })
+  guestId: number;
+
   @ManyToOne((type) => User, (user) => user.chatsAsHost)
   host: User;
+
+  @Column({ nullable: true })
+  hostId: number;
 
   @OneToOne((type) => Trip, (trip) => trip.chat)
   trip: Trip;

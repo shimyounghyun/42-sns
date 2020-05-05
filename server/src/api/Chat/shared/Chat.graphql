@@ -1,8 +1,10 @@
 type Chat {
   id: Int!
-  messages: [Message]!
+  messages: [Message]
   guest: User!
+  guestId: Int!
   host: User!
+  hostId: Int!
   trip: Trip
   createdAt: String!
   updatedAt: String
