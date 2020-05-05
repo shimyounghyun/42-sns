@@ -7,9 +7,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   OneToMany,
-  // PrimaryGeneratedColumn,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -54,8 +52,11 @@ class User extends BaseEntity {
   @OneToMany((type) => Date, (date) => date.user)
   dates: Date[] | any;
 
-  @ManyToMany((type) => Chat, (chat) => chat.participants)
-  chats: Chat[];
+  @OneToMany((type) => Chat, (chat) => chat.host)
+  chatsAsHost: Chat[];
+
+  @OneToMany((type) => Chat, (chat) => chat.guest)
+  chatsAsGuest: Chat[];
 
   @OneToMany((type) => Message, (message) => message.user)
   messages: Message[];

@@ -1,7 +1,8 @@
 type Chat {
   id: Int!
   messages: [Message]!
-  participants: [User]!
+  guest: User!
+  host: User!
   trip: Trip
   createdAt: String!
   updatedAt: String
@@ -31,8 +32,8 @@ type Mutation {
   AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!
   ConfirmRequest(tripId: Int!, confirmResult: Boolean!): ConfirmRequestResponse!
   DeleteTrip(tripId: Int!): DeleteTripResponse
-  EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!
-  ReportChanges(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): ReportChangesResponse!
+  EditPlaceDates(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): EditPlaceDatesResponse!
+  EditTripInfo(id: Int!, title: String, caption: String, file: [String]): EditTripInfoResponse!
   RequestTrip(tripId: Int!): RequestTripResponse!
   TripCanceled(tripId: Int!): TripCanceledResponse!
   TripEnd(tripId: Int!): TripEndResponse!
@@ -158,7 +159,12 @@ type DeleteTripResponse {
   error: String
 }
 
-type EditTripResponse {
+type EditPlaceDatesResponse {
+  result: Boolean!
+  error: String
+}
+
+type EditTripInfoResponse {
   result: Boolean!
   error: String
 }
@@ -178,11 +184,6 @@ type GetNearbyTripsResponse {
 type Subscription {
   GuestSubscription: Trip
   HostSubscription: Trip
-}
-
-type ReportChangesResponse {
-  result: Boolean!
-  error: String
 }
 
 type RequestTripResponse {
@@ -272,7 +273,8 @@ type User {
   password: String!
   places: [Place]
   dates: [Dates]
-  chats: [Chat]
+  chatsAsHost: [Chat]
+  chatsAsGuest: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
   tripAsGuest: [Trip]

@@ -2,7 +2,7 @@ import {
   BaseEntity,
   CreateDateColumn,
   Entity,
-  ManyToMany,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -20,8 +20,11 @@ class Chat extends BaseEntity {
   @OneToMany((type) => Message, (message) => message.chat)
   messages: Message[];
 
-  @ManyToMany((type) => User, (user) => user.chats)
-  participants: User[];
+  @ManyToOne((type) => User, (user) => user.chatsAsGuest)
+  guest: User;
+
+  @ManyToOne((type) => User, (user) => user.chatsAsHost)
+  host: User;
 
   @OneToOne((type) => Trip, (trip) => trip.chat)
   trip: Trip;
