@@ -17,41 +17,43 @@ const resolvers: Resolvers = {
         try {
           const trip = await Trip.findOne({ id: args.tripId });
           if (trip) {
-            if (trip.hostId === user.id) {
-              if (trip.status === "WATING") {
-                await Trip.update(
-                  { id: args.tripId },
-                  { status: "REQUESTING", guest: user }
-                );
-                // connst updatedTrip = awati Trip.update()
-                // 이경우 null이 들어옴
-                // 그래서 Trip.findOne();으로 다시 찾아서 리턴함
-                const updatedTrip = await Trip.findOne({ id: args.tripId });
-                pubSub.publish("hostSubscription", {
-                  RequestSubscription: updatedTrip,
-                });
-                return {
-                  result: true,
-                  error: null,
-                };
-              } else {
-                return {
-                  result: false,
-                  error: "Closed trip",
-                };
-              }
+            // if (trip.hostId === user.id) {
+            if (trip.status === "WATING") {
+              await Trip.update(
+                { id: args.tripId },
+                { status: "REQUESTING", guest: user }
+              );
+              // connst updatedTrip = awati Trip.update()
+              // 이경우 null이 들어옴
+              // 그래서 Trip.findOne();으로 다시 찾아서 리턴함
+              const updatedTrip = await Trip.findOne({ id: args.tripId });
+              pubSub.publish("hostSubscription", {
+                HostSubscription: updatedTrip,
+              });
+              return {
+                result: true,
+                error: null,
+              };
             } else {
               return {
                 result: false,
-                error: "Host can not be a guest",
+                error: "Closed trip",
               };
             }
           } else {
             return {
               result: false,
+              error: "Host can not be a guest",
+            };
+          }
+          /*
+          } else {
+           return {
+             result: false,
               error: "Trip not found",
             };
           }
+          */
         } catch (error) {
           return {
             result: false,
