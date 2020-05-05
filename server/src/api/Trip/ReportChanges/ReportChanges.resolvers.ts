@@ -32,12 +32,10 @@ const resolvers: Resolvers = {
                 (!args.startAt && !args.endAt)
               ) {
                 const notNull = cleanNullArgs(args);
-                const updatedTrip = await Trip.update(
-                  { id: args.id },
-                  { ...notNull }
-                );
+                await Trip.update({ id: args.id }, { ...notNull });
+                const updatedTrip = await Trip.findOne({ id: args.id });
                 pubSub.publish("guestSubscription", {
-                  TripsSubscription: updatedTrip,
+                  GuestSubscription: updatedTrip,
                 });
                 return {
                   result: true,
