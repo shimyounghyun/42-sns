@@ -1,0 +1,8 @@
+type TripStartResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  TripStart(tripId: Int!): TripStartResponse!
+}

@@ -19,16 +19,23 @@ const resolvers: Resolvers = {
         try {
           const trip = await Trip.findOne({ id: args.tripId });
           if (trip) {
-            if (trip.hostId === user.id) {
-              await trip.remove();
-              return {
-                result: true,
-                error: null,
-              };
+            if (trip.status === "WATING") {
+              if (trip.hostId === user.id) {
+                await trip.remove();
+                return {
+                  result: true,
+                  error: null,
+                };
+              } else {
+                return {
+                  result: false,
+                  error: "Not Authorized",
+                };
+              }
             } else {
               return {
                 result: false,
-                error: "Not Authorized",
+                error: "Trip status is not WATING",
               };
             }
           } else {

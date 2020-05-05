@@ -1,27 +1,28 @@
-import { EditTripMutationArgs, EditTripResponse } from "src/types/graph";
+import { TripStartMutationArgs, TripStartResponse } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import Trip from "../../../entities/Trip";
 import User from "../../../entities/User";
-import cleanNullArgs from "../../../utils/cleanNullArgs";
 import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
-    EditTrip: privateResolver(
+    TripStart: privateResolver(
       async (
         _,
-        args: EditTripMutationArgs,
-        { req }
-      ): Promise<EditTripResponse> => {
+        args: TripStartMutationArgs,
+        { req, pubSub }
+      ): Promise<TripStartResponse> => {
         const user: User = req.user;
 
         try {
-          const trip = await Trip.findOne({ id: args.id });
-
-          if (trip) {
+          const trip = await Trip.findOne({ id: args.tripId });
+          if (trip && trip.status === "ACCEPTED") {
             if (trip.hostId === user.id) {
-              const notNull = cleanNullArgs(args);
-              await Trip.update({ id: args.id }, { ...notNull });
+              await Trip.update({ id: args.tripId }, { status: "ONROUTE" });
+              const updatedTrip = await Trip.findOne({ id: args.tripId });
+              pubSub.publish("guestSubscription", {
+                GuestSubscription: updatedTrip,
+              });
               return {
                 result: true,
                 error: null,
@@ -29,7 +30,7 @@ const resolvers: Resolvers = {
             } else {
               return {
                 result: false,
-                error: "Not Authorized",
+                error: "Not authorized",
               };
             }
           } else {

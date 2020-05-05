@@ -32,9 +32,8 @@
 - [x] Delete trip
 - [x] Get nearby trips(lat, lng, startAt, endAt)
 - [x] Report Trip
-- [ ] Request trip
-- [ ] Get trip requests
-- [ ] Subscribe to trip requests
+- [x] Request trip
+- [x] Subscribe to trip requests
 - [ ] Subscribe to trip status
 - [ ] Get chat room messages
 - [ ] Subscribe to Chat room messages
