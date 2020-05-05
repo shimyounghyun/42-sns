@@ -11,7 +11,7 @@ const resolvers = {
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const {
-            RequestSubscription: { hostId },
+            HostSubscription: { hostId },
           } = payload;
 
           if (hostId === user.id) return true;
