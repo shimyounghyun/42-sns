@@ -1,6 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import RoundButton from '../common/RoundButton';
+import Button from '../common/Button';
 import useHeader from './hooks/useHeader';
 import {logo_42nomad} from '../../static/image';
 import HeaderUserIcon from './HeaderUserIcon';
@@ -14,7 +15,8 @@ export type MainHeaderProps = {};
 // }
 
 function Header(props: MainHeaderProps) {
-  const {onLoginClick, isLoggedIn, user, onLogout} = useHeader();
+  const {onLoginClick, isLoggedIn, user, onLogout, onSearchClick, search} = useHeader();
+
   const [userMenu, toggleUserMenu] = useToggle(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,11 +33,32 @@ function Header(props: MainHeaderProps) {
     <Block>
       <Inner>
           <Link to="/">
-           <HeaderLogo/>
+            <HeaderLogo/>
           </Link>
+          <div style={{display:'flex'}}>
+            <Button 
+              color={'lightGray'} 
+              size={'large'} 
+              style={{minWidth:'5rem'}}
+              onClick={onSearchClick}
+            >{search?.location?.name ? search?.location?.name : '여행지'}
+            </Button>
+            <Divider/>
+            <Button 
+              color={'lightGray'} 
+              size={'large'} 
+              style={{minWidth:'5rem'}}
+              onClick={onSearchClick}
+            >{search?.date?.startDate ? search.date.startDate.format("M월 D일") : '' }
+              {search?.date?.endDate ? ' - ' + search.date.endDate.format("M월 D일") : '' }
+              {!search?.date?.startDate && !search?.date?.endDate && '날짜'}
+            </Button>
+          </div>
           {isLoggedIn == true && user
             ? <Right>
-                <HeaderUserIcon user={user} onClick={toggleUserMenu}/>
+                <div ref={ref}>
+                  <HeaderUserIcon user={user} onClick={toggleUserMenu}/>
+                </div>
                 <HeaderUserMenu
                   onClose={onOutsideClick}
                   onLogout={onLogout}
@@ -52,6 +75,15 @@ function Header(props: MainHeaderProps) {
     </Block>
   );
 }
+
+const Divider = styled.div`
+    align-self: center;
+    border-right: 1px solid #DDDDDD;
+    flex: 0 1 0px;
+    height: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+`;
 
 const Block = styled.div`
   height: 4rem;
