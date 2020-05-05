@@ -27,7 +27,7 @@ const resolvers: Resolvers = {
               }
               const updatedTrip = await Trip.findOne({ id: args.tripId });
               pubSub.publish("guestSubscription", {
-                TripsSubscription: updatedTrip,
+                GuestSubscription: updatedTrip,
               });
               return {
                 result: true,
