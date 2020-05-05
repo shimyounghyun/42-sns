@@ -14,6 +14,5 @@ type Mutation {
     intraId: String!
     password: String!
     token: String!
-    id: Int!
   ): SignUpIntraResponse
 }

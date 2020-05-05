@@ -11,24 +11,33 @@ const resolvers: Resolvers = {
       args: SignUpIntraMutationArgs
     ): Promise<SignUpIntraResponse> => {
       try {
-        const { token } = args;
+        const {
+          token,
+          email,
+          userName,
+          firstName,
+          lastName,
+          profilePhoto,
+          intraId,
+          password,
+        } = args;
         // json web token을 해독함
         const decode: any = jwt.verify(token, process.env.JWT_TOKEN || "");
 
         // 해독한 정보에서 id를 가져옴
         const { id } = decode;
 
-        // 회원가입 하려는 id와, 인트라 인증 id가 일치하는지 확인
-        if (id !== args.id) {
-          return {
-            result: false,
-            error: "회원 정보와 intra인증 정보가 일치하지 않습니다.",
-            token: null,
-          };
-        }
-
         // 회원가입 진행
-        const user = await User.create(args).save();
+        const user = await User.create({
+          id,
+          email,
+          userName,
+          firstName,
+          lastName,
+          profilePhoto,
+          intraId,
+          password,
+        }).save();
         return { result: true, error: null, token: createJWT(user.id) };
       } catch (error) {
         return { result: false, error: error.message, token: null };
