@@ -1,0 +1,8 @@
+type TripCanceledResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  TripCanceled(tripId: Int!): TripCanceledResponse!
+}
