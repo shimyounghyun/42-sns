@@ -1,4 +1,7 @@
-import { EditTripMutationArgs, EditTripResponse } from "src/types/graph";
+import {
+  EditTripInfoMutationArgs,
+  EditTripInfoResponse,
+} from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import Trip from "../../../entities/Trip";
 import User from "../../../entities/User";
@@ -7,12 +10,12 @@ import privateResolver from "../../../utils/privateMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
-    EditTrip: privateResolver(
+    EditTripInfo: privateResolver(
       async (
         _,
-        args: EditTripMutationArgs,
-        { req }
-      ): Promise<EditTripResponse> => {
+        args: EditTripInfoMutationArgs,
+        { req, pubSub }
+      ): Promise<EditTripInfoResponse> => {
         const user: User = req.user;
 
         try {
@@ -22,6 +25,10 @@ const resolvers: Resolvers = {
             if (trip.hostId === user.id) {
               const notNull = cleanNullArgs(args);
               await Trip.update({ id: args.id }, { ...notNull });
+              const updatedTrip = await Trip.findOne({ id: args.id });
+              pubSub.publish("guestSubscription", {
+                GuestSubscription: updatedTrip,
+              });
               return {
                 result: true,
                 error: null,
