@@ -1,9 +1,3 @@
-type Subscription {
-  ChatSubscription: Chat
-  GuestSubscription: Trip
-  HostSubscription: Trip
-}
-
 type GetChatResponse {
   result: Boolean!
   error: String
@@ -40,34 +34,20 @@ type GetMyChatAsHostResponse {
   chats: [Chat]
 }
 
-type Chat {
-  id: Int!
-  messages: [Message]
-  guest: User!
-  guestId: Int!
-  host: User!
-  hostId: Int!
-  trip: Trip
-  tripId: Int
-  createdAt: String!
-  updatedAt: String
+type Subscription {
+  MessageSubscription: Message
+  GuestSubscription: Trip
+  HostSubscription: Trip
 }
 
-type Message {
-  id: Int!
-  text: String!
-  chat: Chat!
-  user: User!
-  createdAt: String!
-  updatedAt: String
-}
-
-type AddDatesResponse {
+type SendChatMessageResponse {
   result: Boolean!
   error: String
+  message: Message
 }
 
 type Mutation {
+  SendChatMessage(text: String!, chatId: Int!): SendChatMessageResponse!
   AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse
   DeleteDates(datesId: Int!): DeleteDatesResponse
   EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!
@@ -87,6 +67,34 @@ type Mutation {
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
   UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
+type Chat {
+  id: Int!
+  messages: [Message]
+  guest: User!
+  guestId: Int!
+  host: User!
+  hostId: Int!
+  trip: Trip
+  tripId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  chatId: Int!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddDatesResponse {
+  result: Boolean!
+  error: String
 }
 
 type DeleteDatesResponse {
