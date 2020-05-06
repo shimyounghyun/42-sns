@@ -3,7 +3,7 @@ import User from "src/entities/User";
 
 const resolvers = {
   Subscription: {
-    ChatSubscripion: {
+    ChatSubscription: {
       subscribe: withFilter(
         (_, __, { pubSub }) => {
           return pubSub.asyncIterator("chatSubscription");
@@ -11,7 +11,7 @@ const resolvers = {
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const {
-            ChatSubscripion: { guestId, hostId },
+            ChatSubscription: { guestId, hostId },
           } = payload;
           if (guestId === user.id || hostId === user.id) return true;
           return false;
