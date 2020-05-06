@@ -31,10 +31,6 @@ const resolvers: Resolvers = {
                   guest: trip.guest,
                   trip,
                 }).save();
-                const updatedChat = await Chat.findOne({ tripId: args.tripId });
-                pubSub.publish("chatSubscription", {
-                  ChatSubscription: updatedChat,
-                });
               } else {
                 await Trip.update({ id: args.tripId }, { status: "WATING" });
               }
