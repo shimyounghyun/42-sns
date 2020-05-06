@@ -5,7 +5,7 @@ import User from "../../../entities/User";
 const resolvers = {
   Subscription: {
     MessageSubscription: {
-      subscription: withFilter(
+      subscribe: withFilter(
         (_, __, { pubSub }) => pubSub.asyncIterator("newChatMessage"),
         async (payload, _, { context }) => {
           const user: User = context.currentUser;
