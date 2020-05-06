@@ -5,7 +5,6 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -33,8 +32,11 @@ class Chat extends BaseEntity {
   @Column({ nullable: true })
   hostId: number;
 
-  @OneToOne((type) => Trip, (trip) => trip.chat)
+  @ManyToOne((type) => Trip, (trip) => trip.chats)
   trip: Trip;
+
+  @Column({ nullable: true })
+  tripId: number;
 
   @CreateDateColumn()
   createdAt: string;
