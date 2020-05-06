@@ -1,0 +1,8 @@
+type ConfirmRequestResponse {
+  result: Boolean!
+  error: String
+}
+
+type Mutation {
+  ConfirmRequest(tripId: Int!, confirmResult: Boolean!): ConfirmRequestResponse!
+}
