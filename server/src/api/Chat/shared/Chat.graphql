@@ -6,6 +6,7 @@ type Chat {
   host: User!
   hostId: Int!
   trip: Trip
+  tripId: Int
   createdAt: String!
   updatedAt: String
 }

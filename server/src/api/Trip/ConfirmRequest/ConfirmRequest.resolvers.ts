@@ -3,6 +3,7 @@ import {
   ConfirmRequestResponse,
 } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
+import Chat from "../../../entities/Chat";
 import Trip from "../../../entities/Trip";
 import User from "../../../entities/User";
 import privateResolver from "../../../utils/privateMiddleware";
@@ -17,17 +18,25 @@ const resolvers: Resolvers = {
       ): Promise<ConfirmRequestResponse> => {
         const user: User = req.user;
         try {
-          const trip = await Trip.findOne({ id: args.tripId });
+          const trip = await Trip.findOne(
+            { id: args.tripId },
+            { relations: ["guest"] }
+          );
           if (trip && trip.status === "REQUESTING") {
             if (trip.hostId === user.id) {
               if (args.confirmResult) {
+                await Chat.create({
+                  host: user,
+                  guest: trip.guest,
+                  trip,
+                }).save();
                 await Trip.update({ id: args.tripId }, { status: "ACCEPTED" });
               } else {
                 await Trip.update({ id: args.tripId }, { status: "WATING" });
               }
-              const updatedTrip = await Trip.findOne({ id: args.tripId });
+              const tripSubscription = await Trip.findOne({ id: args.tripId });
               pubSub.publish("guestSubscription", {
-                GuestSubscription: updatedTrip,
+                GuestSubscription: tripSubscription,
               });
               return {
                 result: true,

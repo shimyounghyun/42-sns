@@ -1,9 +1,33 @@
+type GetMyChatAsHostResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type Query {
+  GetMyChatAsHost: GetMyChatAsHostResponse!
+  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
+  GetMyDates: GetMyDatesResponse
+  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
+  GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
+  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
+  GetMyTripsAsHost: GetMyTripsAsHostResponse!
+  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
 type Chat {
   id: Int!
-  messages: [Message]!
+  messages: [Message]
   guest: User!
+  guestId: Int!
   host: User!
+  hostId: Int!
   trip: Trip
+  tripId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -58,20 +82,6 @@ type GetDatesNearTripsResponse {
   result: Boolean!
   error: String
   trips: [Trip]
-}
-
-type Query {
-  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
-  GetMyDates: GetMyDatesResponse
-  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
-  GetMyPlaces: GetMyPlacesResponse!
-  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
-  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
-  GetMyTripsAsHost: GetMyTripsAsHostResponse!
-  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  GetMyProfile: GetMyProfileResponse
-  SignInIntra(intraId: String!): SignInIntraResponse
 }
 
 type GetMyDatesResponse {
@@ -205,7 +215,7 @@ type Trip {
   lng: Float!
   startAt: String!
   endAt: String!
-  chat: Chat
+  chats: [Chat]
   createdAt: String!
   updatedAt: String
 }
