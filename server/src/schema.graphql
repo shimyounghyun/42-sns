@@ -31,8 +31,8 @@ type Mutation {
   AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!
   ConfirmRequest(tripId: Int!, confirmResult: Boolean!): ConfirmRequestResponse!
   DeleteTrip(tripId: Int!): DeleteTripResponse
-  EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!
-  ReportChanges(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): ReportChangesResponse!
+  EditPlaceDates(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): EditPlaceDatesResponse!
+  EditTripInfo(id: Int!, title: String, caption: String, file: [String]): EditTripInfoResponse!
   RequestTrip(tripId: Int!): RequestTripResponse!
   TripCanceled(tripId: Int!): TripCanceledResponse!
   TripEnd(tripId: Int!): TripEndResponse!
@@ -70,6 +70,7 @@ type Query {
   GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
+  GetUserWithHostId(hostId: Int!): GetUserWithHostIdResponse!
   SignInIntra(intraId: String!): SignInIntraResponse
 }
 
@@ -158,7 +159,12 @@ type DeleteTripResponse {
   error: String
 }
 
-type EditTripResponse {
+type EditPlaceDatesResponse {
+  result: Boolean!
+  error: String
+}
+
+type EditTripInfoResponse {
   result: Boolean!
   error: String
 }
@@ -178,11 +184,6 @@ type GetNearbyTripsResponse {
 type Subscription {
   GuestSubscription: Trip
   HostSubscription: Trip
-}
-
-type ReportChangesResponse {
-  result: Boolean!
-  error: String
 }
 
 type RequestTripResponse {
@@ -231,6 +232,12 @@ type EmailSignInResponse {
 }
 
 type GetMyProfileResponse {
+  result: Boolean!
+  error: String
+  user: User
+}
+
+type GetUserWithHostIdResponse {
   result: Boolean!
   error: String
   user: User

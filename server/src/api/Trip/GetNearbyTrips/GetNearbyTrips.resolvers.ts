@@ -17,7 +17,6 @@ const resolvers: Resolvers = {
         { req }
       ): Promise<GetNearbyTripsResponse> => {
         const user: User = req.user;
-
         try {
           const trip = await Trip.findOne({ id: args.tripId });
           if (trip) {
