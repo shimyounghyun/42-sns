@@ -1,10 +1,17 @@
-type GetMyChatAsGeustResponse {
+type Subscription {
+  ChatSubscription: Chat
+  GuestSubscription: Trip
+  HostSubscription: Trip
+}
+
+type GetChatResponse {
   result: Boolean!
   error: String
-  chats: [Chat]
+  chat: Chat
 }
 
 type Query {
+  GetChat(chatId: Int!): GetChatResponse!
   GetMyChatAsGuest: GetMyChatAsGeustResponse!
   GetMyChatAsHost: GetMyChatAsHostResponse!
   GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
@@ -21,6 +28,12 @@ type Query {
   SignInIntra(intraId: String!): SignInIntraResponse
 }
 
+type GetMyChatAsGeustResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
 type GetMyChatAsHostResponse {
   result: Boolean!
   error: String
@@ -32,8 +45,12 @@ type Chat {
   messages: [Message]
   guest: User!
   guestId: Int!
+  guestProfilePhoto: String!
+  guestUserName: String!
   host: User!
   hostId: Int!
+  hostProfilePhoto: String!
+  guestUserName: String!
   trip: Trip
   tripId: Int
   createdAt: String!
@@ -70,7 +87,6 @@ type Mutation {
   TripCanceled(tripId: Int!): TripCanceledResponse!
   TripEnd(tripId: Int!): TripEndResponse!
   TripStart(tripId: Int!): TripStartResponse!
-  addUser(id: Int!, email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): addUserResponse!
   IntraConnect(code: String): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -206,11 +222,6 @@ type GetNearbyTripsResponse {
   trips: [Trip]
 }
 
-type Subscription {
-  GuestSubscription: Trip
-  HostSubscription: Trip
-}
-
 type RequestTripResponse {
   result: Boolean!
   error: String
@@ -248,12 +259,6 @@ type TripEndResponse {
 type TripStartResponse {
   result: Boolean!
   error: String
-}
-
-type addUserResponse {
-  result: Boolean!
-  error: String
-  token: String
 }
 
 type EmailSignInResponse {
