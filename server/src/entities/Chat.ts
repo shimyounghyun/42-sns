@@ -26,23 +26,11 @@ class Chat extends BaseEntity {
   @Column({ nullable: true })
   guestId: number;
 
-  @Column({ nullable: true })
-  guestProfilePhoto: string;
-
-  @Column({ nullable: true })
-  guestUserName: string;
-
   @ManyToOne((type) => User, (user) => user.chatsAsHost)
   host: User;
 
   @Column({ nullable: true })
   hostId: number;
-
-  @Column({ nullable: true })
-  hostProfilePhoto: string;
-
-  @Column({ nullable: true })
-  hostUserName: string;
 
   @ManyToOne((type) => Trip, (trip) => trip.chats)
   trip: Trip;

@@ -45,12 +45,8 @@ type Chat {
   messages: [Message]
   guest: User!
   guestId: Int!
-  guestProfilePhoto: String!
-  guestUserName: String!
   host: User!
   hostId: Int!
-  hostProfilePhoto: String!
-  guestUserName: String!
   trip: Trip
   tripId: Int
   createdAt: String!
