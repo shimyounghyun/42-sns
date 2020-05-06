@@ -49,8 +49,8 @@ class Trip extends BaseEntity {
   @Column({ type: "text", nullable: true })
   caption: string;
 
-  @Column({ type: "text", nullable: true })
-  file: string[];
+  @Column({ type: "text", array: true })
+  public readonly file: string[] = [];
 
   @Column({ type: "double precision", default: 0 })
   lat: number;

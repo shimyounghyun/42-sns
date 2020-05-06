@@ -1,10 +1,11 @@
-type GetMyChatAsHostResponse {
+type GetMyChatAsGeustResponse {
   result: Boolean!
   error: String
   chats: [Chat]
 }
 
 type Query {
+  GetMyChatAsGuest: GetMyChatAsGeustResponse!
   GetMyChatAsHost: GetMyChatAsHostResponse!
   GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
   GetMyDates: GetMyDatesResponse
@@ -12,11 +13,18 @@ type Query {
   GetMyPlaces: GetMyPlacesResponse!
   GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
   GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
+  GetMyTripsAsGuest: GetMyTripsAsGuestResponse!
   GetMyTripsAsHost: GetMyTripsAsHostResponse!
   GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetMyChatAsHostResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
 }
 
 type Chat {
@@ -62,6 +70,7 @@ type Mutation {
   TripCanceled(tripId: Int!): TripCanceledResponse!
   TripEnd(tripId: Int!): TripEndResponse!
   TripStart(tripId: Int!): TripStartResponse!
+  addUser(id: Int!, email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!): addUserResponse!
   IntraConnect(code: String): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -179,6 +188,12 @@ type EditTripInfoResponse {
   error: String
 }
 
+type GetMyTripsAsGuestResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
+}
+
 type GetMyTripsAsHostResponse {
   result: Boolean!
   error: String
@@ -233,6 +248,12 @@ type TripEndResponse {
 type TripStartResponse {
   result: Boolean!
   error: String
+}
+
+type addUserResponse {
+  result: Boolean!
+  error: String
+  token: String
 }
 
 type EmailSignInResponse {
