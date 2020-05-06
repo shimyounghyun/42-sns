@@ -25,18 +25,22 @@ const resolvers: Resolvers = {
           if (trip && trip.status === "REQUESTING") {
             if (trip.hostId === user.id) {
               if (args.confirmResult) {
+                await Trip.update({ id: args.tripId }, { status: "ACCEPTED" });
                 await Chat.create({
                   host: user,
                   guest: trip.guest,
                   trip,
                 }).save();
-                await Trip.update({ id: args.tripId }, { status: "ACCEPTED" });
+                const updatedChat = await Chat.findOne({ tripId: args.tripId });
+                pubSub.publish("chatSubscription", {
+                  ChatSubscription: updatedChat,
+                });
               } else {
                 await Trip.update({ id: args.tripId }, { status: "WATING" });
               }
-              const tripSubscription = await Trip.findOne({ id: args.tripId });
+              const updatedTrip = await Trip.findOne({ id: args.tripId });
               pubSub.publish("guestSubscription", {
-                GuestSubscription: tripSubscription,
+                GuestSubscription: updatedTrip,
               });
               return {
                 result: true,
