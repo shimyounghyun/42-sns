@@ -106,7 +106,6 @@ export const EMAIL_SIGN_IN = gql`
 
 export const SIGN_UP = gql`
   mutation SignUpIntra(
-        $id : Int!
         $email: String!
         $userName: String!
         $firstName: String!
@@ -117,7 +116,6 @@ export const SIGN_UP = gql`
         $token: String!
   ) {
     SignUpIntra(
-        id : $id
         email: $email
         userName: $userName
         firstName: $firstName

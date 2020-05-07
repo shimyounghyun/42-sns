@@ -71,7 +71,7 @@ const RegisterFormContainer: React.FC<RegisterFormContainerProps> = ({
     });
 
     if (result.data && result.data.result && result.data.token){
-      signIn({variables:{token : result.data.token}});
+      await signIn({variables:{token : result.data.token}});
       window.location.href="/";
     }
   }

@@ -1,0 +1,18 @@
+type addUserResponse {
+  result: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  addUser(
+    id: Int!
+    email: String!
+    userName: String!
+    firstName: String!
+    lastName: String!
+    profilePhoto: String!
+    intraId: String!
+    password: String!
+  ): addUserResponse!
+}
