@@ -1,0 +1,9 @@
+type GetUserWithHostIdResponse {
+  result: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  GetUserWithHostId(hostId: Int!): GetUserWithHostIdResponse!
+}

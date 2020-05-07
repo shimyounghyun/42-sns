@@ -47,6 +47,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
+    "styled-reset": "^4.1.4",
     "throttle-debounce": "^2.1.0",
     "typesafe-actions": "^5.1.0",
     "typescript": "^3.7.5"

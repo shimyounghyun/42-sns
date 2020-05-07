@@ -1,14 +1,14 @@
-type ReportChangesResponse {
+type EditPlaceDatesResponse {
   result: Boolean!
   error: String
 }
 
 type Mutation {
-  ReportChanges(
+  EditPlaceDates(
     id: Int!
     lat: Float
     lng: Float
     startAt: String
     endAt: String
-  ): ReportChangesResponse!
+  ): EditPlaceDatesResponse!
 }

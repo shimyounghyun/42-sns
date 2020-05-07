@@ -1,17 +1,32 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  trip: Trip\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse\n  DeleteDates(datesId: Int!): DeleteDatesResponse\n  EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  DeletePlace(placeId: Int!): DeletePlaceResponse\n  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!\n  AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!\n  DeleteTrip(tripId: Int!): DeleteTripResponse\n  EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!\n  ReportChanges(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): ReportChangesResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse\n  IntraConnect(code: String): IntraConnectResponse\n  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse\n  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse\n  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse\n}\n\ntype DeleteDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype GetDatesNearTripsResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype Query {\n  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!\n  GetMyDates: GetMyDatesResponse\n  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!\n  GetMyPlaces: GetMyPlacesResponse!\n  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!\n  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!\n  GetMyTripsAsHost: GetMyTripsAsHostResponse!\n  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!\n  GetMyProfile: GetMyProfileResponse\n  SignInIntra(intraId: String!): SignInIntraResponse\n}\n\ntype GetMyDatesResponse {\n  result: Boolean!\n  error: String\n  dates: [Dates]\n}\n\ntype GetNearbyDatesResponse {\n  result: Boolean!\n  error: String\n  dates: [Dates]\n}\n\ntype Dates {\n  id: Int!\n  name: String!\n  startAt: String!\n  endAt: String!\n  user: User!\n  userId: Int!\n  isFav: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  result: Boolean!\n  error: String\n}\n\ntype DeletePlaceResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditPlaceResponse {\n  result: Boolean!\n  error: String\n}\n\ntype GetMyPlacesResponse {\n  result: Boolean!\n  error: String\n  places: [Place]\n}\n\ntype GetNearbyPlacesResponse {\n  result: Boolean!\n  error: String\n  places: [Place]\n}\n\ntype GetPlaceNearTripsResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  user: User!\n  userId: Int!\n  isFav: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddTripResponse {\n  result: Boolean!\n  error: String\n}\n\ntype DeleteTripResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditTripResponse {\n  result: Boolean!\n  error: String\n}\n\ntype GetMyTripsAsHostResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype GetNearbyTripsResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype ReportChangesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype Trip {\n  id: Int!\n  status: String!\n  host: User!\n  hostId: Int!\n  guest: User\n  guestId: Int\n  title: String\n  caption: String\n  file: [String]\n  lat: Float!\n  lng: Float!\n  startAt: String!\n  endAt: String!\n  chat: Chat\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Subscription {\n  TripsSubscription: Trip\n}\n\ntype EmailSignInResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  result: Boolean!\n  error: String\n  user: User\n}\n\nenum ConnectType {\n  LOGIN\n  REGIST\n  ERROR\n}\n\ntype UserBasicInfo {\n  id: Int!\n  email: String!\n  userName: String!\n  firstName: String!\n  lastName: String!\n  profilePhoto: String!\n  intraId: String!\n}\n\ntype IntraConnectResponse {\n  result: Boolean!\n  error: String\n  token: String\n  type: ConnectType\n  data: UserBasicInfo\n}\n\ntype User {\n  id: Int!\n  email: String!\n  userName: String!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  profilePhoto: String!\n  bio: String\n  password: String!\n  places: [Place]\n  dates: [Dates]\n  chats: [Chat]\n  messages: [Message]\n  tripAsHost: [Trip]\n  tripAsGuest: [Trip]\n  intraId: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype SignInIntraResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype SignUpIntraResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype UpdateMyProfileResponse {\n  result: Boolean!\n  error: String\n}\n\ntype UpdatePasswordResponse {\n  result: Boolean!\n  error: String\n}\n"];
+export const typeDefs = ["type GetChatResponse {\n  result: Boolean!\n  error: String\n  chat: Chat\n}\n\ntype Query {\n  GetChat(chatId: Int!): GetChatResponse!\n  GetMyChatAsGuest: GetMyChatAsGeustResponse!\n  GetMyChatAsHost: GetMyChatAsHostResponse!\n  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!\n  GetMyDates: GetMyDatesResponse\n  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!\n  GetMyPlaces: GetMyPlacesResponse!\n  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!\n  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!\n  GetMyTripsAsGuest: GetMyTripsAsGuestResponse!\n  GetMyTripsAsHost: GetMyTripsAsHostResponse!\n  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!\n  GetTrip(tripId: Int!): GetTripResponse!\n  GetMyProfile: GetMyProfileResponse\n  GetUserWithHostId(hostId: Int!): GetUserWithHostIdResponse!\n  SignInIntra(intraId: String!): SignInIntraResponse\n}\n\ntype GetMyChatAsGeustResponse {\n  result: Boolean!\n  error: String\n  chats: [Chat]\n}\n\ntype GetMyChatAsHostResponse {\n  result: Boolean!\n  error: String\n  chats: [Chat]\n}\n\ntype Subscription {\n  MessageSubscription: Message\n  GuestSubscription: Trip\n  HostSubscription: Trip\n}\n\ntype SendChatMessageResponse {\n  result: Boolean!\n  error: String\n  message: Message\n}\n\ntype Mutation {\n  SendChatMessage(text: String!, chatId: Int!): SendChatMessageResponse!\n  AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse\n  DeleteDates(datesId: Int!): DeleteDatesResponse\n  EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  DeletePlace(placeId: Int!): DeletePlaceResponse\n  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!\n  AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!\n  ConfirmRequest(tripId: Int!, confirmResult: Boolean!): ConfirmRequestResponse!\n  DeleteTrip(tripId: Int!): DeleteTripResponse\n  EditPlaceDates(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): EditPlaceDatesResponse!\n  EditTripInfo(id: Int!, title: String, caption: String, file: [String]): EditTripInfoResponse!\n  RequestTrip(tripId: Int!): RequestTripResponse!\n  TripCanceled(tripId: Int!): TripCanceledResponse!\n  TripEnd(tripId: Int!): TripEndResponse!\n  TripStart(tripId: Int!): TripStartResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse\n  IntraConnect(code: String): IntraConnectResponse\n  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!): SignUpIntraResponse\n  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse\n  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse\n}\n\ntype Chat {\n  id: Int!\n  messages: [Message]\n  guest: User!\n  guestId: Int!\n  host: User!\n  hostId: Int!\n  trip: Trip\n  tripId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  chatId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype DeleteDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype GetDatesNearTripsResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype GetMyDatesResponse {\n  result: Boolean!\n  error: String\n  dates: [Dates]\n}\n\ntype GetNearbyDatesResponse {\n  result: Boolean!\n  error: String\n  dates: [Dates]\n}\n\ntype Dates {\n  id: Int!\n  name: String!\n  startAt: String!\n  endAt: String!\n  user: User!\n  userId: Int!\n  isFav: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  result: Boolean!\n  error: String\n}\n\ntype DeletePlaceResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditPlaceResponse {\n  result: Boolean!\n  error: String\n}\n\ntype GetMyPlacesResponse {\n  result: Boolean!\n  error: String\n  places: [Place]\n}\n\ntype GetNearbyPlacesResponse {\n  result: Boolean!\n  error: String\n  places: [Place]\n}\n\ntype GetPlaceNearTripsResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  user: User!\n  userId: Int!\n  isFav: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddTripResponse {\n  result: Boolean!\n  error: String\n}\n\ntype ConfirmRequestResponse {\n  result: Boolean!\n  error: String\n}\n\ntype DeleteTripResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditPlaceDatesResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EditTripInfoResponse {\n  result: Boolean!\n  error: String\n}\n\ntype GetMyTripsAsGuestResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype GetMyTripsAsHostResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype GetNearbyTripsResponse {\n  result: Boolean!\n  error: String\n  trips: [Trip]\n}\n\ntype GetTripResponse {\n  result: Boolean!\n  error: String\n  trip: Trip\n}\n\ntype RequestTripResponse {\n  result: Boolean!\n  error: String\n}\n\ntype Trip {\n  id: Int!\n  status: String!\n  host: User!\n  hostId: Int!\n  guest: User\n  guestId: Int\n  title: String\n  caption: String\n  file: [String]\n  lat: Float!\n  lng: Float!\n  startAt: String!\n  endAt: String!\n  chats: [Chat]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype TripCanceledResponse {\n  result: Boolean!\n  error: String\n}\n\ntype TripEndResponse {\n  result: Boolean!\n  error: String\n}\n\ntype TripStartResponse {\n  result: Boolean!\n  error: String\n}\n\ntype EmailSignInResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  result: Boolean!\n  error: String\n  user: User\n}\n\ntype GetUserWithHostIdResponse {\n  result: Boolean!\n  error: String\n  user: User\n}\n\nenum ConnectType {\n  LOGIN\n  REGIST\n  ERROR\n}\n\ntype UserBasicInfo {\n  id: Int!\n  email: String!\n  userName: String!\n  firstName: String!\n  lastName: String!\n  profilePhoto: String!\n  intraId: String!\n}\n\ntype IntraConnectResponse {\n  result: Boolean!\n  error: String\n  token: String\n  type: ConnectType\n  data: UserBasicInfo\n}\n\ntype User {\n  id: Int!\n  email: String!\n  userName: String!\n  firstName: String!\n  lastName: String!\n  fullName: String\n  profilePhoto: String!\n  bio: String\n  password: String!\n  places: [Place]\n  dates: [Dates]\n  chatsAsHost: [Chat]\n  chatsAsGuest: [Chat]\n  messages: [Message]\n  tripAsHost: [Trip]\n  tripAsGuest: [Trip]\n  intraId: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype SignInIntraResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype SignUpIntraResponse {\n  result: Boolean!\n  error: String\n  token: String\n}\n\ntype UpdateMyProfileResponse {\n  result: Boolean!\n  error: String\n}\n\ntype UpdatePasswordResponse {\n  result: Boolean!\n  error: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  GetChat: GetChatResponse;
+  GetMyChatAsGuest: GetMyChatAsGeustResponse;
+  GetMyChatAsHost: GetMyChatAsHostResponse;
   GetDatesNearTrips: GetDatesNearTripsResponse;
   GetMyDates: GetMyDatesResponse | null;
   GetNearbyDates: GetNearbyDatesResponse;
   GetMyPlaces: GetMyPlacesResponse;
   GetNearbyPlaces: GetNearbyPlacesResponse;
   GetPlaceNearTrips: GetPlaceNearTripsResponse;
+  GetMyTripsAsGuest: GetMyTripsAsGuestResponse;
   GetMyTripsAsHost: GetMyTripsAsHostResponse;
   GetNearbyTrips: GetNearbyTripsResponse;
+  GetTrip: GetTripResponse;
   GetMyProfile: GetMyProfileResponse | null;
+  GetUserWithHostId: GetUserWithHostIdResponse;
   SignInIntra: SignInIntraResponse | null;
+}
+
+export interface EmailSignInQueryArgs {
+  email :string;
+  password : string;
+}
+
+export interface GetChatQueryArgs {
+  chatId: number;
 }
 
 export interface GetDatesNearTripsQueryArgs {
@@ -34,31 +49,43 @@ export interface GetNearbyTripsQueryArgs {
   tripId: number;
 }
 
+export interface GetTripQueryArgs {
+  tripId: number;
+}
+
+export interface GetUserWithHostIdQueryArgs {
+  hostId: number;
+}
+
 export interface SignInIntraQueryArgs {
   intraId: string;
 }
 
-export interface GetDatesNearTripsResponse {
+export interface GetChatResponse {
   result: boolean;
   error: string | null;
-  trips: Array<Trip> | null;
+  chat: Chat | null;
 }
 
-export interface Trip {
+export interface Chat {
   id: number;
-  status: string;
+  messages: Array<Message> | null;
+  guest: User;
+  guestId: number;
   host: User;
   hostId: number;
-  guest: User | null;
-  guestId: number | null;
-  title: string | null;
-  caption: string | null;
-  file: Array<string> | null;
-  lat: number;
-  lng: number;
-  startAt: string;
-  endAt: string;
-  chat: Chat | null;
+  trip: Trip | null;
+  tripId: number | null;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface Message {
+  id: number;
+  text: string;
+  chat: Chat;
+  chatId: number;
+  user: User;
   createdAt: string;
   updatedAt: string | null;
 }
@@ -75,7 +102,8 @@ export interface User {
   password: string;
   places: Array<Place> | null;
   dates: Array<Dates> | null;
-  chats: Array<Chat> | null;
+  chatsAsHost: Array<Chat> | null;
+  chatsAsGuest: Array<Chat> | null;
   messages: Array<Message> | null;
   tripAsHost: Array<Trip> | null;
   tripAsGuest: Array<Trip> | null;
@@ -109,22 +137,41 @@ export interface Dates {
   updatedAt: string | null;
 }
 
-export interface Chat {
+export interface Trip {
   id: number;
-  messages: Array<Message>;
-  participants: Array<User>;
-  trip: Trip | null;
+  status: string;
+  host: User;
+  hostId: number;
+  guest: User | null;
+  guestId: number | null;
+  title: string | null;
+  caption: string | null;
+  file: Array<string> | null;
+  lat: number;
+  lng: number;
+  startAt: string;
+  endAt: string;
+  chats: Array<Chat> | null;
   createdAt: string;
   updatedAt: string | null;
 }
 
-export interface Message {
-  id: number;
-  text: string;
-  chat: Chat;
-  user: User;
-  createdAt: string;
-  updatedAt: string | null;
+export interface GetMyChatAsGeustResponse {
+  result: boolean;
+  error: string | null;
+  chats: Array<Chat> | null;
+}
+
+export interface GetMyChatAsHostResponse {
+  result: boolean;
+  error: string | null;
+  chats: Array<Chat> | null;
+}
+
+export interface GetDatesNearTripsResponse {
+  result: boolean;
+  error: string | null;
+  trips: Array<Trip> | null;
 }
 
 export interface GetMyDatesResponse {
@@ -157,6 +204,12 @@ export interface GetPlaceNearTripsResponse {
   trips: Array<Trip> | null;
 }
 
+export interface GetMyTripsAsGuestResponse {
+  result: boolean;
+  error: string | null;
+  trips: Array<Trip> | null;
+}
+
 export interface GetMyTripsAsHostResponse {
   result: boolean;
   error: string | null;
@@ -169,7 +222,19 @@ export interface GetNearbyTripsResponse {
   trips: Array<Trip> | null;
 }
 
+export interface GetTripResponse {
+  result: boolean;
+  error: string | null;
+  trip: Trip | null;
+}
+
 export interface GetMyProfileResponse {
+  result: boolean;
+  error: string | null;
+  user: User | null;
+}
+
+export interface GetUserWithHostIdResponse {
   result: boolean;
   error: string | null;
   user: User | null;
@@ -182,6 +247,7 @@ export interface SignInIntraResponse {
 }
 
 export interface Mutation {
+  SendChatMessage: SendChatMessageResponse;
   AddDates: AddDatesResponse | null;
   DeleteDates: DeleteDatesResponse | null;
   EditDates: EditDatesResponse;
@@ -189,14 +255,24 @@ export interface Mutation {
   DeletePlace: DeletePlaceResponse | null;
   EditPlace: EditPlaceResponse;
   AddTrip: AddTripResponse;
+  ConfirmRequest: ConfirmRequestResponse;
   DeleteTrip: DeleteTripResponse | null;
-  EditTrip: EditTripResponse;
-  ReportChanges: ReportChangesResponse;
+  EditPlaceDates: EditPlaceDatesResponse;
+  EditTripInfo: EditTripInfoResponse;
+  RequestTrip: RequestTripResponse;
+  TripCanceled: TripCanceledResponse;
+  TripEnd: TripEndResponse;
+  TripStart: TripStartResponse;
   EmailSignIn: EmailSignInResponse | null;
   IntraConnect: IntraConnectResponse | null;
   SignUpIntra: SignUpIntraResponse | null;
   UpdateMyProfile: UpdateMyProfileResponse | null;
   UpdatePassword: UpdatePasswordResponse | null;
+}
+
+export interface SendChatMessageMutationArgs {
+  text: string;
+  chatId: number;
 }
 
 export interface AddDatesMutationArgs {
@@ -242,23 +318,44 @@ export interface AddTripMutationArgs {
   datesId: number;
 }
 
+export interface ConfirmRequestMutationArgs {
+  tripId: number;
+  confirmResult: boolean;
+}
+
 export interface DeleteTripMutationArgs {
   tripId: number;
 }
 
-export interface EditTripMutationArgs {
+export interface EditPlaceDatesMutationArgs {
+  id: number;
+  lat: number | null;
+  lng: number | null;
+  startAt: string | null;
+  endAt: string | null;
+}
+
+export interface EditTripInfoMutationArgs {
   id: number;
   title: string | null;
   caption: string | null;
   file: Array<string> | null;
 }
 
-export interface ReportChangesMutationArgs {
-  id: number;
-  lat: number | null;
-  lng: number | null;
-  startAt: string | null;
-  endAt: string | null;
+export interface RequestTripMutationArgs {
+  tripId: number;
+}
+
+export interface TripCanceledMutationArgs {
+  tripId: number;
+}
+
+export interface TripEndMutationArgs {
+  tripId: number;
+}
+
+export interface TripStartMutationArgs {
+  tripId: number;
 }
 
 export interface EmailSignInMutationArgs {
@@ -279,7 +376,6 @@ export interface SignUpIntraMutationArgs {
   intraId: string;
   password: string;
   token: string;
-  id: number;
 }
 
 export interface UpdateMyProfileMutationArgs {
@@ -290,6 +386,12 @@ export interface UpdateMyProfileMutationArgs {
 export interface UpdatePasswordMutationArgs {
   previousPassword: string;
   presentPassword: string;
+}
+
+export interface SendChatMessageResponse {
+  result: boolean;
+  error: string | null;
+  message: Message | null;
 }
 
 export interface AddDatesResponse {
@@ -327,24 +429,46 @@ export interface AddTripResponse {
   error: string | null;
 }
 
+export interface ConfirmRequestResponse {
+  result: boolean;
+  error: string | null;
+}
+
 export interface DeleteTripResponse {
   result: boolean;
   error: string | null;
 }
 
-export interface EditTripResponse {
+export interface EditPlaceDatesResponse {
   result: boolean;
   error: string | null;
 }
 
-export interface ReportChangesResponse {
+export interface EditTripInfoResponse {
   result: boolean;
   error: string | null;
 }
-export interface EmailSignInQueryArgs {
-  email : string;
-  password : string;
+
+export interface RequestTripResponse {
+  result: boolean;
+  error: string | null;
 }
+
+export interface TripCanceledResponse {
+  result: boolean;
+  error: string | null;
+}
+
+export interface TripEndResponse {
+  result: boolean;
+  error: string | null;
+}
+
+export interface TripStartResponse {
+  result: boolean;
+  error: string | null;
+}
+
 export interface EmailSignInResponse {
   result: boolean;
   error: string | null;
@@ -388,5 +512,7 @@ export interface UpdatePasswordResponse {
 }
 
 export interface Subscription {
-  TripsSubscription: Trip | null;
+  MessageSubscription: Message | null;
+  GuestSubscription: Trip | null;
+  HostSubscription: Trip | null;
 }

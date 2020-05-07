@@ -1,8 +1,85 @@
+type GetChatResponse {
+  result: Boolean!
+  error: String
+  chat: Chat
+}
+
+type Query {
+  GetChat(chatId: Int!): GetChatResponse!
+  GetMyChatAsGuest: GetMyChatAsGeustResponse!
+  GetMyChatAsHost: GetMyChatAsHostResponse!
+  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
+  GetMyDates: GetMyDatesResponse
+  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
+  GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
+  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
+  GetMyTripsAsGuest: GetMyTripsAsGuestResponse!
+  GetMyTripsAsHost: GetMyTripsAsHostResponse!
+  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
+  GetTrip(tripId: Int!): GetTripResponse!
+  GetMyProfile: GetMyProfileResponse
+  GetUserWithHostId(hostId: Int!): GetUserWithHostIdResponse!
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetMyChatAsGeustResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type GetMyChatAsHostResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type Subscription {
+  MessageSubscription: Message
+  GuestSubscription: Trip
+  HostSubscription: Trip
+}
+
+type SendChatMessageResponse {
+  result: Boolean!
+  error: String
+  message: Message
+}
+
+type Mutation {
+  SendChatMessage(text: String!, chatId: Int!): SendChatMessageResponse!
+  AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse
+  DeleteDates(datesId: Int!): DeleteDatesResponse
+  EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!
+  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse
+  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!
+  ConfirmRequest(tripId: Int!, confirmResult: Boolean!): ConfirmRequestResponse!
+  DeleteTrip(tripId: Int!): DeleteTripResponse
+  EditPlaceDates(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): EditPlaceDatesResponse!
+  EditTripInfo(id: Int!, title: String, caption: String, file: [String]): EditTripInfoResponse!
+  RequestTrip(tripId: Int!): RequestTripResponse!
+  TripCanceled(tripId: Int!): TripCanceledResponse!
+  TripEnd(tripId: Int!): TripEndResponse!
+  TripStart(tripId: Int!): TripStartResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  IntraConnect(code: String): IntraConnectResponse
+  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!): SignUpIntraResponse
+  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
+  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
+}
+
 type Chat {
   id: Int!
-  messages: [Message]!
-  participants: [User]!
+  messages: [Message]
+  guest: User!
+  guestId: Int!
+  host: User!
+  hostId: Int!
   trip: Trip
+  tripId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -11,6 +88,7 @@ type Message {
   id: Int!
   text: String!
   chat: Chat!
+  chatId: Int!
   user: User!
   createdAt: String!
   updatedAt: String
@@ -19,24 +97,6 @@ type Message {
 type AddDatesResponse {
   result: Boolean!
   error: String
-}
-
-type Mutation {
-  AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse
-  DeleteDates(datesId: Int!): DeleteDatesResponse
-  EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!
-  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
-  DeletePlace(placeId: Int!): DeletePlaceResponse
-  EditPlace(id: Int!, name: String, isFav: Boolean): EditPlaceResponse!
-  AddTrip(title: String, caption: String, file: [String], placeId: Int!, datesId: Int!): AddTripResponse!
-  DeleteTrip(tripId: Int!): DeleteTripResponse
-  EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!
-  ReportChanges(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): ReportChangesResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  IntraConnect(code: String): IntraConnectResponse
-  SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse
-  UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
-  UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
 }
 
 type DeleteDatesResponse {
@@ -53,19 +113,6 @@ type GetDatesNearTripsResponse {
   result: Boolean!
   error: String
   trips: [Trip]
-}
-
-type Query {
-  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
-  GetMyDates: GetMyDatesResponse
-  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
-  GetMyPlaces: GetMyPlacesResponse!
-  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
-  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
-  GetMyTripsAsHost: GetMyTripsAsHostResponse!
-  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
-  GetMyProfile: GetMyProfileResponse
-  SignInIntra(intraId: String!): SignInIntraResponse
 }
 
 type GetMyDatesResponse {
@@ -143,14 +190,36 @@ type AddTripResponse {
   error: String
 }
 
+type EmailSignInQueryArgs {
+  email :String!
+  password : String!
+}
+
+
+type ConfirmRequestResponse {
+  result: Boolean!
+  error: String
+}
+
 type DeleteTripResponse {
   result: Boolean!
   error: String
 }
 
-type EditTripResponse {
+type EditPlaceDatesResponse {
   result: Boolean!
   error: String
+}
+
+type EditTripInfoResponse {
+  result: Boolean!
+  error: String
+}
+
+type GetMyTripsAsGuestResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
 }
 
 type GetMyTripsAsHostResponse {
@@ -165,7 +234,13 @@ type GetNearbyTripsResponse {
   trips: [Trip]
 }
 
-type ReportChangesResponse {
+type GetTripResponse {
+  result: Boolean!
+  error: String
+  trip: Trip
+}
+
+type RequestTripResponse {
   result: Boolean!
   error: String
 }
@@ -184,18 +259,24 @@ type Trip {
   lng: Float!
   startAt: String!
   endAt: String!
-  chat: Chat
+  chats: [Chat]
   createdAt: String!
   updatedAt: String
 }
 
-type EmailSignInQueryArgs {
-  email : String!
-  password : String!
+type TripCanceledResponse {
+  result: Boolean!
+  error: String
 }
 
-type Subscription {
-  TripsSubscription: Trip
+type TripEndResponse {
+  result: Boolean!
+  error: String
+}
+
+type TripStartResponse {
+  result: Boolean!
+  error: String
 }
 
 type EmailSignInResponse {
@@ -205,6 +286,12 @@ type EmailSignInResponse {
 }
 
 type GetMyProfileResponse {
+  result: Boolean!
+  error: String
+  user: User
+}
+
+type GetUserWithHostIdResponse {
   result: Boolean!
   error: String
   user: User
@@ -246,7 +333,8 @@ type User {
   password: String!
   places: [Place]
   dates: [Dates]
-  chats: [Chat]
+  chatsAsHost: [Chat]
+  chatsAsGuest: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
   tripAsGuest: [Trip]
