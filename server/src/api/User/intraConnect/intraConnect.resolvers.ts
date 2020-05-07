@@ -20,10 +20,10 @@ const resolvers: Resolvers = {
       const { code } = args;
       const accessToken = await axios
         .post("https://api.intra.42.fr/oauth/token", {
-          grant_type: process.env.GRANTTYPE,
-          client_id: process.env.CLIENTID,
-          client_secret: process.env.CLIENTSECRET,
-          redirect_uri: process.env.REDIRECTURI,
+          grant_type: "authorization_code",
+          client_id: "5502eb0a16b9d4e2c52efa25d4a97437462c649ea3e3f5e0ad8ef5e0c24a700e",
+          client_secret: "02673be641d22404932124304f110cb6f2d6179df3c9dfda18962876318d317a",
+          redirect_uri: "http://127.0.0.1:3000/auth",
           code,
         })
         .then((r) => r.data.access_token)

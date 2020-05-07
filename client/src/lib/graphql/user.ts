@@ -19,6 +19,11 @@ export const LOGUSER_OUT = gql`
         logUserOut(input: $input) @client
     }
 `;
+export type BasicResponse = {
+    result : boolean;
+    error : string | null | undefined | "";
+    token : string | null | undefined | "";
+}
 
 export type SignUpIntraResponse = {
     result : boolean;
@@ -82,6 +87,19 @@ export const GET_CURRENT_USER = gql`
                 lastName
                 profilePhoto
             }
+        }
+    }
+`;
+
+export const EMAIL_SIGN_IN = gql`
+    mutation EmailSignIn($email: String!, $password: String!) {
+        EmailSignIn(
+            email: $email
+            password : $password
+        ) {
+            result
+            error
+            token
         }
     }
 `;

@@ -18,8 +18,8 @@ type Query {
   GetMyTripsAsHost: GetMyTripsAsHostResponse!
   GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
   GetTrip(tripId: Int!): GetTripResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
+  GetUserWithHostId(hostId: Int!): GetUserWithHostIdResponse!
   SignInIntra(intraId: String!): SignInIntraResponse
 }
 
@@ -64,6 +64,7 @@ type Mutation {
   TripCanceled(tripId: Int!): TripCanceledResponse!
   TripEnd(tripId: Int!): TripEndResponse!
   TripStart(tripId: Int!): TripStartResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
   IntraConnect(code: String): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -188,6 +189,12 @@ type AddTripResponse {
   result: Boolean!
   error: String
 }
+
+type EmailSignInQueryArgs {
+  email :String!
+  password : String!
+}
+
 
 type ConfirmRequestResponse {
   result: Boolean!

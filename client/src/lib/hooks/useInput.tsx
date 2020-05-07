@@ -9,9 +9,11 @@ export default function useInput(defaultValue: string) {
     [],
   );
   const onReset = useCallback(() => setInput(''), []);
-  return [input, onChange, onReset] as [
+  const onInputValueChange = useCallback((newVal:string)=> setInput(newVal),[]);
+  return [input, onChange, onReset, onInputValueChange] as [
     string,
     typeof onChange,
-    typeof onReset
+    typeof onReset,
+    typeof onInputValueChange
   ];
 }

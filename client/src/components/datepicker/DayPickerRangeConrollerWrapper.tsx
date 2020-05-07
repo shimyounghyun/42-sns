@@ -24,13 +24,13 @@ interface onDatesChangeArgs {
 
 interface DatePickerRangeWrapperProps 
     extends Omit<DayPickerRangeControllerShape,
-         'focusedInput' | 'onFocusChange' |
+         'focusedInput' | 'onFocusChange' | 'startDate' | 'endDate' |
           'onDatesChange' | 'hideKeyboardShortcutsPanel'>{
             autoFocus?: boolean;
             autoFocusEndDate?: boolean;
             stateDateWrapper?: Function;
-            initialStartDate?: moment.Moment;
-            initialEndDate?: moment.Moment;
+            initialStartDate: moment.Moment | null;
+            initialEndDate: moment.Moment | null;
             daysViolatingMinNightsCanBeClicked?: boolean;
             hideKeyboardShortcutsPanel?: boolean;
             onChangeDate:({startDate, endDate}:any) => void;
@@ -93,12 +93,12 @@ class DayPickerRangeControllerWrapper extends React.Component<DatePickerRangeWra
             startDate,
             endDate,
           } = this.state;
-        const startDateString = startDate && startDate.format('M월 D일');
-        const endDateString = endDate && endDate.format('M월 D일');
         const renderCalendarInfo = renderCalendarInfoProp;
         
         const propsObj = {...this.props};
         delete propsObj['onChangeDate'];
+        delete propsObj['initialStartDate'];
+        delete propsObj['initialEndDate'];
       return (
           <DayPickerRangeController
             {...propsObj}
@@ -107,6 +107,9 @@ class DayPickerRangeControllerWrapper extends React.Component<DatePickerRangeWra
             focusedInput={focusedInput}
             renderCalendarInfo={renderCalendarInfo}
             hideKeyboardShortcutsPanel={hideKeyboardShortcutsPanel}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            isOutsideRange={day => (moment().diff(day) >= 0)}
           />
       );
     }

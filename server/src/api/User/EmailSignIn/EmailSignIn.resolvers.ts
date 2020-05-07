@@ -1,10 +1,10 @@
-import { EmailSignInQueryArgs, EmailSignInResponse } from "src/types/graph";
+import { EmailSignInResponse,EmailSignInQueryArgs } from "src/types/graph";
 import { Resolvers } from "src/types/resolvers";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
-  Query: {
+  Mutation: {
     EmailSignIn: async (
       _,
       args: EmailSignInQueryArgs

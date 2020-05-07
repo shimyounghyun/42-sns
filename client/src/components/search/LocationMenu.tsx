@@ -116,7 +116,7 @@ const LocationMenu:React.FC<LocationMenuProps> = ({
     searchResult,
     onSelect
 }) => {
-    const [keyword, setKeyword] = useInput(initial);
+    const [keyword, setKeyword, onReset, onChangeKeyword] = useInput(initial);
     const onClick = () => onFocus(FOCUS.LOCATION);
     
     const debouncedSearch = useMemo(() => {
@@ -144,7 +144,7 @@ const LocationMenu:React.FC<LocationMenuProps> = ({
                 {searchResult.map((data)=>
                     <AutocompleteItem 
                         key={data.place_id}
-                        onClick={()=>onSelect(data.place_id, data.description)}
+                        onClick={()=>{onSelect(data.place_id, data.description);onChangeKeyword(data.description);}}
                     >
                         <div className="location-img"></div>
                         <div className="location-name">{data.description}</div>

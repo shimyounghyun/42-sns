@@ -1,5 +1,34 @@
 import { useState, createRef, useCallback, useEffect } from 'react';
 import 'googlemaps';
+
+export const usePlaceAutoComplete2 = () => {
+  const [ref, setRef]:any = useState(null);
+  const [keyword, setKeyword]:any = useState(null);
+  const [result, setResult]:any = useState(null);
+  
+  const init = useCallback(() => {
+    const {google} = window;
+    const placesLib = google?.maps?.places;
+    if (!placesLib) {
+      return;
+    }
+    setRef(new placesLib.AutocompleteService());
+    
+  }, []);
+
+  useEffect(()=>init(),[]);
+  useEffect(()=>{
+    if (!ref || !keyword)
+      return;
+    ref.getPlacePredictions({input:keyword},(result:any,status:any)=>{
+      setResult(result);
+      console.log(result);
+    });
+  },[keyword]);
+
+  return [result, setKeyword] as [any, typeof setKeyword];
+}
+
 export const usePlaceAutocomplete = () => {
     const [keyword, setKeyword]:any = useState(null);
     const [autocompleteResult, setAutocompleteResult]:any = useState(null);
@@ -31,7 +60,12 @@ export const usePlaceAutocomplete = () => {
         }
     },[keyword]);
 
-    return {keyword,setKeyword, autocompleteResult, status};
+    return [keyword,setKeyword, autocompleteResult, status] as [
+      string, 
+      typeof setKeyword,
+      typeof autocompleteResult,
+      typeof status,
+    ];
 }
 
 
