@@ -1,0 +1,9 @@
+type GetMyChatAsHostResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type Query {
+  GetMyChatAsHost: GetMyChatAsHostResponse!
+}

@@ -1,10 +1,10 @@
 import {
   BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -20,11 +20,23 @@ class Chat extends BaseEntity {
   @OneToMany((type) => Message, (message) => message.chat)
   messages: Message[];
 
-  @ManyToMany((type) => User, (user) => user.chats)
-  participants: User[];
+  @ManyToOne((type) => User, (user) => user.chatsAsGuest)
+  guest: User;
 
-  @OneToOne((type) => Trip, (trip) => trip.chat)
+  @Column({ nullable: true })
+  guestId: number;
+
+  @ManyToOne((type) => User, (user) => user.chatsAsHost)
+  host: User;
+
+  @Column({ nullable: true })
+  hostId: number;
+
+  @ManyToOne((type) => Trip, (trip) => trip.chats)
   trip: Trip;
+
+  @Column({ nullable: true })
+  tripId: number;
 
   @CreateDateColumn()
   createdAt: string;

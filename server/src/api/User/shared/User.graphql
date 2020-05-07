@@ -10,7 +10,8 @@ type User {
   password: String!
   places: [Place]
   dates: [Dates]
-  chats: [Chat]
+  chatsAsHost: [Chat]
+  chatsAsGuest: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
   tripAsGuest: [Trip]

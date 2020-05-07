@@ -12,7 +12,7 @@ type Trip {
   lng: Float!
   startAt: String!
   endAt: String!
-  chat: Chat
+  chats: [Chat]
   createdAt: String!
   updatedAt: String
 }

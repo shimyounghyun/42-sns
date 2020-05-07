@@ -1,0 +1,9 @@
+type GetMyChatAsGeustResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type Query {
+  GetMyChatAsGuest: GetMyChatAsGeustResponse!
+}
