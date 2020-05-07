@@ -17,6 +17,7 @@ export interface Query {
   GetTrip: GetTripResponse;
   EmailSignIn: EmailSignInResponse | null;
   GetMyProfile: GetMyProfileResponse | null;
+  GetUserWithHostId: GetUserWithHostIdResponse;
   SignInIntra: SignInIntraResponse | null;
 }
 
@@ -51,6 +52,10 @@ export interface GetTripQueryArgs {
 export interface EmailSignInQueryArgs {
   email: string;
   password: string;
+}
+
+export interface GetUserWithHostIdQueryArgs {
+  hostId: number;
 }
 
 export interface SignInIntraQueryArgs {
@@ -231,6 +236,12 @@ export interface EmailSignInResponse {
 }
 
 export interface GetMyProfileResponse {
+  result: boolean;
+  error: string | null;
+  user: User | null;
+}
+
+export interface GetUserWithHostIdResponse {
   result: boolean;
   error: string | null;
   user: User | null;

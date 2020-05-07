@@ -284,6 +284,12 @@ type GetMyProfileResponse {
   user: User
 }
 
+type GetUserWithHostIdResponse {
+  result: Boolean!
+  error: String
+  user: User
+}
+
 enum ConnectType {
   LOGIN
   REGIST
