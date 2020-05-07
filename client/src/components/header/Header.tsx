@@ -59,7 +59,7 @@ function Header(props: MainHeaderProps) {
           </div>
           {isLoggedIn == true && user
             ? <Right>
-                <RoundButton color="lightGray" style={{margin:"1rem"}}>
+                <RoundButton to="/trip/regist" color="lightGray" style={{margin:"1rem"}}>
                     여행지 만들기
                 </RoundButton>
                 <div ref={ref}>

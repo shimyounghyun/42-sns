@@ -84,8 +84,8 @@ const DateMenu:React.FC<DateMenuProps> = ({
                         numberOfMonths={3}
                         noBorder
                         onChangeDate={onChangeDate}
-                        startDate={startDate}
-                        endDate={endDate}
+                        initialStartDate={startDate}
+                        initialEndDate={endDate}
                     />
                 </DatePickerWrapper>
                 : null

@@ -32,6 +32,7 @@ type Mutation {
   DeleteTrip(tripId: Int!): DeleteTripResponse
   EditTrip(id: Int!, title: String, caption: String, file: [String]): EditTripResponse!
   ReportChanges(id: Int!, lat: Float, lng: Float, startAt: String, endAt: String): ReportChangesResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
   IntraConnect(code: String): IntraConnectResponse
   SignUpIntra(email: String!, userName: String!, firstName: String!, lastName: String!, profilePhoto: String!, intraId: String!, password: String!, token: String!, id: Int!): SignUpIntraResponse
   UpdateMyProfile(bio: String, profilePhoto: String): UpdateMyProfileResponse
@@ -63,7 +64,6 @@ type Query {
   GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
   GetMyTripsAsHost: GetMyTripsAsHostResponse!
   GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
   GetMyProfile: GetMyProfileResponse
   SignInIntra(intraId: String!): SignInIntraResponse
 }
@@ -187,6 +187,11 @@ type Trip {
   chat: Chat
   createdAt: String!
   updatedAt: String
+}
+
+type EmailSignInQueryArgs {
+  email : String!
+  password : String!
 }
 
 type Subscription {

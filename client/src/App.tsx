@@ -5,6 +5,9 @@ import Core from './containers/base/Core';
 import LoadingPage from './pages/LoadingPage';
 import RegisterPage from './pages/RegisterPage';
 
+//테스트
+import RegistTrip from './components/trip/RegisterTrip';
+
 // Core : 모달팝업 / 배경 레이어 ..
 function App() {
   return (
@@ -13,6 +16,7 @@ function App() {
         <Route path="/" component={HomePage} exact />
         <Route path="/auth" component={LoadingPage}/>
         <Route path="/regist" component={RegisterPage}/>
+        <Route path="/trip/regist" component={RegistTrip}/>
       </Switch>
       <Core/>
     </>

@@ -40,7 +40,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({
     setFocus    
 }) => {
     const dispatch = useDispatch();
-    const {keyword,setKeyword, autocompleteResult, status} = usePlaceAutocomplete();
+    const [keyword,setKeyword, autocompleteResult, status] = usePlaceAutocomplete();
     const onChangeDate = ({startDate, endDate}:DateType) => {
         dispatch(setDate({startDate, endDate}));
     }
