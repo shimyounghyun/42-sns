@@ -20,11 +20,6 @@ export interface Query {
   SignInIntra: SignInIntraResponse | null;
 }
 
-export interface EmailSignInQueryArgs {
-  email :string;
-  password : string;
-}
-
 export interface GetChatQueryArgs {
   chatId: number;
 }

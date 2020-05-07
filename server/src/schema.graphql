@@ -190,12 +190,6 @@ type AddTripResponse {
   error: String
 }
 
-type EmailSignInQueryArgs {
-  email :String!
-  password : String!
-}
-
-
 type ConfirmRequestResponse {
   result: Boolean!
   error: String
