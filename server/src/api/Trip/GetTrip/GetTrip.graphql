@@ -1,0 +1,9 @@
+type GetTripResponse {
+  result: Boolean!
+  error: String
+  trip: Trip
+}
+
+type Query {
+  GetTrip(tripId: Int!): GetTripResponse!
+}

@@ -17,7 +17,8 @@ const resolvers: Resolvers = {
         try {
           const trip = await Trip.findOne({ id: args.tripId });
           if (trip) {
-            if (trip.hostId === user.id) {
+            console.log(user);
+            if (trip.hostId !== user.id) {
               if (trip.status === "WATING") {
                 await Trip.update(
                   { id: args.tripId },

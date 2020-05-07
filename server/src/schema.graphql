@@ -1,27 +1,54 @@
-type Chat {
-  id: Int!
-  messages: [Message]!
-  participants: [User]!
-  trip: Trip
-  createdAt: String!
-  updatedAt: String
-}
-
-type Message {
-  id: Int!
-  text: String!
-  chat: Chat!
-  user: User!
-  createdAt: String!
-  updatedAt: String
-}
-
-type AddDatesResponse {
+type GetChatResponse {
   result: Boolean!
   error: String
+  chat: Chat
+}
+
+type Query {
+  GetChat(chatId: Int!): GetChatResponse!
+  GetMyChatAsGuest: GetMyChatAsGeustResponse!
+  GetMyChatAsHost: GetMyChatAsHostResponse!
+  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
+  GetMyDates: GetMyDatesResponse
+  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
+  GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
+  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
+  GetMyTripsAsGuest: GetMyTripsAsGuestResponse!
+  GetMyTripsAsHost: GetMyTripsAsHostResponse!
+  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
+  GetTrip(tripId: Int!): GetTripResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse
+  GetMyProfile: GetMyProfileResponse
+  SignInIntra(intraId: String!): SignInIntraResponse
+}
+
+type GetMyChatAsGeustResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type GetMyChatAsHostResponse {
+  result: Boolean!
+  error: String
+  chats: [Chat]
+}
+
+type Subscription {
+  MessageSubscription: Message
+  GuestSubscription: Trip
+  HostSubscription: Trip
+}
+
+type SendChatMessageResponse {
+  result: Boolean!
+  error: String
+  message: Message
 }
 
 type Mutation {
+  SendChatMessage(text: String!, chatId: Int!): SendChatMessageResponse!
   AddDates(name: String!, startAt: String!, endAt: String!, isFav: Boolean!): AddDatesResponse
   DeleteDates(datesId: Int!): DeleteDatesResponse
   EditDates(id: Int!, name: String, isFav: Boolean): EditDatesResponse!
@@ -43,6 +70,34 @@ type Mutation {
   UpdatePassword(previousPassword: String!, presentPassword: String!): UpdatePasswordResponse
 }
 
+type Chat {
+  id: Int!
+  messages: [Message]
+  guest: User!
+  guestId: Int!
+  host: User!
+  hostId: Int!
+  trip: Trip
+  tripId: Int
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  chatId: Int!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddDatesResponse {
+  result: Boolean!
+  error: String
+}
+
 type DeleteDatesResponse {
   result: Boolean!
   error: String
@@ -57,21 +112,6 @@ type GetDatesNearTripsResponse {
   result: Boolean!
   error: String
   trips: [Trip]
-}
-
-type Query {
-  GetDatesNearTrips(dateId: Int!): GetDatesNearTripsResponse!
-  GetMyDates: GetMyDatesResponse
-  GetNearbyDates(dateId: Int!): GetNearbyDatesResponse!
-  GetMyPlaces: GetMyPlacesResponse!
-  GetNearbyPlaces(placeId: Int!): GetNearbyPlacesResponse!
-  GetPlaceNearTrips(placeId: Int!): GetPlaceNearTripsResponse!
-  GetMyTripsAsHost: GetMyTripsAsHostResponse!
-  GetNearbyTrips(tripId: Int!): GetNearbyTripsResponse!
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse
-  GetMyProfile: GetMyProfileResponse
-  GetUserWithHostId(hostId: Int!): GetUserWithHostIdResponse!
-  SignInIntra(intraId: String!): SignInIntraResponse
 }
 
 type GetMyDatesResponse {
@@ -169,6 +209,12 @@ type EditTripInfoResponse {
   error: String
 }
 
+type GetMyTripsAsGuestResponse {
+  result: Boolean!
+  error: String
+  trips: [Trip]
+}
+
 type GetMyTripsAsHostResponse {
   result: Boolean!
   error: String
@@ -181,9 +227,10 @@ type GetNearbyTripsResponse {
   trips: [Trip]
 }
 
-type Subscription {
-  GuestSubscription: Trip
-  HostSubscription: Trip
+type GetTripResponse {
+  result: Boolean!
+  error: String
+  trip: Trip
 }
 
 type RequestTripResponse {
@@ -205,7 +252,7 @@ type Trip {
   lng: Float!
   startAt: String!
   endAt: String!
-  chat: Chat
+  chats: [Chat]
   createdAt: String!
   updatedAt: String
 }
@@ -279,7 +326,8 @@ type User {
   password: String!
   places: [Place]
   dates: [Dates]
-  chats: [Chat]
+  chatsAsHost: [Chat]
+  chatsAsGuest: [Chat]
   messages: [Message]
   tripAsHost: [Trip]
   tripAsGuest: [Trip]

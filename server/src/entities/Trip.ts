@@ -5,7 +5,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -49,8 +49,8 @@ class Trip extends BaseEntity {
   @Column({ type: "text", nullable: true })
   caption: string;
 
-  @Column({ type: "text", nullable: true })
-  file: string[];
+  @Column({ type: "text", array: true })
+  public readonly file: string[] = [];
 
   @Column({ type: "double precision", default: 0 })
   lat: number;
@@ -64,8 +64,8 @@ class Trip extends BaseEntity {
   @Column({ type: "text" })
   endAt: string;
 
-  @OneToOne((type) => Chat, (chat) => chat.trip)
-  chat: Chat;
+  @OneToMany((type) => Chat, (chat) => chat.trip)
+  chats: Chat[];
 
   @CreateDateColumn()
   createdAt: string;
